@@ -9,6 +9,7 @@ export const metadata = {
   description: 'No solo hacemos páginas bonitas, las hacemos visibles. Optimización SEO en Bogotá para que tu negocio aparezca donde tus clientes buscan.',
 }
 
+
 export default function SeoPage() {
   return (
     <div className="bg-white">
