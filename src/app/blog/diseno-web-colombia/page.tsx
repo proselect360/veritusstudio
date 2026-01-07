@@ -36,7 +36,7 @@ export default function DisenoWebColombia() {
               <a href="#contact" className="px-10 py-5 bg-indigo-600 text-white font-black rounded-2xl shadow-2xl shadow-indigo-600/30 hover:bg-indigo-700 transition-all hover:scale-105">
                 Quiero mi cotización gratis
               </a>
-              <Link href="/blog/cuanto-cuesta-una-pagina-web-colombia" className="px-10 py-5 bg-slate-100 text-slate-900 font-black rounded-2xl hover:bg-slate-200 transition-all">
+              <Link href="/blog/cuanto-cuesta-pagina-web-colombia" className="px-10 py-5 bg-slate-100 text-slate-900 font-black rounded-2xl hover:bg-slate-200 transition-all">
                 Ver Guía de Precios 2026
               </Link>
             </div>
@@ -88,7 +88,7 @@ export default function DisenoWebColombia() {
             </div>
           </div>
         </section>
-        
+
 
         {/* Grid de Sedes - Interlinking Estratégico */}
         <section className="max-w-7xl mx-auto px-6 pb-32">

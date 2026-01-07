@@ -110,9 +110,10 @@ export default function BlogPrices() {
               <h3 className="text-3xl font-black mb-8 tracking-tighter">Domina tu mercado local</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
+                  { name: 'Colombia', slug: 'diseno-web-colombia' },
                   { name: 'Bogotá', slug: 'diseno-web-bogota' },
-                  { name: 'Medellín', slug: 'diseno-web-medellin' },
-                  { name: 'Colombia', slug: 'diseno-web-colombia' }
+                  { name: 'Medellín', slug: 'diseno-web-medellin' }
+                  
                 ].map((city) => (
                   <Link 
                     key={city.slug}
