@@ -5,9 +5,11 @@ import Header from '@/components/Header'
 import Hero from '@/sections/Hero'
 import Services from '@/sections/Services'
 import Process from '@/sections/Process'
+import Warranty from '@/sections/Warranty'
+import TestimonialsSection from '@/components/TestimonialsSection'
 import Contact from '@/sections/Contact'
 import Footer from '@/sections/Footer'
-import TestimonialsSection from '@/components/TestimonialsSection'
+import FAQSection from '@/sections/FAQSection'
 
 
 export default function Home() {
@@ -25,10 +27,21 @@ export default function Home() {
         <Hero />
         <Services />
         <Process />
-        <Contact />
+        
+        {/* 1. Generamos confianza absoluta con la garantía */}
+        <Warranty />
+        
+        {/* 2. Reforzamos con la prueba social de otros clientes */}
         <TestimonialsSection />
+        
+        {/* 3. Ahora que no tienen dudas, el llamado a la acción final */}
+        <Contact />
+        <FAQSection /> 
       </main>
       <Footer />
     </>
   )
 }
+
+
+  

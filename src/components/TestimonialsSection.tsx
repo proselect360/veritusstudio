@@ -1,14 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const testimonials = [
   {
     name: "María Alejandra Gómez",
     role: "Propietaria - Boutique La Elegancia",
     location: "Bogotá",
-    text: "En solo 14 días tuve mi tienda online funcionando. Las ventas por WhatsApp se dispararon desde la primera semana. ¡El equipo de Veritus es profesional y cumplidor!",
+    text: "En solo 14 días tuve mi tienda online funcionando. Las ventas por WhatsApp se dispararon desde la primera semana. ¡El equipo de Veritus es profesional!",
     rating: 5,
+    color: "from-indigo-500/20 to-purple-500/20"
   },
   {
     name: "Carlos Ramírez",
@@ -16,107 +19,121 @@ const testimonials = [
     location: "Medellín",
     text: "Mi web corporativa transmite la seriedad que necesitaba. Ahora recibo consultas de clientes premium que antes no llegaban. Excelente inversión.",
     rating: 5,
+    color: "from-blue-500/20 to-cyan-500/20"
   },
   {
     name: "Laura Mendoza",
-    role: "Gerente - Clínica Estética BellaVida",
+    role: "Gerente - Clínica BellaVida",
     location: "Cali",
     text: "El diseño es hermoso y moderno. Lo mejor: pacientes agendan citas directamente desde la web. La integración con WhatsApp es perfecta.",
     rating: 5,
+    color: "from-emerald-500/20 to-teal-500/20"
   },
   {
     name: "Andrés Felipe Torres",
-    role: "Emprendedor - FoodTruck Sabores del Valle",
+    role: "Emprendedor - Sabores del Valle",
     location: "Barranquilla",
     text: "Mi landing page captó más de 200 leads en el primer mes. El proceso fue rápido y el resultado superó mis expectativas.",
     rating: 5,
+    color: "from-orange-500/20 to-rose-500/20"
   },
 ]
 
 export default function TestimonialsSection() {
+  const containerRef = useRef(null)
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
+
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-white to-slate-50/50">
-      {/* Fondo sutil premium */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-indigo-400/10 to-purple-400/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-emerald-400/10 to-cyan-400/10 rounded-full blur-3xl" />
+    <section className="relative py-24 lg:py-40 overflow-hidden bg-white" ref={containerRef}>
+      {/* Background Decor */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-50 rounded-full blur-[120px] opacity-60" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-50 rounded-full blur-[120px] opacity-60" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Header */}
-        <div className="text-center mb-20 lg:mb-28">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black bg-gradient-to-r from-slate-900 via-indigo-900 to-indigo-700 bg-clip-text text-transparent leading-tight">
-            Lo que dicen nuestros clientes
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header con Animación */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-24"
+        >
+          <span className="text-indigo-600 font-black uppercase tracking-[0.3em] text-sm mb-4 block">Social Proof</span>
+          <h2 className="text-5xl md:text-7xl font-black text-slate-950 tracking-tighter mb-8 leading-none">
+            Impacto <span className="text-indigo-600 italic">Real</span>
           </h2>
-          <p className="mt-6 text-lg md:text-xl text-slate-700 max-w-4xl mx-auto font-medium">
-            Más de 300 pymes colombianas ya confiaron en nosotros para crecer en digital.
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
+            Hemos ayudado a más de <span className="text-slate-950 font-bold">300 pymes colombianas</span> a transformar su presencia digital en una máquina de ventas.
           </p>
+        </motion.div>
+
+        {/* Desktop: Masonry-style Grid */}
+        <div className="hidden md:grid md:grid-cols-2 gap-8 lg:gap-12">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+            >
+              <TestimonialCard testimonial={t} />
+            </motion.div>
+          ))}
         </div>
 
-        {/* Testimonios: Grid en desktop, Carrusel en móvil */}
-        <div className="relative">
-          {/* Desktop: Grid 2 columnas */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-2 gap-10 lg:gap-16">
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={i} testimonial={t} />
-            ))}
-          </div>
-
-          {/* Móvil: Carrusel horizontal */}
-          <div className="md:hidden">
-            <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-slate-100">
-              {testimonials.map((t, i) => (
-                <div key={i} className="flex-shrink-0 w-[85vw] max-w-md snap-center">
-                  <TestimonialCard testimonial={t} isMobile />
-                </div>
-              ))}
+        {/* Mobile: Animated Scroll */}
+        <div className="md:hidden flex gap-6 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide">
+          {testimonials.map((t, i) => (
+            <div key={i} className="flex-shrink-0 w-[85vw] snap-center">
+              <TestimonialCard testimonial={t} />
             </div>
-
-            {/* Indicadores móviles */}
-            <div className="flex justify-center gap-2 mt-6">
-              {testimonials.map((_, i) => (
-                <div key={i} className="w-2 h-2 rounded-full bg-slate-400/60" />
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   )
 }
 
-function TestimonialCard({ testimonial, isMobile = false }: { testimonial: any; isMobile?: boolean }) {
+function TestimonialCard({ testimonial }: { testimonial: any }) {
   return (
-    <div className={`
-      group relative bg-white/90 backdrop-blur-xl rounded-3xl p-10 shadow-2xl border border-white/50 hover:border-indigo-600/20 transition-all duration-700 h-full flex flex-col
-      ${isMobile ? '' : 'hover:shadow-3xl hover:-translate-y-6'}
-    `}>
-      {/* Shine effect */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-all duration-1000 pointer-events-none" />
+    <motion.div 
+      whileHover={{ y: -10 }}
+      className="group relative h-full bg-slate-50 rounded-[3rem] p-10 lg:p-14 border border-slate-100 transition-all duration-500 hover:bg-white hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] overflow-hidden"
+    >
+      {/* Background Glow on Hover */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
       <div className="relative z-10 flex flex-col h-full">
-        {/* Estrellas */}
-        <div className="flex gap-1 mb-6">
-          {[...Array(testimonial.rating)].map((_, i) => (
-            <svg key={i} className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.163c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.97a1 1 0 00-.364-1.118L2.316 9.397c-.783-.57-.38-1.81.588-1.81h4.163a1 1 0 00.95-.69l1.286-3.97z" />
-            </svg>
-          ))}
+        {/* Quote Icon Animado */}
+        <div className="mb-8 flex justify-between items-start">
+          <div className="flex gap-1 text-yellow-500">
+            {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
+          </div>
+          <Quote className="text-slate-200 group-hover:text-indigo-200 transition-colors duration-500" size={48} strokeWidth={3} />
         </div>
 
-        {/* Testimonio */}
-        <p className="text-lg md:text-xl text-slate-700 leading-relaxed flex-grow mb-10 font-medium italic">
+        {/* Texto con tipografía premium */}
+        <blockquote className="text-2xl lg:text-3xl font-bold text-slate-900 leading-[1.2] mb-12 tracking-tight">
           "{testimonial.text}"
-        </p>
+        </blockquote>
 
-        {/* Autor */}
-        <div className="mt-auto">
-          <p className="font-black text-xl text-slate-900">{testimonial.name}</p>
-          <p className="text-base text-slate-600 mt-1">
-            {testimonial.role} • {testimonial.location}
-          </p>
+        {/* Footer del autor */}
+        <div className="mt-auto flex items-center gap-5">
+          <div className="w-14 h-14 rounded-2xl bg-indigo-600 flex items-center justify-center text-white text-xl font-black shadow-lg shadow-indigo-600/20">
+            {testimonial.name[0]}
+          </div>
+          <div>
+            <p className="font-black text-slate-900 text-lg leading-none mb-1">{testimonial.name}</p>
+            <p className="text-sm font-bold text-slate-500 uppercase tracking-widest leading-none">
+              {testimonial.location} • {testimonial.role.split('-')[0]}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Border Light Effect */}
+      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+    </motion.div>
   )
 }
