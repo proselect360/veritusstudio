@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://veritus.co' // Cambia a tu dominio real
+  // app/sitemap.ts
+const baseUrl = 'https://veritusstudio.vercel.app' // Cambia a tu dominio real
 
   // 1. Tus páginas principales
   const routes = ['', '/blog', '/contacto'].map((route) => ({

@@ -24,7 +24,7 @@ export default function Header() {
   const navLinks = [
     { href: '/#services', label: 'Servicios' },
     { href: '/#process', label: 'Proceso' },
-    { href: '/blog/cuanto-cuesta-una-pagina-web-colombia', label: '¿Cuánto cuesta?', highlight: true },
+    { href: '/blog/cuanto-cuesta-pagina-web-colombia', label: '¿Cuánto cuesta?', highlight: true },
     { href: '/#warranty', label: 'Garantía' },
     { href: '/#contact', label: 'Contacto' },
   ]
