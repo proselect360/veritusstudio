@@ -1,13 +1,22 @@
-import './globals.css'; // Esta línea es vital para que Tailwind funcione
+import './globals.css';
 import { Inter } from 'next/font/google';
-import Header from '@/components/Header';
-import Footer from '@/sections/Footer';
 
-const inter = Inter({ subsets: ['latin'] });
+// 1. Configuración de fuente optimizada
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap', 
+});
 
 export const metadata = {
   title: 'Veritus Studio | Diseño Web Profesional en Colombia',
   description: 'Creamos sitios web de alto impacto con Next.js y Tailwind CSS.',
+};
+
+// 2. Viewport separado para mejor rendimiento
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#4f46e5', // El color índigo de tu marca
 };
 
 export default function RootLayout({
@@ -16,9 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className="scroll-smooth">
       <body className={`${inter.className} bg-white antialiased`}>
-        {/* Aquí puedes poner el Header si quieres que aparezca en TODAS las páginas automáticamente */}
         {children}
       </body>
     </html>
