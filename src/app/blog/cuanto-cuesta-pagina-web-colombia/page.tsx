@@ -6,9 +6,6 @@ import Contact from '@/sections/Contact'
 import { CheckCircle2, AlertTriangle, ArrowRight, TrendingUp, Zap, Search } from 'lucide-react'
 import Link from 'next/link'
 
-// METADATA (Nota: En Next.js App Router, si usas 'use client', la metadata 
-// debe ir en un archivo layout.tsx o un componente de servidor padre)
-
 export default function BlogPrices() {
   return (
     <>
@@ -16,7 +13,7 @@ export default function BlogPrices() {
       <main className="pt-32 pb-24 bg-white overflow-hidden">
         <article className="max-w-4xl mx-auto px-6">
           
-          {/* --- HERO SECTION DEL ARTÍCULO --- */}
+          {/* --- HERO SECTION --- */}
           <header className="mb-16 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 mb-6">
               <TrendingUp className="w-4 h-4" />
@@ -32,7 +29,7 @@ export default function BlogPrices() {
             </p>
           </header>
 
-          {/* --- TABLA DE COSTOS TÉCNICOS --- */}
+          {/* --- TABLA DE COSTOS --- */}
           <section className="mb-20">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold">1</div>
@@ -67,7 +64,7 @@ export default function BlogPrices() {
             </div>
           </section>
 
-          {/* --- COMPARATIVA DE VALOR --- */}
+          {/* --- COMPARATIVA --- */}
           <section className="mb-24">
             <div className="flex items-center gap-3 mb-10">
               <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold">2</div>
@@ -75,7 +72,6 @@ export default function BlogPrices() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Opción Barata */}
               <div className="group p-10 bg-slate-50 rounded-[3rem] border-2 border-transparent hover:border-rose-200 transition-all duration-500">
                 <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mb-6">
                   <AlertTriangle className="w-6 h-6" />
@@ -89,7 +85,6 @@ export default function BlogPrices() {
                 </ul>
               </div>
 
-              {/* Opción Veritus */}
               <div className="group p-10 bg-indigo-600 rounded-[3rem] shadow-2xl shadow-indigo-200 transition-all duration-500 hover:-translate-y-2">
                 <div className="w-12 h-12 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-6">
                   <Zap className="w-6 h-6" />
@@ -105,7 +100,7 @@ export default function BlogPrices() {
             </div>
           </section>
 
-          {/* --- INTERLAZADO ESTRATÉGICO --- */}
+          {/* --- INTERLAZADO ESTRATÉGICO (CORREGIDO) --- */}
           <section className="p-12 bg-slate-900 rounded-[3.5rem] text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 blur-[100px]" />
             <div className="relative z-10">
@@ -114,13 +109,17 @@ export default function BlogPrices() {
               </div>
               <h3 className="text-3xl font-black mb-8 tracking-tighter">Domina tu mercado local</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {['Bogotá', 'Medellín', 'Colombia'].map((city) => (
+                {[
+                  { name: 'Bogotá', slug: 'diseno-web-bogota' },
+                  { name: 'Medellín', slug: 'diseno-web-medellin' },
+                  { name: 'Colombia', slug: 'diseno-web-colombia' }
+                ].map((city) => (
                   <Link 
-                    key={city}
-                    href={`/blog/diseno-web-${city.toLowerCase()}`} 
+                    key={city.slug}
+                    href={`/blog/${city.slug}`} 
                     className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white hover:text-slate-900 transition-all group font-bold"
                   >
-                    Estrategia {city}
+                    Estrategia {city.name}
                     <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                   </Link>
                 ))}
@@ -148,7 +147,6 @@ export default function BlogPrices() {
               </div>
             </div>
           </div>
-
         </article>
       </main>
       <Contact />
