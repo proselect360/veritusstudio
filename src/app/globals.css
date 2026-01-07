@@ -1,43 +1,41 @@
 @import "tailwindcss";
 
-:root {
-  /* Light mode */
-  --bg: #f8fafc;
-  --text: #0f172a;           /* Corregido a Slate-900 para contraste */
-  --text-primary: #1e1b4b;   /* Indigo-950 */
-  --text-primary-light: #3730a3;
-  --text-muted: #475569;     /* Slate-600 para accesibilidad */
-  --text-muted2: #64748b;    /* Slate-500 */
-  --border: #e2e8f0;
-  --bg-card: #ffffff;
-  --accent: #f97316;         /* Orange-500 */
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --bg: #020617;
-    --text: #f8fafc;
-    --text-primary: #818cf8;
-    --text-primary-light: #a5b4fc;
-    --text-muted: #cbd5e1;
-    --text-muted2: #94a3b8;
-    --border: #1e293b;
-    --bg-card: #0f172a;
-    --accent: #fb923c;
+    /* Light mode */
+    --bg: #f8fafc;
+    --text: #0f172a;
+    --text-primary: #1e1b4b;
+    --text-primary-light: #3730a3;
+    --text-muted: #475569;
+    --text-muted2: #64748b;
+    --border: #e2e8f0;
+    --bg-card: #ffffff;
+    --accent: #f97316;
   }
-}
 
-/* ELIMINAMOS @theme si causa conflicto con Next.js Font 
-  O lo configuramos para que use la variable de Inter
-*/
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #020617;
+      --text: #f8fafc;
+      --text-primary: #818cf8;
+      --text-primary-light: #a5b4fc;
+      --text-muted: #cbd5e1;
+      --text-muted2: #94a3b8;
+      --border: #1e293b;
+      --bg-card: #0f172a;
+      --accent: #fb923c;
+    }
+  }
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  /* Eliminamos el fallback manual para que mande el Inter del Layout */
-}
+  body {
+    @apply bg-[family-name:var(--bg)] text-[family-name:var(--text)] antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+  }
 
-h1, h2, h3 {
-  letter-spacing: -0.02em;
-  color: var(--text-primary); /* Usamos el azul profundo para títulos */
+  h1, h2, h3 {
+    @apply tracking-tight;
+    color: var(--text-primary);
+  }
 }
