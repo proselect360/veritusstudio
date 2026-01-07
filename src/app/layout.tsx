@@ -1,10 +1,11 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter', // Usar variable CSS es más rápido para el navegador
+  variable: '--font-inter', 
 });
 
 export const metadata = {
@@ -27,6 +28,8 @@ export default function RootLayout({
     <html lang="es" className={`scroll-smooth ${inter.variable}`} suppressHydrationWarning>
       <body className={`${inter.className} bg-white text-slate-900 antialiased`}>
         {children}
+        {/* El botón ahora está correctamente ubicado antes de cerrar el body */}
+        <WhatsAppFloat />
       </body>
     </html>
   );

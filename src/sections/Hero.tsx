@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Rocket, Zap, Globe, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Zap, Globe, ArrowRight } from 'lucide-react'
 
 export default function HeroSection() {
   const [isMounted, setIsMounted] = useState(false)
@@ -29,11 +29,21 @@ export default function HeroSection() {
     },
   ]
 
+  // Función de Scroll Suave
+  const scrollToPortfolio = () => {
+    const el = document.getElementById('portfolio');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.warn("Sección #portfolio no encontrada");
+    }
+  };
+
   if (!isMounted) return <HeroSkeleton />
 
   return (
     <section className="relative min-h-[90vh] lg:min-h-screen overflow-hidden flex items-center isolate bg-[#fafafa]" aria-labelledby="hero-heading">
-      {/* Background Layer - Ultra Refined */}
+      {/* Background Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-[10%] -left-[10%] w-[70%] h-[70%] bg-blue-100/40 rounded-full blur-[120px] animate-blob" />
         <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] bg-indigo-100/30 rounded-full blur-[120px] animate-blob animation-delay-4s" />
@@ -66,21 +76,22 @@ export default function HeroSection() {
           <div className="mt-12 flex flex-col sm:flex-row gap-5 justify-center items-center">
             <Link
               href="https://wa.me/573125858242"
-              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-blue-600 text-white text-lg font-black rounded-2xl shadow-[0_20px_50px_rgba(37,99,235,0.3)] hover:bg-blue-700 transition-all duration-300 hover:-translate-y-1"
+              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-blue-600 text-white text-lg font-black rounded-2xl shadow-[0_20px_50px_rgba(37,99,235,0.3)] hover:bg-blue-700 transition-all duration-300 hover:-translate-y-1 text-center"
             >
               Cotizar por WhatsApp
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
 
-            <Link
-              href="#portfolio"
-              className="px-10 py-5 border-2 border-slate-200 text-slate-900 text-lg font-black rounded-2xl hover:bg-slate-50 hover:border-slate-300 transition-all"
+            {/* BOTÓN CORREGIDO CON SCROLL */}
+            <button
+              onClick={scrollToPortfolio}
+              className="px-10 py-5 border-2 border-slate-200 text-slate-900 text-lg font-black rounded-2xl hover:bg-slate-50 hover:border-slate-300 transition-all cursor-pointer"
             >
               Ver Portafolio
-            </Link>
+            </button>
           </div>
 
-          {/* Trust Signals Section */}
+          {/* Trust Signals */}
           <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
             {trustSignals.map((item, i) => (
               <div key={i} className="group p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
@@ -126,7 +137,7 @@ function ClockIcon() {
 function HeroSkeleton() {
   return (
     <section className="min-h-screen bg-slate-50 flex items-center">
-      <div className="max-w-7xl mx-auto px-6 w-full space-y-8 animate-pulse">
+      <div className="max-w-7xl mx-auto px-6 w-full space-y-8 animate-pulse text-center">
         <div className="h-4 w-40 bg-slate-200 mx-auto rounded-full" />
         <div className="h-20 bg-slate-200 max-w-3xl mx-auto rounded-3xl" />
         <div className="h-12 bg-slate-200 max-w-xl mx-auto rounded-2xl" />

@@ -39,3 +39,18 @@
     color: var(--text-primary);
   }
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Esto evita que el Header tape el título al bajar */
+}
+
+/* Animación para el botón de WhatsApp cuando entra la página */
+.loaded .fixed {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}

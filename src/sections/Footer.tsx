@@ -124,7 +124,7 @@ export default function Footer() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xs font-bold text-slate-900 uppercase tracking-widest mb-4">Hablemos</h3>
-              <p className="text-sm font-bold text-slate-800 tracking-tight underline decoration-indigo-500 underline-offset-4">contacto@veritus.studio</p>
+              <p className="text-sm font-bold text-slate-800 tracking-tight underline decoration-indigo-500 underline-offset-4">veritusstudioweb@gmail.com</p>
               <p className="text-sm font-bold text-slate-800 mt-2">+57 312 585 8242</p>
             </div>
             
