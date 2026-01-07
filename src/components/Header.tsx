@@ -86,11 +86,13 @@ export default function Header() {
               </Link>
             </nav>
 
-            {/* Botón móvil */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-xl bg-slate-100 text-slate-900 focus:outline-none"
-            >
+           {/* Botón móvil corregido para Accesibilidad */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label={mobileOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+                className="lg:hidden p-2 rounded-xl bg-slate-100 text-slate-900 focus:outline-none"
+              >
+                
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d={mobileOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
               </svg>

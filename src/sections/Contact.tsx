@@ -11,7 +11,6 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulación de envío
     setTimeout(() => {
       setIsSubmitting(false)
       setSubmitted(true)
@@ -42,7 +41,7 @@ export default function ContactSection() {
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs font-black uppercase text-slate-400">Escríbenos</p>
+                  <p className="text-xs font-black uppercase text-slate-500">Escríbenos</p>
                   <p className="text-lg font-bold text-slate-900">contacto@veritus.studio</p>
                 </div>
               </div>
@@ -51,7 +50,7 @@ export default function ContactSection() {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs font-black uppercase text-slate-400">WhatsApp</p>
+                  <p className="text-xs font-black uppercase text-slate-500">WhatsApp</p>
                   <p className="text-lg font-bold text-slate-900">+57 312 585 8242</p>
                 </div>
               </div>
@@ -60,7 +59,7 @@ export default function ContactSection() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs font-black uppercase text-slate-400">Ubicación</p>
+                  <p className="text-xs font-black uppercase text-slate-500">Ubicación</p>
                   <p className="text-lg font-bold text-slate-900">Bogotá, Colombia</p>
                 </div>
               </div>
@@ -91,18 +90,23 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="bg-[#fcfcfd] border border-slate-100 rounded-[3rem] p-8 md:p-12 shadow-2xl shadow-slate-200/50">
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-400 ml-2">Nombre</label>
-                    <input required type="text" placeholder="Ej. Juan Pérez" className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold" />
+                    <label htmlFor="name" className="text-xs font-black uppercase text-slate-500 ml-2">Nombre</label>
+                    <input id="name" required type="text" placeholder="Ej. Juan Pérez" className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-400 ml-2">WhatsApp</label>
-                    <input required type="tel" placeholder="+57 ..." className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold" />
+                    <label htmlFor="whatsapp" className="text-xs font-black uppercase text-slate-500 ml-2">WhatsApp</label>
+                    <input id="whatsapp" required type="tel" placeholder="+57 ..." className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold" />
                   </div>
                 </div>
 
                 <div className="space-y-2 mb-6">
-                  <label className="text-xs font-black uppercase text-slate-400 ml-2">Presupuesto Estimado</label>
-                  <select className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold appearance-none cursor-pointer">
+                  <label htmlFor="budget-select" className="text-xs font-black uppercase text-slate-500 ml-2">Presupuesto Estimado</label>
+                  <select 
+                    id="budget-select" 
+                    name="presupuesto"
+                    aria-label="Selecciona tu presupuesto estimado"
+                    className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold appearance-none cursor-pointer"
+                  >
                     <option>Menos de $2M COP</option>
                     <option>$2M - $5M COP</option>
                     <option>$5M - $10M COP</option>
@@ -111,8 +115,8 @@ export default function ContactSection() {
                 </div>
 
                 <div className="space-y-2 mb-8">
-                  <label className="text-xs font-black uppercase text-slate-400 ml-2">Cuéntanos sobre tu negocio</label>
-                  <textarea rows={4} className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold resize-none" placeholder="¿Qué buscas lograr con tu nueva web?"></textarea>
+                  <label htmlFor="message" className="text-xs font-black uppercase text-slate-500 ml-2">Cuéntanos sobre tu negocio</label>
+                  <textarea id="message" rows={4} className="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all font-semibold resize-none" placeholder="¿Qué buscas lograr con tu nueva web?"></textarea>
                 </div>
 
                 <button 
@@ -125,7 +129,6 @@ export default function ContactSection() {
               </form>
             )}
             
-            {/* Decoración */}
             <div className="absolute -z-10 -bottom-6 -right-6 w-32 h-32 bg-indigo-600/10 rounded-full blur-3xl" />
           </div>
 
