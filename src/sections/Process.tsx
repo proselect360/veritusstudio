@@ -72,7 +72,6 @@ export default function ProcessSection() {
   const [selectedStep, setSelectedStep] = useState<(typeof steps)[0] | null>(null)
   const [isMounted, setIsMounted] = useState(false)
 
-  // Evita errores de hidratación en Next.js
   useEffect(() => { 
     setIsMounted(true) 
   }, [])
@@ -80,35 +79,36 @@ export default function ProcessSection() {
   if (!isMounted) return null
 
   return (
-    <section id="process" className="relative py-20 lg:py-40 bg-white overflow-hidden isolate">
-      {/* Background Decor */}
+    <section id="process" className="relative py-24 lg:py-48 bg-slate-950 overflow-hidden isolate">
+      
+      {/* Luces de fondo (Glow effects) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-indigo-50/40 rounded-full blur-[140px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-50/40 rounded-full blur-[140px] translate-y-1/2" />
+        <div className="absolute top-0 left-1/4 w-[1000px] h-[1000px] bg-indigo-600/10 rounded-full blur-[160px] -translate-y-1/2" />
+        <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[160px] translate-y-1/2" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <header className="max-w-4xl mb-16 lg:mb-24">
+        <header className="max-w-4xl mb-20 lg:mb-32">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2 text-indigo-600 font-black uppercase tracking-[0.3em] text-[10px] mb-6 italic"
+            className="flex items-center gap-2 text-indigo-400 font-black uppercase tracking-[0.3em] text-[10px] mb-8 italic"
           >
             <Sparkles className="w-4 h-4" /> Speed-to-Market Methodology
           </motion.div>
           
-          <h2 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter leading-[0.85] mb-10">
+          <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] mb-12">
             Tu ecosistema <br />
-            digital en <span className="text-indigo-600">14 días.</span>
+            digital en <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-500">14 días.</span>
           </h2>
 
-          <p className="text-lg md:text-2xl text-slate-500 font-medium leading-relaxed max-w-2xl italic">
-            ← Desliza para explorar nuestro proceso →
+          <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-2xl">
+            Un proceso optimizado para <span className="text-white border-b-2 border-indigo-500/30">resultados inmediatos</span>. Sin demoras, sin fricciones.
           </p>
         </header>
 
-        {/* CARRUSEL MÓVIL / GRID DESKTOP */}
-        <div className="flex flex-nowrap overflow-x-auto gap-6 pb-12 no-scrollbar snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 scroll-smooth">
+        {/* GRID DE PASOS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, idx) => (
             <motion.div 
               key={idx}
@@ -117,109 +117,101 @@ export default function ProcessSection() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               onClick={() => setSelectedStep(step)}
-              className="min-w-[85vw] md:min-w-[45vw] lg:min-w-0 snap-center group relative p-8 md:p-10 bg-slate-50 rounded-[3rem] border-2 border-transparent hover:border-indigo-600 hover:bg-white hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col h-full"
+              className="group relative p-10 bg-slate-900/40 backdrop-blur-sm rounded-[3rem] border border-slate-800 hover:border-indigo-500/50 hover:bg-slate-900/80 transition-all duration-500 cursor-pointer flex flex-col h-full overflow-hidden"
             >
-              <div className="flex justify-between items-start mb-12">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.gradient} text-white flex items-center justify-center shadow-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+              {/* Card Glow Effect on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div className="flex justify-between items-start mb-16 relative z-10">
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.gradient} text-white flex items-center justify-center shadow-lg shadow-black/20 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
                   {step.icon}
                 </div>
-                <span className="text-4xl font-black tracking-tighter text-slate-200 group-hover:text-indigo-600/10 transition-colors">
+                <span className="text-5xl font-black tracking-tighter text-slate-800 transition-colors group-hover:text-indigo-500/20">
                   {step.number}
                 </span>
               </div>
 
-              <h3 className="text-2xl font-black text-slate-900 mb-4 leading-none">{step.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-8 font-medium">
-                {step.description}
-              </p>
+              <div className="relative z-10">
+                <h3 className="text-2xl font-black text-white mb-4 leading-none">{step.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium">
+                  {step.description}
+                </p>
+              </div>
 
-              <div className="mt-auto flex items-center justify-between">
-                <div className="flex items-center gap-2 text-indigo-600 font-black text-[9px] uppercase tracking-widest bg-white border border-indigo-100 px-3 py-1.5 rounded-full shadow-sm">
+              <div className="mt-auto flex items-center justify-between relative z-10">
+                <div className="flex items-center gap-2 text-indigo-300 font-black text-[9px] uppercase tracking-widest bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-full shadow-inner">
                   <Calendar className="w-3 h-3" />
                   {step.duration}
                 </div>
-                <span className="flex items-center gap-1 text-[10px] font-black text-indigo-600 uppercase tracking-tighter opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
-                  Ver más <Plus className="w-3 h-3" />
+                <span className="flex items-center gap-1 text-[10px] font-black text-white uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">
+                  Ver detalles <Plus className="w-3 h-3 text-indigo-400" />
                 </span>
               </div>
             </motion.div>
           ))}
         </div>
 
-       {/* Footer de la Sección de Proceso */}
-        <div className="mt-20 text-center">
-          <button 
-            onClick={() => {
-              const element = document.getElementById('warranty');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            className="inline-flex items-center gap-4 text-slate-400 hover:text-indigo-600 font-black transition-all group uppercase text-[10px] tracking-[0.2em] cursor-pointer bg-transparent border-none"
-          >
-            Ver garantía de cumplimiento <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+        {/* Footer */}
+        <div className="mt-24 text-center">
+          <button className="group inline-flex items-center gap-4 text-slate-500 hover:text-white transition-all">
+            <span className="font-black uppercase text-[10px] tracking-[0.3em]">Ver garantía de cumplimiento</span>
+            <div className="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center group-hover:border-indigo-500 transition-colors">
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
           </button>
         </div>
       </div>
 
-      {/* MODAL CON ANIMATE PRESENCE */}
+      {/* MODAL DARK */}
       <AnimatePresence>
         {selectedStep && (
           <>
-            {/* Overlay */}
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }}
               onClick={() => setSelectedStep(null)}
-              className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[100]"
+              className="fixed inset-0 bg-slate-950/90 backdrop-blur-xl z-[100]"
             />
             
-            {/* Modal Content */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 20 }} 
               animate={{ opacity: 1, scale: 1, y: 0 }} 
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-xl bg-white rounded-[2.5rem] shadow-2xl z-[101] overflow-hidden max-h-[90vh] flex flex-col"
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-xl bg-slate-900 border border-slate-800 rounded-[3rem] shadow-[0_0_50px_-12px_rgba(79,70,229,0.3)] z-[101] overflow-hidden max-h-[90vh] flex flex-col"
             >
               <div className={`h-2 w-full shrink-0 bg-gradient-to-r ${selectedStep.gradient}`} />
               
               <button 
                 onClick={() => setSelectedStep(null)} 
-                className="absolute top-4 right-4 z-[110] p-3 rounded-full bg-slate-100 text-slate-600 hover:bg-red-500 hover:text-white transition-all active:scale-90"
+                className="absolute top-6 right-6 z-[110] p-3 rounded-full bg-slate-800 text-slate-400 hover:bg-white hover:text-slate-950 transition-all"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div className="p-8 md:p-12 overflow-y-auto no-scrollbar">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className={`w-14 h-14 rounded-2xl shrink-0 bg-gradient-to-br ${selectedStep.gradient} text-white flex items-center justify-center shadow-lg`}>
+                <div className="flex items-center gap-5 mb-10">
+                  <div className={`w-16 h-16 rounded-2xl shrink-0 bg-gradient-to-br ${selectedStep.gradient} text-white flex items-center justify-center shadow-xl`}>
                     {selectedStep.icon}
                   </div>
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 italic">Etapa {selectedStep.number}</span>
-                    <h3 className="text-2xl font-black text-slate-950">{selectedStep.title}</h3>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400 italic">Etapa {selectedStep.number}</span>
+                    <h3 className="text-3xl font-black text-white">{selectedStep.title}</h3>
                   </div>
                 </div>
 
-                <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-10 font-medium">
-                  {selectedStep.description}
-                </p>
-
                 <div className="space-y-4 mb-10">
-                  <h4 className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2">Entregables de la fase:</h4>
+                  <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-6">Hoja de ruta y entregables:</h4>
                   {selectedStep.details.map((detail, idx) => (
                     <motion.div 
                       key={idx}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.05 }}
-                      className="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100"
+                      className="flex items-start gap-4 bg-slate-800/50 p-5 rounded-2xl border border-slate-700/50"
                     >
-                      <div className="mt-1 w-5 h-5 rounded-full bg-indigo-600 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-3 h-3 text-white" />
-                      </div>
-                      <span className="text-slate-800 font-bold text-sm">{detail}</span>
+                      <CheckCircle2 className="mt-0.5 w-5 h-5 text-indigo-400 shrink-0" />
+                      <span className="text-slate-300 font-bold text-sm leading-tight">{detail}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -227,9 +219,9 @@ export default function ProcessSection() {
                 <Link 
                   href={`https://wa.me/573125858242?text=Hola!%20Me%20interesa%20iniciar%20la%20fase%20de%20${selectedStep.title}`}
                   target="_blank"
-                  className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-slate-950 transition-all shadow-xl"
+                  className="w-full py-5 bg-white text-slate-950 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-indigo-500 hover:text-white transition-all shadow-xl shadow-white/5"
                 >
-                  Iniciar Proyecto <ArrowRight className="w-5 h-5" />
+                  Agendar Consultoría Gratuita <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </motion.div>

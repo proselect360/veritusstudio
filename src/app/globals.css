@@ -2,7 +2,7 @@
 
 @layer base {
   :root {
-    /* Light mode */
+    /* Light mode - Limpio y profesional */
     --bg: #f8fafc;
     --text: #0f172a;
     --text-primary: #1e1b4b;
@@ -14,43 +14,50 @@
     --accent: #f97316;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #020617;
-      --text: #f8fafc;
-      --text-primary: #818cf8;
-      --text-primary-light: #a5b4fc;
-      --text-muted: #cbd5e1;
-      --text-muted2: #94a3b8;
-      --border: #1e293b;
-      --bg-card: #0f172a;
-      --accent: #fb923c;
-    }
+  /* Cambiamos el @media por .dark para que funcione con darkMode: 'class' */
+  .dark {
+    --bg: #020617; /* El negro profundo que le gusta a Vercel */
+    --text: #f8fafc;
+    --text-primary: #818cf8;
+    --text-primary-light: #a5b4fc;
+    --text-muted: #cbd5e1;
+    --text-muted2: #94a3b8;
+    --border: #1e293b;
+    --bg-card: #0f172a;
+    --accent: #fb923c;
   }
 
   body {
-    @apply bg-[family-name:var(--bg)] text-[family-name:var(--text)] antialiased;
     background-color: var(--bg);
     color: var(--text);
+    @apply antialiased transition-colors duration-300;
   }
 
   h1, h2, h3 {
-    @apply tracking-tight;
+    @apply tracking-tight font-bold;
     color: var(--text-primary);
   }
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Esto evita que el Header tape el título al bajar */
+  scroll-padding-top: 80px;
 }
 
-/* Animación para el botón de WhatsApp cuando entra la página */
-.loaded .fixed {
-  animation: slideIn 0.5s ease-out forwards;
+/* --- Mejoras de Animación --- */
+
+/* Animación de entrada para elementos fijos (WhatsApp) */
+.fixed-whatsapp {
+  animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes slideIn {
-  from { transform: translateX(100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from { 
+    transform: translateX(100px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
 }

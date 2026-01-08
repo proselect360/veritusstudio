@@ -6,10 +6,7 @@ export default function WhatsAppFloat() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // 1. Aparecer automáticamente a los 3 segundos
     const timer = setTimeout(() => setIsVisible(true), 3000)
-
-    // 2. Aparecer al hacer scroll (lo que pase primero)
     const handleScroll = () => {
       if (window.scrollY > 300) setIsVisible(true)
     }
@@ -22,8 +19,7 @@ export default function WhatsAppFloat() {
   }, [])
 
   return (
-    /* Subimos a z-[99] para asegurar visibilidad total */
-    <div className={`fixed bottom-6 right-6 z-50 transition-all duration-700 ${
+    <div className={`fixed bottom-6 right-6 z-[99] transition-all duration-700 ${
       isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-20 opacity-0 scale-50'
     }`}>
       <a
@@ -33,12 +29,12 @@ export default function WhatsAppFloat() {
         className="group relative block"
         aria-label="Chatear por WhatsApp"
       >
-        {/* Efectos de brillo Premium */}
-        <div className="absolute inset-0 bg-[#25D366] rounded-full blur-xl opacity-60 group-hover:opacity-80 animate-pulse" />
-        <div className="absolute inset-0 bg-[#25D366] rounded-full blur-lg opacity-40 scale-110 animate-ping" />
+        {/* Glow dinámico: Menos intenso en modo oscuro para que se vea elegante */}
+        <div className="absolute inset-0 bg-[#25D366] rounded-full blur-xl opacity-40 dark:opacity-20 group-hover:opacity-80 transition-opacity animate-pulse" />
+        <div className="absolute inset-0 bg-[#25D366] rounded-full blur-lg opacity-30 dark:opacity-10 scale-110 animate-ping" />
 
-        {/* Botón Circular */}
-        <div className="relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-[#25D366] rounded-full shadow-2xl hover:shadow-[#25D366]/60 transition-all duration-500 hover:scale-110 border-4 border-white/20">
+        {/* Botón Circular con borde adaptable */}
+        <div className="relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-[#25D366] rounded-full shadow-2xl transition-all duration-500 hover:scale-110 border-4 border-white/20 dark:border-slate-900/40">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-9 h-9 md:w-11 md:h-11 text-white"
@@ -50,11 +46,11 @@ export default function WhatsAppFloat() {
           </svg>
         </div>
 
-        {/* Tooltip mejorado para móviles y desktop */}
+        {/* Tooltip adaptable al tema */}
         <div className="absolute right-full bottom-1/2 translate-y-1/2 mr-5 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 translate-x-4 group-hover:translate-x-0 hidden md:block">
-          <div className="bg-slate-900 text-white text-sm font-bold px-5 py-3 rounded-2xl whitespace-nowrap shadow-2xl border border-white/10">
+          <div className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold px-5 py-3 rounded-2xl whitespace-nowrap shadow-2xl border border-white/10 dark:border-slate-200">
             ¡Chatea con nosotros! 🚀
-            <div className="w-3 h-3 bg-slate-900 rotate-45 absolute -right-1.5 top-1/2 -translate-y-1/2" />
+            <div className="w-3 h-3 bg-slate-900 dark:bg-white rotate-45 absolute -right-1.5 top-1/2 -translate-y-1/2" />
           </div>
         </div>
       </a>
