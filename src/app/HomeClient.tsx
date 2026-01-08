@@ -11,6 +11,7 @@ import Warranty from '@/sections/Warranty'
 import Contact from '@/sections/Contact'
 import FAQSection from '@/sections/FAQSection'
 import Footer from '@/sections/Footer'
+import PageSpeedCTA from '@/components/PageSpeedCTA' // <--- La importas así
 
 export default function HomeClient() {
   useEffect(() => {
@@ -29,6 +30,8 @@ export default function HomeClient() {
         <section id="portfolio"><Portfolio /></section>
         <section id="process"><Process /></section>
         <section id="testimonials"><TestimonialsSection /></section>
+
+        <section id="PageSpeedCTA"><PageSpeedCTA /></section>
         <section id="warranty"><Warranty /></section>
         <section id="contact"><Contact /></section>
         <section id="faq"><FAQSection /></section>
