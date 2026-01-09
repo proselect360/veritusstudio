@@ -51,8 +51,8 @@ export default function LocalBusinessSchema() {
             ]
           },
           "sameAs": [
-            "https://www.instagram.com/veritusstudio",
-            "https://www.linkedin.com/company/veritusstudio",
+            "https://www.instagram.com/veritusstudioweb",
+            "https://www.linkedin.com/company/VeritusStudio",
             "https://wa.me/573125858242"
           ]
         }),

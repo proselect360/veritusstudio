@@ -19,8 +19,8 @@ export default function SchemaJsonLd() {
                 name: "Juan Medina",
               },
               sameAs: [
-                "https://www.instagram.com/veritusstudio",
-                "https://www.linkedin.com/company/veritusstudio"
+                "https://www.instagram.com/veritusstudioweb",
+                "https://www.linkedin.com/company/VeritusStudio"
               ],
             },
             {

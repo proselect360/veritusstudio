@@ -1,4 +1,6 @@
 import HomeClient from './HomeClient'
+import Portfolio from '@/sections/PortfolioServer' // Tu componente de servidor
+import Blog from '@/sections/BlogServer'
 
 export const metadata = {
   title: 'Veritus Studio | Diseño Web de Alto Rendimiento en Colombia',
@@ -13,5 +15,11 @@ export const metadata = {
 }
 
 export default function Page() {
-  return <HomeClient />
+  return (
+    <HomeClient>
+      {/* Pasamos el Portfolio como contenido interno (children) */}
+      <Portfolio />
+      <Blog />
+    </HomeClient>
+  )
 }
