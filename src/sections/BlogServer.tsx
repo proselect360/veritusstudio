@@ -1,5 +1,6 @@
 // src/sections/BlogServer.tsx
-import { client } from '@/sanity/lib/client'
+import { sanityServerClient } from '@/sanity/lib/client.server'
+
 import BlogClient from './BlogClient'
 
 export const dynamic = 'force-dynamic' // <--- AÑADE ESTO
@@ -20,7 +21,7 @@ const BLOG_QUERY = `*[_type == "blog"] | order(fechaPublicacion desc) {
 }`
 
 export default async function BlogServer() {
-  const posts = await client.fetch(BLOG_QUERY)
+  const posts = await sanityServerClient.fetch(BLOG_QUERY)
   
   return (
     // Usamos un ID que no se repita en todo el proyecto

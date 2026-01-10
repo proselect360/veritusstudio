@@ -1,10 +1,10 @@
-import { client } from '@/sanity/lib/client'
+import { sanityClient } from '@/sanity/lib/client.client'
 import { PROJECTS_QUERY } from '@/sanity/lib/queries'
 import Image from 'next/image'
 
 export default async function Projects() {
   // 1. Traemos los proyectos desde Sanity
-  const proyectos = await client.fetch(PROJECTS_QUERY)
+  const proyectos = await sanityClient.fetch(PROJECTS_QUERY)
 
   return (
     <section id="proyectos" className="py-20">
