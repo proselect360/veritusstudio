@@ -38,9 +38,9 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post, index) => (
+          {posts.map((post: any, index: number) => (
             <motion.article
-              key={post._id}
+              key={post._id || post.slug || index} // Triple protección para la "key"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -80,16 +80,21 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
                 <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
                   {/* Autor */}
+                 {/* Contenedor del Autor Protegido */}
                   <div className="flex items-center gap-3">
                     <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/10">
                       <Image 
-                        src={post.autor.avatarUrl || '/avatar-placeholder.png'} 
-                        alt={post.autor.nombre}
+                        // Si no hay avatar, usamos una imagen genérica de la web para evitar el 404
+                        src={post.autor?.avatarUrl ?? 'https://ui-avatars.com/api/?name=Veritus+Studio'} 
+                        alt={post.autor?.nombre ?? 'Autor Veritus'}
                         fill
                         className="object-cover"
                       />
                     </div>
-                    <span className="text-sm text-white/70 font-medium">{post.autor.nombre}</span>
+                    {/* El ?. evita que el sistema intente leer 'nombre' si 'autor' es null */}
+                    <span className="text-sm text-white/70 font-medium">
+                      {post.autor?.nombre ?? "Veritus Studio"}
+                    </span>
                   </div>
 
                   <Link 

@@ -1,30 +1,25 @@
 'use client'
 
-
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { ExternalLink, ArrowUpRight, Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-const projects = [
-  {
-    title: "E-commerce de Belleza",
-    category: "Tienda Online / Next.js",
-    image: "/proyecto1.webp",
-    link: "https://sebumherenciapura.pages.dev/",
-    tags: ["Vercel", "Tailwind", "Stripe"],
-  },
-  {
-    title: "Centro Vacacional",
-    category: "Real Estate / SEO Local",
-    image: "/proyecto2.webp",
-    link: "https://hotelycentrovacacionallaprimavera.vercel.app/",
-    tags: ["SEO", "Next.js", "WhatsApp Pro"],
+// Definimos la interfaz para que TypeScript no marque error en PortfolioWrapper
+interface ProyectoSanity {
+  _id: string
+  nombre: string
+  url: string
+  imageUrl: string
+  categoria?: {
+    titulo: string
   }
-]
+}
 
-export default function Portfolio() {
+export default function Portfolio({ proyectos }: { proyectos: ProyectoSanity[] }) {
+  // Si no hay proyectos, podemos mostrar un estado vacío o nada
+  if (!proyectos || proyectos.length === 0) return null;
+
   return (
     <section id="portfolio" className="py-24 lg:py-48 bg-slate-950 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -56,11 +51,11 @@ export default function Portfolio() {
           </p>
         </div>
 
-        {/* Grid Asimétrico (La clase md:mt-32 crea el efecto de desajuste) */}
+        {/* Grid Asimétrico dinámico con datos de Sanity */}
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-32">
-          {projects.map((project, index) => (
+          {proyectos.map((project, index) => (
             <motion.div 
-              key={index} 
+              key={project._id} // Usamos el ID de Sanity
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -70,8 +65,8 @@ export default function Portfolio() {
               {/* Contenedor de Imagen con Glow */}
               <div className="relative aspect-[16/11] w-full overflow-hidden rounded-[3.5rem] bg-slate-900 border border-slate-800 transition-all duration-700 group-hover:border-indigo-500/50 group-hover:shadow-[0_40px_100px_-20px_rgba(79,70,229,0.2)]">
                 <Image
-                  src={project.image}
-                  alt={project.title}
+                  src={project.imageUrl || "/placeholder.webp"} // Imagen desde Sanity
+                  alt={project.nombre} // Alt obligatorio para evitar errores
                   fill
                   className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110 opacity-80 group-hover:opacity-100"
                 />
@@ -79,7 +74,7 @@ export default function Portfolio() {
                 {/* Overlay Glassmorphism */}
                 <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[4px] flex items-center justify-center">
                    <Link 
-                    href={project.link} 
+                    href={project.url || "#"} 
                     target="_blank"
                     className="flex items-center gap-3 bg-white text-slate-950 px-10 py-5 rounded-2xl font-black shadow-2xl scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 hover:bg-indigo-500 hover:text-white"
                   >
@@ -90,26 +85,25 @@ export default function Portfolio() {
 
               {/* Información del Proyecto */}
               <div className="mt-12 px-2">
+                {/* Aquí podrías mapear tags si los agregas a Sanity, por ahora mostramos la categoría */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="text-[9px] font-black uppercase tracking-[0.2em] text-indigo-400 bg-indigo-500/5 border border-indigo-500/20 px-4 py-1.5 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-indigo-400 bg-indigo-500/5 border border-indigo-500/20 px-4 py-1.5 rounded-full">
+                    {project.categoria?.titulo || "Digital Asset"}
+                  </span>
                 </div>
                 
                 <div className="flex justify-between items-start gap-4">
                   <div>
                     <h3 className="text-4xl font-black text-white tracking-tight group-hover:text-indigo-400 transition-colors duration-300">
-                      {project.title}
+                      {project.nombre}
                     </h3>
                     <p className="text-slate-500 font-bold mt-3 italic flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-indigo-500/50" /> {project.category}
+                      <Sparkles className="w-4 h-4 text-indigo-500/50" /> Proyecto de Veritus Studio
                     </p>
                   </div>
 
                   <Link 
-                    href={project.link} 
+                    href={project.url || "#"} 
                     target="_blank"
                     className="mt-2 p-5 rounded-2xl bg-slate-900 border border-slate-800 text-slate-400 hover:bg-white hover:text-slate-950 hover:border-white hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-500"
                   >
@@ -121,7 +115,7 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* Call to Action Final del Portfolio */}
+        {/* Call to Action Final */}
         <div className="mt-48 text-center">
             <Link 
               href="https://wa.me/573125858242"
