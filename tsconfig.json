@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/sanity/lib/client.server.ts.bak"  ],
   "exclude": ["node_modules"]
 }

@@ -1,7 +1,9 @@
 // src/sections/PortfolioWrapper.tsx
-import { sanityClient } from '@/sanity/lib/client.client'
+import { client } from '@/sanity/lib/client' // Cambiado de getClient a client
+import Portfolio from './Portfolio'
 
-import Portfolio from './Portfolio' // Tu componente actual con animaciones
+// Forzamos a que esta sección siempre busque datos frescos y no use caché vieja
+export const dynamic = 'force-dynamic'
 
 const PROJECTS_QUERY = `*[_type == "proyecto"] | order(_createdAt desc) {
   _id,
@@ -12,8 +14,8 @@ const PROJECTS_QUERY = `*[_type == "proyecto"] | order(_createdAt desc) {
 }`
 
 export default async function PortfolioWrapper() {
-  const proyectos = await sanityClient.fetch(PROJECTS_QUERY)
+  // Corregido: Usamos client.fetch directamente
+  const proyectos = await client.fetch(PROJECTS_QUERY)
   
-  // Enviamos los datos como una propiedad (prop)
   return <Portfolio proyectos={proyectos} />
 }

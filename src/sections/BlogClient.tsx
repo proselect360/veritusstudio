@@ -10,7 +10,9 @@ interface Post {
   titulo: string;
   slug: string;
   tiempoLectura: number;
-  categoria: string;
+  categoria: {
+    titulo: string;
+  };
   fechaPublicacion: string;
   imagenUrl: string;
   autor: {
@@ -18,6 +20,7 @@ interface Post {
     avatarUrl: string;
   };
 }
+
 
 export default function BlogClient({ posts }: { posts: Post[] }) {
   if (!posts || posts.length === 0) return null;
@@ -54,7 +57,8 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold text-[#25D366] uppercase tracking-widest border border-white/10">
-                    {post.categoria}
+                    {post.categoria?.titulo}
+
                   </span>
                 </div>
               </div>

@@ -1,13 +1,14 @@
 import { createClient } from 'next-sanity'
 import { apiVersion, dataset, projectId } from '../env'
 
-export function getSanityClient() {
-  return createClient({
-    projectId,
-    dataset,
-    apiVersion,
-    useCdn: true,
-    perspective: 'published',
-    stega: { enabled: false },
-  })
-}
+export const client = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: true, 
+  // Forzamos a que NO busque herramientas de edición
+  stega: {
+    enabled: false,
+    studioUrl: '/studio', 
+  },
+})

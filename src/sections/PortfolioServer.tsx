@@ -1,18 +1,19 @@
-// src/sections/PortfolioServer.tsx
-import { sanityServerClient} from '@/sanity/lib/client.server'
-import PortfolioClient from './Portfolio' // Tu componente actual con animaciones
+// src/sections/PortfolioWrapper.tsx
+import { sanityServerClient } from '@/sanity/lib/client.server'
+import Portfolio from './Portfolio'
 
 const PROJECTS_QUERY = `*[_type == "proyecto"] | order(_createdAt desc) {
   _id,
   nombre,
-  categoria,
+  url,
   "imageUrl": imagen.asset->url,
-  url
+  categoria->{
+    titulo
+  }
 }`
 
-export default async function PortfolioServer() {
+export default async function PortfolioWrapper() {
   const proyectos = await sanityServerClient.fetch(PROJECTS_QUERY)
-  
-  // Le pasamos los datos al componente de cliente como "proyectos"
-  return <PortfolioClient proyectos={proyectos} />
+
+  return <Portfolio proyectos={proyectos} />
 }
