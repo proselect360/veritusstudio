@@ -2,6 +2,9 @@
 import { client } from '@/sanity/lib/client'
 import BlogClient from './BlogClient'
 
+export const dynamic = 'force-dynamic' // <--- AÑADE ESTO
+export const revalidate = 0            // <--- AÑADE ESTO
+
 const BLOG_QUERY = `*[_type == "blog"] | order(fechaPublicacion desc) {
   _id,
   titulo,
