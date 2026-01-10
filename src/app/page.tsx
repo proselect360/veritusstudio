@@ -17,9 +17,11 @@ export const metadata = {
 export default function Page() {
   return (
     <HomeClient>
-      {/* Pasamos el Portfolio como contenido interno (children) */}
       <Portfolio />
-      <Blog />
+      {/* Envolvemos el Blog aquí con un ID que NO se repita en ningún otro archivo */}
+      <div id="ver-articulos-recientes" className="scroll-mt-32">
+        <Blog />
+      </div>
     </HomeClient>
   )
 }
