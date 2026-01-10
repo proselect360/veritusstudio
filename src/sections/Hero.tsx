@@ -61,7 +61,7 @@ export default function HeroSection() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
-                Disponibilidad Limitada <span className="text-blue-600 dark:text-blue-400 ml-1 italic font-serif lowercase text-xs">2026</span>
+                Disponibilidad Limitada. <span className="text-blue-600 dark:text-blue-400 ml-1 italic font-serif lowercase text-xs">2026</span>
               </span>
             </div>
           </div>
