@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { sanityServerClient } from '@/sanity/lib/client.server'
+import { getSanityClient } from '@/sanity/lib/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
@@ -44,7 +44,7 @@ export default function BlogPostPage({ params }: { params: any }) {
   useEffect(() => {
     const fetchData = async () => {
       const { slug } = await params;
-      const result = await sanityServerClient.fetch(POST_QUERY, { slug });
+      const client = getSanityClient();
       setData(result);
     };
     fetchData();

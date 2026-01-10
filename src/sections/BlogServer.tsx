@@ -1,17 +1,13 @@
 // src/sections/BlogServer.tsx
-import { sanityServerClient } from '@/sanity/lib/client.server'
-
-import BlogClient from './BlogClient'
-
-export const dynamic = 'force-dynamic' // <--- AÑADE ESTO
-export const revalidate = 0            // <--- AÑADE ESTO
+import { client } from '@/sanity/lib/client'
+import BlogClient from './BlogClient' // Tu componente visual
 
 const BLOG_QUERY = `*[_type == "blog"] | order(fechaPublicacion desc) {
   _id,
   titulo,
   "slug": slug.current,
   tiempoLectura,
-  "categoria": categoria->titulo, 
+  categoria,
   fechaPublicacion,
   "imagenUrl": imagenPrincipal.asset->url,
   "autor": {
@@ -21,12 +17,7 @@ const BLOG_QUERY = `*[_type == "blog"] | order(fechaPublicacion desc) {
 }`
 
 export default async function BlogServer() {
-  const posts = await sanityServerClient.fetch(BLOG_QUERY)
+  const posts = await client.fetch(BLOG_QUERY)
   
-  return (
-    // Usamos un ID que no se repita en todo el proyecto
-    <section id="nuestros-articulos" className="scroll-mt-32"> 
-      <BlogClient posts={posts} />
-    </section>
-  )
+  return <BlogClient posts={posts} />
 }
