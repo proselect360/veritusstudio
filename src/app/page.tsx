@@ -1,6 +1,7 @@
 import HomeClient from './HomeClient'
 import Portfolio from '@/sections/PortfolioServer' // Tu componente de servidor
 import Blog from '@/sections/BlogServer'
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Veritus Studio | Diseño Web de Alto Rendimiento en Colombia',

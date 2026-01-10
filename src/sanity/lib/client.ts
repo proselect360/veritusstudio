@@ -5,5 +5,8 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // Usamos false para ver los cambios al instante al publicar
+  useCdn: true, // Importante para que no pida tokens en el build
+  stega: {
+    enabled: false, // Esto evita el error de "auth is null"
+  },
 })
