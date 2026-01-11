@@ -27,16 +27,17 @@ export default function HomeClient({ children }: { children: ReactNode }) {
       <main className="relative">
         <section id="hero"><Hero /></section>
         <section id="services"><Services /></section>
-        
-        {/* Aquí caerán el Portfolio Y el Blog que vienen de page.tsx */}
-        <div id="content-wrapper">
-          {children}
-        </div>
-
         <section id="process"><Process /></section>
         <section id="testimonials"><TestimonialsSection /></section>
         <section id="PageSpeedCTA"><PageSpeedCTA /></section>
         <section id="warranty"><Warranty /></section>
+
+        
+         {/* Aquí caerán el Portfolio Y el Blog que vienen de page.tsx */}
+        <div id="content-wrapper">
+          {children}
+        </div>
+
         <section id="contact"><Contact /></section>
         <section id="faq"><FAQSection /></section>
       </main>

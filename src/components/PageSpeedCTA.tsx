@@ -60,14 +60,15 @@ export default function PageSpeedCTA() {
   }, [isScanning, url])
 
   return (
-    <section className="py-24 bg-slate-950 overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6">
+    // CAMBIO: bg-transparent para ver la imagen 3D de fondo
+    <section className="relative py-24 bg-transparent overflow-hidden isolate">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         
-        {/* Banner de Contraste Superior */}
+        {/* Banner de Contraste Superior - Estilo Glass */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-3xl bg-indigo-500/5 border border-indigo-500/10"
+          className="mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-3xl bg-indigo-500/5 backdrop-blur-md border border-indigo-500/10"
         >
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400">
@@ -86,9 +87,10 @@ export default function PageSpeedCTA() {
         </motion.div>
 
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-[3rem] blur opacity-10 group-hover:opacity-30 transition duration-1000"></div>
           
-          <div className="relative bg-slate-900 border border-slate-800 rounded-[3rem] p-8 md:p-16">
+          {/* CAMBIO: bg-slate-900/40 y backdrop-blur-xl para que se vea la imagen pasando por detrás */}
+          <div className="relative bg-slate-950/40 backdrop-blur-xl border border-slate-800/50 rounded-[3rem] p-8 md:p-16">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               
               {/* Lado Izquierdo: Info */}
@@ -101,7 +103,7 @@ export default function PageSpeedCTA() {
                   <span className="text-slate-500 italic font-serif font-normal">alto rendimiento.</span>
                 </h2>
                 <p className="text-slate-400 font-medium mb-8 leading-relaxed">
-                  Mide tu sitio con los mismos estándares que usamos en Veritus. Ingresa tu URL y descubre por qué tus visitantes no están convirtiendo.
+                  Mide tu sitio con los mismos estándares que usamos en Veritus. Descubre por qué tus visitantes no están convirtiendo.
                 </p>
                 
                 <div className="flex items-center gap-6 mb-10">
@@ -116,12 +118,11 @@ export default function PageSpeedCTA() {
                     </div>
                 </div>
 
-                {/* Auxilio - Redirección a Formulario de Contacto */}
                 <AnimatePresence>
                   {showHelp && (
                     <motion.div 
                       initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                      className="p-5 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 shadow-2xl shadow-indigo-500/5"
+                      className="p-5 rounded-2xl bg-indigo-500/10 backdrop-blur-md border border-indigo-500/20 shadow-2xl shadow-indigo-500/5"
                     >
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0">
@@ -131,12 +132,9 @@ export default function PageSpeedCTA() {
                           <p className="text-white font-bold text-sm leading-tight italic">
                             Podemos llevar este puntaje al 100%.
                           </p>
-                          <p className="text-slate-500 text-[10px] mt-1 mb-3">
-                            Nuestra infraestructura resuelve los errores técnicos automáticamente.
-                          </p>
                           <Link 
                             href="#contacto"
-                            className="inline-flex items-center gap-2 text-indigo-400 font-black text-[10px] uppercase tracking-widest hover:text-white transition-colors border-b border-indigo-500/30 pb-1"
+                            className="inline-flex items-center gap-2 text-indigo-400 font-black text-[10px] uppercase tracking-widest hover:text-white transition-colors border-b border-indigo-500/30 pb-1 mt-2"
                           >
                             Solicitar optimización gratuita <ArrowRight className="w-3 h-3" />
                           </Link>
@@ -147,8 +145,8 @@ export default function PageSpeedCTA() {
                 </AnimatePresence>
               </div>
 
-              {/* Lado Derecho: Input & Escaneo */}
-              <div className="bg-slate-950/50 p-8 md:p-10 rounded-[2.5rem] border border-slate-800 relative min-h-[350px] flex flex-col justify-center">
+              {/* Lado Derecho: Input & Escaneo - Efecto de Profundidad */}
+              <div className="bg-slate-950/60 backdrop-blur-2xl p-8 md:p-10 rounded-[2.5rem] border border-slate-800/50 relative min-h-[350px] flex flex-col justify-center">
                 <AnimatePresence mode="wait">
                   {!isScanning ? (
                     <motion.form 
@@ -163,7 +161,7 @@ export default function PageSpeedCTA() {
                           placeholder="tu-sitio-web.co"
                           value={url}
                           onChange={(e) => setUrl(e.target.value)}
-                          className="w-full bg-slate-900 border border-slate-700 text-white rounded-2xl py-5 pl-12 pr-4 focus:outline-none focus:border-indigo-500 transition-all font-bold placeholder:text-slate-700"
+                          className="w-full bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 text-white rounded-2xl py-5 pl-12 pr-4 focus:outline-none focus:border-indigo-500 transition-all font-bold placeholder:text-slate-700"
                         />
                       </div>
                       
@@ -177,7 +175,7 @@ export default function PageSpeedCTA() {
                         
                         <div 
                           onClick={openVeritusBenchmark}
-                          className="w-full bg-slate-900/50 text-slate-400 border border-slate-800 font-bold py-4 rounded-2xl flex items-center justify-center gap-3 hover:bg-slate-800 hover:text-white transition-all cursor-pointer text-xs uppercase tracking-widest"
+                          className="w-full bg-slate-900/30 text-slate-400 border border-slate-800 font-bold py-4 rounded-2xl flex items-center justify-center gap-3 hover:bg-slate-800 hover:text-white transition-all cursor-pointer text-xs uppercase tracking-widest"
                         >
                           Nuestras Paginas <Cpu className="w-4 h-4" />
                         </div>
@@ -223,7 +221,7 @@ export default function PageSpeedCTA() {
 
         {/* Badge Inferior */}
         <div className="mt-12 flex justify-center">
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900/30 border border-slate-800 rounded-full group cursor-default">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-950/20 backdrop-blur-md border border-slate-800/50 rounded-full group cursor-default">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-slate-500 text-[10px] font-black uppercase tracking-widest">
                     Infraestructura <span className="text-white">Vercel Edge Network</span> & Next.js 15

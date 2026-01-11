@@ -11,12 +11,11 @@ export default function Footer() {
     setMounted(true)
   }, [])
 
-  // Skeleton de carga refinado para evitar saltos visuales
   if (!mounted) {
     return (
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+      <footer className="bg-transparent border-t border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="h-24 bg-slate-50 dark:bg-slate-900 rounded-[2rem] animate-pulse" />
+          <div className="h-24 bg-slate-900/20 rounded-[2rem] animate-pulse" />
         </div>
       </footer>
     )
@@ -50,27 +49,28 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="border-t border-slate-200/70 dark:border-slate-800 bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+    // CAMBIO: bg-transparent y backdrop-blur para mantener la coherencia visual global
+    <footer className="relative border-t border-slate-200/50 dark:border-slate-800/50 bg-white/5 dark:bg-slate-950/20 backdrop-blur-xl transition-colors duration-500 overflow-hidden isolate">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 lg:py-24 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 lg:gap-12">
           
-          {/* Branding - Ocupa 2 columnas en Desktop para mejor balance */}
+          {/* Branding - El ancla visual */}
           <div className="lg:col-span-2 space-y-8">
             <Link href="/" className="group inline-flex items-center gap-4">
-              <div className="relative w-12 h-12">
-                <div className="absolute inset-0 bg-indigo-600 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
-                <div className="relative h-full bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl transition-transform group-hover:scale-105">
+              <div className="relative w-14 h-14">
+                <div className="absolute inset-0 bg-indigo-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-50 transition-all duration-500" />
+                <div className="relative h-full bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-2xl transition-transform group-hover:scale-110 group-hover:rotate-3">
                   V
                 </div>
               </div>
               <span className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Veritus Studio</span>
             </Link>
             
-            <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed max-w-sm">
-              Ingeniería web de alto rendimiento con **Next.js 15**. Transformamos empresas colombianas en referentes digitales.
+            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-sm font-medium">
+              Ingeniería web de alto rendimiento. Transformamos empresas en <span className="text-slate-900 dark:text-white font-bold">referentes digitales</span> con Next.js 15.
             </p>
 
-            <div className="flex gap-5">
+            <div className="flex gap-4">
               <SocialLink 
                 href="https://instagram.com/veritusstudioweb" 
                 icon={<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.069-1.644-.069-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />} 
@@ -84,10 +84,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navegación Enlazada */}
+          {/* Navegación Dinámica */}
           {navGroups.map((group) => (
             <div key={group.title}>
-              <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-8">
+              <h3 className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-[0.3em] mb-8">
                 {group.title}
               </h3>
               <ul className="space-y-4">
@@ -95,7 +95,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link 
                       href={link.href} 
-                      className="text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 text-sm font-bold transition-colors block"
+                      className="text-slate-500 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 text-sm font-bold transition-all block hover:translate-x-1"
                     >
                       {link.label}
                     </Link>
@@ -108,23 +108,23 @@ export default function Footer() {
           {/* Contacto Directo */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6">Hablemos</h3>
-              <a href="mailto:veritusstudioweb@gmail.com" className="text-sm font-black text-slate-800 dark:text-slate-200 hover:text-indigo-600 transition-colors underline decoration-indigo-500/30 underline-offset-4 block mb-2">
+              <h3 className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-[0.3em] mb-8">Hablemos</h3>
+              <a href="mailto:veritusstudioweb@gmail.com" className="text-sm font-black text-slate-800 dark:text-slate-200 hover:text-indigo-500 transition-colors underline decoration-indigo-500/30 underline-offset-8 block mb-3">
                 veritusstudioweb@gmail.com
               </a>
-              <p className="text-sm font-bold text-slate-800 dark:text-slate-200">+57 312 585 8242</p>
+              <p className="text-sm font-black text-slate-800 dark:text-slate-200">+57 312 585 8242</p>
             </div>
           </div>
         </div>
 
-        {/* Barra Inferior */}
-        <div className="mt-20 pt-10 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+        {/* Barra de Copyright e Disponibilidad */}
+        <div className="mt-24 pt-10 border-t border-slate-200/50 dark:border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest text-center md:text-left">
             © {currentYear} Veritus Studio — Medellín & Bogotá, Colombia.
           </p>
           
-          <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-500/5 border border-emerald-100 dark:border-emerald-500/20">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
             <span className="text-[10px] font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-[0.15em]">
               Disponibles para nuevos proyectos
             </span>
@@ -142,7 +142,7 @@ function SocialLink({ href, icon, label }: { href: string, icon: React.ReactNode
       target="_blank" 
       rel="noopener noreferrer" 
       aria-label={label}
-      className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-500 hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-500 transition-all duration-300 shadow-sm"
+      className="w-11 h-11 flex items-center justify-center rounded-2xl bg-slate-900/5 dark:bg-slate-900/40 text-slate-500 hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-500 transition-all duration-500 border border-slate-200/50 dark:border-slate-800/50 shadow-sm"
     >
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">{icon}</svg>
     </a>

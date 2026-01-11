@@ -2,40 +2,62 @@
 
 @layer base {
   :root {
-    /* Light mode - Limpio y profesional */
+    /* Fondos */
     --bg: #f8fafc;
-    --text: #0f172a;
-    --text-primary: #1e1b4b;
-    --text-primary-light: #3730a3;
-    --text-muted: #475569;
-    --text-muted2: #64748b;
-    --border: #e2e8f0;
     --bg-card: #ffffff;
-    --accent: #f97316;
+    
+    /* Textos (Jerarquía visual) */
+    --text-header: #0f172a;   /* Azul-negro profundo para títulos */
+    --text-body: #334155;     /* Gris azulado oscuro para párrafos */
+    --text-muted: #64748b;    /* Gris para detalles */
+    
+    /* Colores de marca */
+    --primary: #4f46e5;       /* Indigo 600 */
+    --accent: #f97316;        /* Naranja */
+    --border: #e2e8f0;
   }
 
-  /* Cambiamos el @media por .dark para que funcione con darkMode: 'class' */
   .dark {
-    --bg: #020617; /* El negro profundo que le gusta a Vercel */
-    --text: #f8fafc;
-    --text-primary: #818cf8;
-    --text-primary-light: #a5b4fc;
-    --text-muted: #cbd5e1;
-    --text-muted2: #94a3b8;
-    --border: #1e293b;
+    /* Fondos */
+    --bg: #020617;
     --bg-card: #0f172a;
+    
+    /* Textos (Jerarquía visual) */
+    --text-header: #f8fafc;   /* Blanco puro para títulos */
+    --text-body: #cbd5e1;     /* Gris claro para párrafos */
+    --text-muted: #94a3b8;    /* Gris tenue para detalles */
+    
+    /* Colores de marca */
+    --primary: #818cf8;       /* Indigo 400 */
     --accent: #fb923c;
+    --border: #1e293b;
   }
 
   body {
     background-color: var(--bg);
-    color: var(--text);
+    color: var(--text-body); /* El cuerpo usa el color de párrafo */
     @apply antialiased transition-colors duration-300;
   }
 
-  h1, h2, h3 {
-    @apply tracking-tight font-bold;
-    color: var(--text-primary);
+  /* FORZAMOS LA JERARQUÍA PARA EVITAR EL GRIS PLANO */
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tighter font-black;
+    color: var(--text-header) !important; /* Títulos siempre fuertes */
+  }
+
+  p {
+    color: var(--text-body); /* Párrafos legibles */
+    @apply leading-relaxed;
+  }
+
+  span, label, .muted {
+    color: var(--text-muted); /* Solo los detalles van en gris */
+  }
+
+  /* Mejora de selección de texto */
+  ::selection {
+    @apply bg-indigo-500/30 text-indigo-900 dark:text-indigo-200;
   }
 }
 
@@ -44,20 +66,17 @@ html {
   scroll-padding-top: 80px;
 }
 
-/* --- Mejoras de Animación --- */
-
-/* Animación de entrada para elementos fijos (WhatsApp) */
-.fixed-whatsapp {
-  animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-@keyframes slideIn {
-  from { 
-    transform: translateX(100px); 
-    opacity: 0; 
-  }
-  to { 
-    transform: translateX(0); 
-    opacity: 1; 
-  }
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out;
 }

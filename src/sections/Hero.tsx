@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Zap, Globe, ArrowRight, Sparkles, MousePointer2 } from 'lucide-react'
-import { motion } from 'framer-motion' // Opcional pero recomendado para animaciones fluidas
+import Image from 'next/image'
+import { Zap, Globe, ArrowRight, MousePointer2, Clock } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function HeroSection() {
   const [isMounted, setIsMounted] = useState(false)
@@ -13,140 +14,185 @@ export default function HeroSection() {
   }, [])
 
   const trustSignals = [
-    { 
-      title: 'Entrega en 14 días', 
+    {
+      title: 'Entrega en 14 días',
       desc: 'Proceso Speed-to-Market para negocios ágiles.',
-      icon: <ClockIcon />,
-      accent: 'group-hover:bg-blue-600'
+      icon: <Clock className="w-7 h-7 text-white" />,
+      accent: 'group-hover:bg-blue-600',
     },
-    { 
-      title: 'Carga Instantánea', 
+    {
+      title: 'Carga Instantánea',
       desc: 'Webs Next.js con LCP < 1s garantizado.',
       icon: <Zap className="w-7 h-7 text-white" />,
-      accent: 'group-hover:bg-indigo-600'
+      accent: 'group-hover:bg-indigo-600',
     },
-    { 
-      title: 'SEO Local Pro', 
+    {
+      title: 'SEO Local Pro',
       desc: 'Dominio absoluto en búsquedas regionales.',
       icon: <Globe className="w-7 h-7 text-white" />,
-      accent: 'group-hover:bg-emerald-600'
+      accent: 'group-hover:bg-emerald-600',
     },
   ]
 
   const scrollToPortfolio = () => {
-    const el = document.getElementById('portfolio');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+    const el = document.getElementById('portfolio')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
 
-  if (!isMounted) return <HeroSkeleton />
+  if (!isMounted) return null
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-slate-950 pt-24 pb-16 transition-colors duration-500">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-slate-950 pt-24 pb-16 transition-colors duration-500">
       
-      {/* CAPA DE ARTE DE FONDO (Refinada) */}
+      {/* CAPA DE ARTE DE FONDO */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-5%] w-[50%] h-[50%] bg-gradient-to-br from-blue-400/10 to-indigo-500/10 rounded-full blur-[120px] animate-blob" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] bg-gradient-to-tr from-emerald-400/10 to-blue-500/10 rounded-full blur-[100px] animate-blob animation-delay-4s" />
-        <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.4]" />
+        
+        {/* IMAGEN 3D CENTRAL - Arreglo de posicionamiento Mobile vs Desktop */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
+          animate={{
+            opacity: [0.5, 0.7, 0.5],
+            scale: [0.9, 1, 0.9],
+            rotate: 0,
+            y: [0, -30, 0],
+          }}
+          transition={{
+            opacity: { duration: 4, repeat: Infinity, ease: 'linear' },
+            scale: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+            rotate: { duration: 1.8, ease: 'easeOut' },
+            y: { duration: 7, repeat: Infinity, ease: 'easeInOut' },
+          }}
+          /* CAMBIO CLAVE: 
+             En móvil: top-[15%] y centrado horizontal con translate-x.
+             En desktop (lg): recupera el top-1/2 y translate-y-1/2.
+          */
+          className="absolute left-1/2 -translate-x-1/2 top-[15%] lg:top-1/2 lg:-translate-y-1/2 w-[110%] md:w-[70%] lg:w-[50%] max-w-[1000px] h-auto aspect-square z-0"
+        >
+          {/* Glow/Resplandor */}
+          <div className="absolute inset-[15%] bg-blue-600/20 blur-[100px] lg:blur-[150px] rounded-full" />
+          
+          <Image
+            src="/3d-abstract-shape.webp"
+            alt="Veritus Studio Abstract 3D Shape"
+            width={1800}
+            height={1800}
+            className="relative z-10 object-contain opacity-60 lg:opacity-90 drop-shadow-[0_40px_80px_rgba(37,99,235,0.3)]"
+            priority
+          />
+        </motion.div>
+
+        {/* Patrón de fondo */}
+        <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.2]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+      {/* CONTENIDO PRINCIPAL */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
         <div className="max-w-5xl mx-auto text-center">
           
-          {/* Badge Superior */}
-          <div className="flex justify-center mb-8">
-            <div className="group relative inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-300 hover:border-blue-400/50">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex justify-center mb-8"
+          >
+            <div className="group relative inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50 shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
-                Disponibilidad Limitada. <span className="text-blue-600 dark:text-blue-400 ml-1 italic font-serif lowercase text-xs">2026</span>
+                Disponibilidad 2026
               </span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Headline Titánico */}
-          <h1 className="text-5xl sm:text-7xl lg:text-[110px] font-black leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8">
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-5xl sm:text-7xl lg:text-[110px] font-black leading-[0.9] lg:leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8"
+          >
             Diseño web <span className="text-blue-600 italic font-serif font-light lowercase">premium</span> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 dark:from-white dark:via-blue-300 dark:to-white">
               que escala tu éxito
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="mt-8 text-lg md:text-2xl text-slate-500 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium">
-            No solo creamos páginas, construimos <span className="text-slate-900 dark:text-slate-100 font-bold decoration-blue-500/30 underline underline-offset-4">activos digitales</span> de alto rendimiento con Next.js que transforman visitantes en facturación real.
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 1 }}
+            className="mt-8 text-lg md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-medium"
+          >
+            Construimos <span className="text-slate-900 dark:text-white font-bold">activos digitales</span> de alto rendimiento que transforman visitantes en facturación real.
+          </motion.p>
 
-          {/* CTAs Primarios */}
-          <div className="mt-14 flex flex-col sm:flex-row gap-5 justify-center items-center">
+          {/* Botones */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mt-12 flex flex-col sm:flex-row gap-5 justify-center items-center"
+          >
             <Link
               href="https://wa.me/573125858242"
-              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-blue-600 text-white text-lg font-bold rounded-2xl shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300 hover:-translate-y-1 active:scale-95 overflow-hidden"
+              target="_blank" // Abre en pestaña nueva
+              rel="noopener noreferrer" // Seguridad para links externos
+              className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white text-lg font-bold rounded-2xl shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all active:scale-95 overflow-hidden"
             >
-              <span>Empezar Proyecto</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              {/* Efecto de Brillo (Shimmer) */}
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
+              
+              <span className="relative z-10 flex items-center gap-3">
+                Empezar Proyecto
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
             </Link>
 
             <button
               onClick={scrollToPortfolio}
-              className="group px-10 py-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-950 dark:text-white text-lg font-bold rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-300 shadow-sm flex items-center gap-2"
+              className="w-full sm:w-auto group px-10 py-5 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50 text-slate-950 dark:text-white text-lg font-bold rounded-2xl hover:bg-white dark:hover:bg-slate-800 transition-all shadow-sm flex items-center justify-center gap-2"
             >
               Ver Portfolio
               <MousePointer2 className="w-4 h-4 text-slate-400 group-hover:text-blue-500" />
             </button>
-          </div>
+          </motion.div>
 
-          {/* Grid de Propuesta de Valor */}
-          <div className="mt-28 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
+          {/* Cards de Valor */}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1, delayChildren: 0.8 },
+              },
+            }}
+            className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10"
+          >
             {trustSignals.map((item, i) => (
-              <div key={i} className="group relative">
-                <div className="absolute inset-0 bg-slate-100/50 dark:bg-slate-900/50 rounded-[2.5rem] transition-all duration-500 group-hover:bg-white dark:group-hover:bg-slate-900 group-hover:shadow-2xl group-hover:shadow-indigo-500/5 group-hover:-translate-y-2" />
-                
-                <div className="relative p-10 flex flex-col items-center text-center">
-                  <div className={`w-16 h-16 mb-6 bg-slate-950 dark:bg-slate-800 rounded-2xl flex items-center justify-center transition-all duration-500 ${item.accent} group-hover:rotate-6 shadow-lg`}>
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 }
+                }}
+                className="group relative"
+              >
+                <div className="absolute inset-0 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-[2.5rem] border border-slate-200/50 dark:border-slate-800/50 transition-all duration-500 group-hover:-translate-y-2" />
+                <div className="relative p-8 flex flex-col items-center text-center">
+                  <div className={`w-14 h-14 mb-5 bg-slate-950 dark:bg-slate-800 rounded-2xl flex items-center justify-center transition-all ${item.accent} shadow-lg`}>
                     {item.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-slate-950 dark:text-white mb-3 tracking-tight">{item.title}</h3>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm font-medium leading-relaxed">{item.desc}</p>
+                  <h3 className="text-lg font-bold text-slate-950 dark:text-white mb-2">{item.title}</h3>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
-        @keyframes blob {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        .animate-blob { animation: blob 15s infinite alternate ease-in-out; }
-        .animation-delay-4s { animation-delay: 4s; }
-      `}</style>
-    </section>
-  )
-}
-
-function ClockIcon() {
-  return (
-    <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  )
-}
-
-function HeroSkeleton() {
-  return (
-    <section className="min-h-screen bg-white dark:bg-slate-950 flex items-center justify-center">
-      <div className="w-full max-w-4xl px-12 space-y-12 animate-pulse">
-        <div className="h-4 w-32 bg-slate-100 dark:bg-slate-900 mx-auto rounded-full" />
-        <div className="h-40 bg-slate-100 dark:bg-slate-900 rounded-3xl" />
-        <div className="h-20 bg-slate-100 dark:bg-slate-900 max-w-2xl mx-auto rounded-2xl" />
-        <div className="flex gap-4 justify-center">
-          <div className="h-16 w-48 bg-slate-100 dark:bg-slate-900 rounded-2xl" />
-          <div className="h-16 w-48 bg-slate-100 dark:bg-slate-900 rounded-2xl" />
+          </motion.div>
         </div>
       </div>
     </section>
