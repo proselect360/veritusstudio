@@ -14,113 +14,93 @@ export default function HeroSection() {
   }, [])
 
   const trustSignals = [
-  {
-    title: 'Despliegue Record',
-    desc: 'Tu activo online listo en 14 días con metodología ágil certificada.',
-    icon: <Clock className="w-6 h-6 text-blue-400 group-hover:text-white transition-colors" />,
-    accent: 'hover:border-blue-500/50',
-    bg: 'group-hover:bg-blue-600',
-    shadow: 'shadow-blue-500/20'
-  },
-  {
-    title: 'Velocidad Extrema',
-    desc: 'Arquitectura Next.js 15 con carga < 1s. Retención de usuarios garantizada.',
-    icon: <Zap className="w-6 h-6 text-indigo-400 group-hover:text-white transition-colors" />,
-    accent: 'hover:border-indigo-500/50',
-    bg: 'group-hover:bg-indigo-600',
-    shadow: 'shadow-indigo-500/20'
-  },
-  {
-    title: 'Autoridad Digital',
-    desc: 'SEO técnico de élite para dominar los resultados de búsqueda locales.',
-    icon: <Globe className="w-6 h-6 text-emerald-400 group-hover:text-white transition-colors" />,
-    accent: 'hover:border-emerald-500/50',
-    bg: 'group-hover:bg-emerald-600',
-    shadow: 'shadow-emerald-500/20'
-  },
-]
+    {
+      title: 'Despliegue Record',
+      desc: 'Tu activo online listo en 14 días con metodología ágil.',
+      icon: <Clock className="w-6 h-6" />,
+      color: 'text-blue-400',
+      shadow: 'group-hover:shadow-blue-500/20'
+    },
+    {
+      title: 'Velocidad Extrema',
+      desc: 'Arquitectura Next.js 15 con carga < 1s garantizada.',
+      icon: <Zap className="w-6 h-6" />,
+      color: 'text-indigo-400',
+      shadow: 'group-hover:shadow-indigo-500/20'
+    },
+    {
+      title: 'Autoridad Digital',
+      desc: 'SEO técnico de élite para dominar resultados locales.',
+      icon: <Globe className="w-6 h-6" />,
+      color: 'text-emerald-400',
+      shadow: 'group-hover:shadow-emerald-500/20'
+    },
+  ]
 
-  const scrollToPortfolio = () => {
-    const el = document.getElementById('portfolio')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  if (!isMounted) {
+    // Skeleton o contenedor vacío con altura mínima para evitar CLS inicial
+    return <section className="min-h-screen bg-white dark:bg-slate-950" />
   }
 
-  if (!isMounted) return null
-
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-slate-950 pt-24 pb-16 transition-colors duration-500">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-slate-950 pt-28 pb-16 transition-colors duration-500 isolate">
       
-      {/* CAPA DE ARTE DE FONDO */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        
-        {/* IMAGEN 3D CENTRAL - Arreglo de posicionamiento Mobile vs Desktop */}
+      {/* ARTE DE FONDO - Optimizado para CLS */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
-          animate={{
-            opacity: [0.5, 0.7, 0.5],
-            scale: [0.9, 1, 0.9],
-            rotate: 0,
-            y: [0, -30, 0],
-          }}
-          transition={{
-            opacity: { duration: 4, repeat: Infinity, ease: 'linear' },
-            scale: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-            rotate: { duration: 1.8, ease: 'easeOut' },
-            y: { duration: 7, repeat: Infinity, ease: 'easeInOut' },
-          }}
-          /* CAMBIO CLAVE: 
-             En móvil: top-[15%] y centrado horizontal con translate-x.
-             En desktop (lg): recupera el top-1/2 y translate-y-1/2.
-          */
-          className="absolute left-1/2 -translate-x-1/2 top-[15%] lg:top-1/2 lg:-translate-y-1/2 w-[110%] md:w-[70%] lg:w-[50%] max-w-[1000px] h-auto aspect-square z-0"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2 }}
+          className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-full max-w-[1000px] aspect-square"
         >
-          {/* Glow/Resplandor */}
-          <div className="absolute inset-[15%] bg-blue-600/20 blur-[100px] lg:blur-[150px] rounded-full" />
+          {/* Resplandor estático para no saturar el Main Thread */}
+          <div className="absolute inset-0 bg-blue-600/10 dark:bg-blue-500/10 blur-[120px] rounded-full" />
           
           <Image
             src="/3d-abstract-shape.webp"
-            alt="Veritus Studio Abstract 3D Shape"
-            width={1800}
-            height={1800}
-            className="relative z-10 object-contain opacity-60 lg:opacity-90 drop-shadow-[0_40px_80px_rgba(37,99,235,0.3)]"
-            priority
+            alt="Veritus Studio Ingeniería Web"
+            width={800} // Reducido para mejor performance inicial
+            height={800}
+            priority // Carga inmediata
+            fetchPriority="high" // Prioridad máxima en el navegador
+            sizes="(max-width: 768px) 100vw, 800px"
+            className="relative z-10 object-contain opacity-40 lg:opacity-70 drop-shadow-2xl animate-float"
           />
         </motion.div>
 
-        {/* Patrón de fondo */}
-        <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.2]" />
+        {/* Grid de fondo ligero */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-30" />
       </div>
 
-      {/* CONTENIDO PRINCIPAL */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
         <div className="max-w-5xl mx-auto text-center">
           
-          {/* Badge */}
+          {/* Badge de Disponibilidad */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex justify-center mb-8"
           >
-            <div className="group relative inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50 shadow-sm">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-100/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-white/10">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
-                Disponibilidad 2026
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300">
+                Disponibilidad Enero 2026
               </span>
             </div>
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline con Layout Estable */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-7xl lg:text-[110px] font-black leading-[0.9] lg:leading-[0.85] tracking-tighter text-slate-950 dark:text-white mb-8"
+            transition={{ duration: 0.6 }}
+            className="text-[42px] leading-[1.1] sm:text-7xl lg:text-[100px] font-black tracking-tighter text-slate-950 dark:text-white mb-8"
           >
-            Diseño web <span className="text-blue-600 italic font-serif font-light lowercase">premium</span> <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 dark:from-white dark:via-blue-300 dark:to-white">
+            Diseño web <span className="text-blue-600 italic font-light lowercase font-serif">premium</span> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-blue-600 dark:from-white dark:to-blue-400">
               que escala tu éxito
             </span>
           </motion.h1>
@@ -128,107 +108,66 @@ export default function HeroSection() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 1 }}
-            className="mt-8 text-lg md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-medium"
+            transition={{ delay: 0.3 }}
+            className="text-lg md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium mb-12"
           >
-            Construimos <span className="text-slate-900 dark:text-white font-bold">activos digitales</span> de alto rendimiento que transforman visitantes en facturación real.
+            Construimos activos digitales de <span className="text-slate-950 dark:text-white font-bold">alto rendimiento</span> que transforman clics en facturación.
           </motion.p>
 
-          {/* Botones */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="mt-12 flex flex-col sm:flex-row gap-5 justify-center items-center"
-          >
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-24">
             <Link
               href="https://wa.me/573125858242"
-              target="_blank" // Abre en pestaña nueva
-              rel="noopener noreferrer" // Seguridad para links externos
-              className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white text-lg font-bold rounded-2xl shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all active:scale-95 overflow-hidden"
+              className="w-full sm:w-auto px-10 py-5 bg-blue-600 text-white text-lg font-black rounded-2xl shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-3 active:scale-95"
             >
-              {/* Efecto de Brillo (Shimmer) */}
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
-              
-              <span className="relative z-10 flex items-center gap-3">
-                Empezar Proyecto
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+              Empezar Proyecto
+              <ArrowRight className="w-5 h-5" />
             </Link>
 
             <button
-              onClick={scrollToPortfolio}
-              className="w-full sm:w-auto group px-10 py-5 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50 text-slate-950 dark:text-white text-lg font-bold rounded-2xl hover:bg-white dark:hover:bg-slate-800 transition-all shadow-sm flex items-center justify-center gap-2"
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto px-10 py-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-950 dark:text-white text-lg font-bold rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
             >
               Ver Portfolio
-              <MousePointer2 className="w-4 h-4 text-slate-400 group-hover:text-blue-500" />
+              <MousePointer2 className="w-4 h-4 text-blue-500" />
             </button>
-          </motion.div>
+          </div>
 
-          {/* Contenedor con Scroll Snap para móvil */}
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.15, delayChildren: 0.4 },
-                },
-              }}
-              /* CLASES CLAVE: 
-                - flex overflow-x-auto: activa el carrusel en móvil
-                - snap-x snap-mandatory: hace que las tarjetas "encajen" al deslizar
-                - md:grid: vuelve a la cuadrícula normal en escritorio
-              */
-              className="mt-16 md:mt-24 flex overflow-x-auto pb-12 pt-4 px-4 md:px-0 md:overflow-visible md:grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-12 snap-x snap-mandatory scrollbar-hide"
-            >
-              {trustSignals.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 30 },
-                    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                  }}
-                  /* min-w-[85%]: permite ver un pedazo de la siguiente tarjeta (afordance visual) */
-                  className="group relative flex-shrink-0 w-[85%] md:w-full snap-center md:snap-align-none"
-                >
-                  {/* Fondo con Glassmorphism */}
-                  <div className="absolute inset-0 bg-white/80 dark:bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] border border-slate-200 dark:border-white/10 transition-all duration-500 md:group-hover:-translate-y-3 shadow-lg md:group-hover:shadow-2xl" />
-                  
-                  {/* Luz de acento superior */}
-                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-[2px] opacity-0 md:group-hover:opacity-100 transition-all duration-500 bg-gradient-to-r from-transparent via-blue-500 to-transparent blur-[1px]`} />
-
-                  <div className="relative p-8 md:p-10 flex flex-col items-center text-center">
-                    {/* Contenedor del Icono */}
-                    <div className="relative mb-6 md:mb-8">
-                      <div className={`absolute inset-0 rounded-2xl blur-2xl opacity-20 transition-all duration-500 ${item.accent.replace('group-hover:', '')} md:group-hover:opacity-60`} />
-                      <div className={`relative w-14 h-14 md:w-16 md:h-16 bg-slate-950 dark:bg-slate-800 rounded-2xl flex items-center justify-center transition-all duration-500 md:group-hover:scale-110 shadow-2xl border border-white/5`}>
-                        <div className="text-white md:group-hover:text-blue-400 transition-colors">
-                          {item.icon}
-                        </div>
-                      </div>
-                    </div>
-
-                    <h3 className="text-lg md:text-xl font-black text-slate-950 dark:text-white mb-3 tracking-tight uppercase">
-                      {item.title}
-                    </h3>
-                    
-                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium">
-                      {item.desc}
-                    </p>
-
-                    {/* Indicador de lectura */}
-                    <div className="mt-6 md:mt-8 w-10 h-[2px] bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                      <div className={`h-full w-full transition-transform duration-700 translate-x-[-100%] md:group-hover:translate-x-0 ${item.accent.replace('group-hover:', '')}`} />
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+          {/* Trust Signals - Carrusel móvil / Grid Desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {trustSignals.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group p-8 rounded-[2rem] bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 text-center transition-all hover:border-blue-500/30"
+              >
+                <div className={`w-12 h-12 mx-auto mb-6 rounded-xl bg-white dark:bg-slate-950 shadow-sm flex items-center justify-center ${item.color}`}>
+                  {item.icon}
+                </div>
+                <h3 className="text-sm font-black uppercase tracking-widest text-slate-950 dark:text-white mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   )
 }
