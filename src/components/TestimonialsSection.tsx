@@ -9,8 +9,8 @@ const philosophy = [
     name: "Diseño Exclusivo",
     role: "Pilar 01",
     location: "Estética",
-    text: "No usamos plantillas genéricas. Cada línea de código y cada píxel se diseña para que tu marca destaque sobre la competencia.",
-    icon: <Layout className="w-6 h-6" />,
+    text: "No usamos plantillas genéricas. Cada línea de código se diseña para que tu marca destaque sobre la competencia.",
+    icon: <Layout className="w-6 h-6 md:w-7 md:h-7" />,
     color: "from-indigo-500 via-purple-500 to-indigo-600",
     shadow: "shadow-indigo-500/20"
   },
@@ -18,8 +18,8 @@ const philosophy = [
     name: "Velocidad Extrema",
     role: "Pilar 02",
     location: "Rendimiento",
-    text: "Usamos Next.js 15 y optimización de imágenes para que tu web cargue en menos de 1 segundo. Si es lento, no es Veritus.",
-    icon: <Zap className="w-6 h-6" />,
+    text: "Next.js 15 y optimización radical de assets para que tu web cargue en menos de 1 segundo. El rendimiento es ley.",
+    icon: <Zap className="w-6 h-6 md:w-7 md:h-7" />,
     color: "from-blue-500 via-cyan-400 to-blue-600",
     shadow: "shadow-blue-500/20"
   },
@@ -27,8 +27,8 @@ const philosophy = [
     name: "Enfoque Comercial",
     role: "Pilar 03",
     location: "Conversión",
-    text: "Una web bonita no sirve si no vende. Integramos WhatsApp Pro y llamados a la acción estratégicos para captar clientes.",
-    icon: <BarChart3 className="w-6 h-6" />,
+    text: "Una web bonita no sirve si no vende. Integramos estrategias de captura de leads y CTAs psicológicos.",
+    icon: <BarChart3 className="w-6 h-6 md:w-7 md:h-7" />,
     color: "from-emerald-500 via-teal-400 to-emerald-600",
     shadow: "shadow-emerald-500/20"
   }
@@ -39,29 +39,29 @@ export default function PhilosophySection() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   return (
-    <section className="relative py-32 lg:py-56 bg-transparent overflow-hidden isolate" ref={containerRef}>
+    <section className="relative py-24 md:py-32 lg:py-56 bg-transparent overflow-hidden isolate" ref={containerRef}>
       
-      {/* Luces de Fondo (Mesh Gradient) */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
-        <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[140px] animate-pulse" />
-        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px]" />
+      {/* Luces de Fondo Refinadas */}
+      <div className="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none">
+        <div className="absolute top-[10%] left-[-5%] w-[40vw] h-[40vw] bg-indigo-500/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[30vw] h-[30vw] bg-emerald-500/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6">
-        {/* Cabecera Refinada */}
-        <div className="grid lg:grid-cols-2 gap-12 items-end mb-32">
+        {/* Cabecera Estilo Editorial */}
+        <div className="grid lg:grid-cols-2 gap-10 items-end mb-16 md:mb-32">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-slate-950/5 dark:bg-white/5 border border-slate-950/10 dark:border-white/10 backdrop-blur-md mb-8">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-600 dark:text-slate-400">Nuestra Filosofía</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Nuestra Filosofía</span>
             </div>
-            <h2 className="text-6xl md:text-8xl font-black text-slate-950 dark:text-white tracking-tighter leading-[0.85]">
+            <h2 className="text-5xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-[0.85]">
               Calidad sobre <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-500 italic">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-emerald-400 italic font-serif">
                 Cantidad.
               </span>
             </h2>
@@ -71,19 +71,38 @@ export default function PhilosophySection() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.4 }}
-            className="text-xl text-slate-500 dark:text-slate-400 font-medium max-w-md pb-4 lg:border-l lg:border-slate-200 lg:dark:border-slate-800 lg:pl-12"
+            className="text-lg md:text-xl text-slate-400 font-medium max-w-md pb-4 lg:border-l lg:border-white/10 lg:pl-12 leading-relaxed"
           >
-            No somos una fábrica de sitios web masivos. Somos un estudio que construye activos digitales que <span className="text-slate-950 dark:text-white font-bold text-2xl">escalan.</span>
+            No somos una fábrica masiva. Somos un estudio boutique que construye <span className="text-white font-bold">activos digitales</span> diseñados para dominar tu industria.
           </motion.p>
         </div>
 
-        {/* Grid de Pilares */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
-          {philosophy.map((pilar, i) => (
-            <PilarCard key={i} pilar={pilar} index={i} isInView={isInView} />
-          ))}
+        {/* CONTENEDOR HÍBRIDO: Carrusel en Móvil / Grid en Web */}
+        <div className="relative -mx-6 md:mx-0">
+          <div className={`
+            flex overflow-x-auto gap-6 px-6 pb-12 
+            snap-x snap-mandatory scrollbar-hide
+            md:grid md:grid-cols-3 md:gap-8 md:px-0 md:overflow-visible
+          `}>
+            {philosophy.map((pilar, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: i * 0.15 }}
+                className="w-[85vw] md:w-auto flex-shrink-0 snap-center md:snap-align-none"
+              >
+                <PilarCard pilar={pilar} index={i} isInView={isInView} />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </section>
   )
 }
@@ -91,25 +110,22 @@ export default function PhilosophySection() {
 function PilarCard({ pilar, index, isInView }: any) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.15 }}
-      whileHover={{ y: -15 }}
-      className="group relative"
+      whileHover={{ y: -10 }}
+      className="group relative h-full"
     >
-      {/* Efecto de borde iluminado (Border Glow) */}
-      <div className={`absolute -inset-[1px] bg-gradient-to-b ${pilar.color} rounded-[3rem] opacity-0 group-hover:opacity-40 blur-sm transition-opacity duration-500`} />
+      {/* Borde de gradiente animado en hover */}
+      <div className={`absolute -inset-[1px] bg-gradient-to-b ${pilar.color} rounded-[2.5rem] md:rounded-[3rem] opacity-0 group-hover:opacity-30 blur-md transition-all duration-500`} />
       
-      <div className="relative h-full bg-white/60 dark:bg-slate-950/60 backdrop-blur-3xl rounded-[3rem] p-10 lg:p-14 border border-white/40 dark:border-white/10 flex flex-col transition-colors duration-500">
+      <div className="relative h-full bg-slate-900/40 backdrop-blur-2xl rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-12 border border-white/10 flex flex-col transition-all duration-500 group-hover:bg-slate-900/60">
         
-        {/* Top: Icon & Pillar Number */}
-        <div className="flex justify-between items-start mb-12">
-          <div className={`w-16 h-16 rounded-[1.5rem] bg-gradient-to-br ${pilar.color} flex items-center justify-center text-white shadow-2xl ${pilar.shadow} transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+        {/* Cabecera del Pilar */}
+        <div className="flex justify-between items-start mb-10 md:mb-16">
+          <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${pilar.color} flex items-center justify-center text-white shadow-2xl transition-all duration-700 group-hover:scale-110 group-hover:rotate-6`}>
             {pilar.icon}
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.4em] mb-1">{pilar.role}</span>
-            <div className="w-8 h-1 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-1">{pilar.role}</span>
+            <div className="w-10 h-1 bg-white/5 rounded-full overflow-hidden">
                <motion.div 
                 initial={{ x: "-100%" }}
                 animate={isInView ? { x: 0 } : {}}
@@ -120,30 +136,29 @@ function PilarCard({ pilar, index, isInView }: any) {
           </div>
         </div>
 
-        {/* Middle: Content */}
-        <div className="mb-14">
-          <h3 className="text-2xl font-black text-slate-950 dark:text-white mb-6 uppercase tracking-tighter group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+        {/* Contenido Principal */}
+        <div className="mb-10">
+          <h3 className="text-lg md:text-xl font-black text-white mb-4 uppercase tracking-tighter transition-colors">
             {pilar.name}
           </h3>
-          <p className="text-xl lg:text-2xl font-bold text-slate-800 dark:text-slate-200 leading-[1.3] tracking-tight">
+          <p className="text-xl md:text-2xl font-bold text-slate-200 leading-[1.25] tracking-tight group-hover:text-white transition-colors">
             "{pilar.text}"
           </p>
         </div>
 
-        {/* Bottom: Meta & Link */}
+        {/* Footer Card */}
         <div className="mt-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${pilar.color}`} />
-            <span className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
+            <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${pilar.color} animate-pulse`} />
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
               {pilar.location}
             </span>
           </div>
           
-          <button className="w-12 h-12 rounded-full border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:bg-slate-950 dark:group-hover:bg-white group-hover:text-white dark:group-hover:text-slate-950 transition-all duration-300">
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all duration-500">
             <ArrowUpRight className="w-5 h-5 transition-transform group-hover:rotate-45" />
-          </button>
+          </div>
         </div>
-
       </div>
     </motion.div>
   )

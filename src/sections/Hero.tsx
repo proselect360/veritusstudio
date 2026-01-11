@@ -14,25 +14,31 @@ export default function HeroSection() {
   }, [])
 
   const trustSignals = [
-    {
-      title: 'Entrega en 14 días',
-      desc: 'Proceso Speed-to-Market para negocios ágiles.',
-      icon: <Clock className="w-7 h-7 text-white" />,
-      accent: 'group-hover:bg-blue-600',
-    },
-    {
-      title: 'Carga Instantánea',
-      desc: 'Webs Next.js con LCP < 1s garantizado.',
-      icon: <Zap className="w-7 h-7 text-white" />,
-      accent: 'group-hover:bg-indigo-600',
-    },
-    {
-      title: 'SEO Local Pro',
-      desc: 'Dominio absoluto en búsquedas regionales.',
-      icon: <Globe className="w-7 h-7 text-white" />,
-      accent: 'group-hover:bg-emerald-600',
-    },
-  ]
+  {
+    title: 'Despliegue Record',
+    desc: 'Tu activo online listo en 14 días con metodología ágil certificada.',
+    icon: <Clock className="w-6 h-6 text-blue-400 group-hover:text-white transition-colors" />,
+    accent: 'hover:border-blue-500/50',
+    bg: 'group-hover:bg-blue-600',
+    shadow: 'shadow-blue-500/20'
+  },
+  {
+    title: 'Velocidad Extrema',
+    desc: 'Arquitectura Next.js 15 con carga < 1s. Retención de usuarios garantizada.',
+    icon: <Zap className="w-6 h-6 text-indigo-400 group-hover:text-white transition-colors" />,
+    accent: 'hover:border-indigo-500/50',
+    bg: 'group-hover:bg-indigo-600',
+    shadow: 'shadow-indigo-500/20'
+  },
+  {
+    title: 'Autoridad Digital',
+    desc: 'SEO técnico de élite para dominar los resultados de búsqueda locales.',
+    icon: <Globe className="w-6 h-6 text-emerald-400 group-hover:text-white transition-colors" />,
+    accent: 'hover:border-emerald-500/50',
+    bg: 'group-hover:bg-emerald-600',
+    shadow: 'shadow-emerald-500/20'
+  },
+]
 
   const scrollToPortfolio = () => {
     const el = document.getElementById('portfolio')
@@ -159,40 +165,68 @@ export default function HeroSection() {
             </button>
           </motion.div>
 
-          {/* Cards de Valor */}
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              show: {
-                opacity: 1,
-                transition: { staggerChildren: 0.1, delayChildren: 0.8 },
-              },
-            }}
-            className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10"
-          >
-            {trustSignals.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  show: { opacity: 1, y: 0 }
-                }}
-                className="group relative"
-              >
-                <div className="absolute inset-0 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-[2.5rem] border border-slate-200/50 dark:border-slate-800/50 transition-all duration-500 group-hover:-translate-y-2" />
-                <div className="relative p-8 flex flex-col items-center text-center">
-                  <div className={`w-14 h-14 mb-5 bg-slate-950 dark:bg-slate-800 rounded-2xl flex items-center justify-center transition-all ${item.accent} shadow-lg`}>
-                    {item.icon}
+          {/* Contenedor con Scroll Snap para móvil */}
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.15, delayChildren: 0.4 },
+                },
+              }}
+              /* CLASES CLAVE: 
+                - flex overflow-x-auto: activa el carrusel en móvil
+                - snap-x snap-mandatory: hace que las tarjetas "encajen" al deslizar
+                - md:grid: vuelve a la cuadrícula normal en escritorio
+              */
+              className="mt-16 md:mt-24 flex overflow-x-auto pb-12 pt-4 px-4 md:px-0 md:overflow-visible md:grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-12 snap-x snap-mandatory scrollbar-hide"
+            >
+              {trustSignals.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                  }}
+                  /* min-w-[85%]: permite ver un pedazo de la siguiente tarjeta (afordance visual) */
+                  className="group relative flex-shrink-0 w-[85%] md:w-full snap-center md:snap-align-none"
+                >
+                  {/* Fondo con Glassmorphism */}
+                  <div className="absolute inset-0 bg-white/80 dark:bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] border border-slate-200 dark:border-white/10 transition-all duration-500 md:group-hover:-translate-y-3 shadow-lg md:group-hover:shadow-2xl" />
+                  
+                  {/* Luz de acento superior */}
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-[2px] opacity-0 md:group-hover:opacity-100 transition-all duration-500 bg-gradient-to-r from-transparent via-blue-500 to-transparent blur-[1px]`} />
+
+                  <div className="relative p-8 md:p-10 flex flex-col items-center text-center">
+                    {/* Contenedor del Icono */}
+                    <div className="relative mb-6 md:mb-8">
+                      <div className={`absolute inset-0 rounded-2xl blur-2xl opacity-20 transition-all duration-500 ${item.accent.replace('group-hover:', '')} md:group-hover:opacity-60`} />
+                      <div className={`relative w-14 h-14 md:w-16 md:h-16 bg-slate-950 dark:bg-slate-800 rounded-2xl flex items-center justify-center transition-all duration-500 md:group-hover:scale-110 shadow-2xl border border-white/5`}>
+                        <div className="text-white md:group-hover:text-blue-400 transition-colors">
+                          {item.icon}
+                        </div>
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg md:text-xl font-black text-slate-950 dark:text-white mb-3 tracking-tight uppercase">
+                      {item.title}
+                    </h3>
+                    
+                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium">
+                      {item.desc}
+                    </p>
+
+                    {/* Indicador de lectura */}
+                    <div className="mt-6 md:mt-8 w-10 h-[2px] bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div className={`h-full w-full transition-transform duration-700 translate-x-[-100%] md:group-hover:translate-x-0 ${item.accent.replace('group-hover:', '')}`} />
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-950 dark:text-white mb-2">{item.title}</h3>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
         </div>
       </div>
     </section>

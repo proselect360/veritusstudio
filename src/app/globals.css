@@ -2,81 +2,75 @@
 
 @layer base {
   :root {
-    /* Fondos */
-    --bg: #f8fafc;
-    --bg-card: #ffffff;
+    /* MODO CLARO: Limpio, Aireado y Profesional */
+    --bg: #ffffff;            /* Blanco puro para máxima luz */
+    --bg-card: #f8fafc;       /* Gris Slate 50 para sutil elevación */
     
-    /* Textos (Jerarquía visual) */
-    --text-header: #0f172a;   /* Azul-negro profundo para títulos */
-    --text-body: #334155;     /* Gris azulado oscuro para párrafos */
-    --text-muted: #64748b;    /* Gris para detalles */
+    /* Jerarquía de Texto */
+    --text-header: #020617;   /* Slate 950: Casi negro para títulos potentes */
+    --text-body: #334155;     /* Slate 700: Gris neutro para lectura prolongada */
+    --text-muted: #64748b;    /* Slate 500: Para detalles */
     
-    /* Colores de marca */
+    /* Marca y Acentos */
     --primary: #4f46e5;       /* Indigo 600 */
-    --accent: #f97316;        /* Naranja */
-    --border: #e2e8f0;
+    --primary-soft: #eef2ff;  /* Para botones secundarios */
+    --border: #e2e8f0;        /* Bordes definidos pero suaves */
+    --glow: rgba(79, 70, 229, 0.1);
   }
 
   .dark {
-    /* Fondos */
-    --bg: #020617;
-    --bg-card: #0f172a;
+    /* MODO OSCURO: Estilo OLED / Deep Space */
+    --bg: #030712;            /* Slate 950 real: Negro azulado profundo */
+    --bg-card: #0f172a;       /* Slate 900: Para dar profundidad a las tarjetas */
     
-    /* Textos (Jerarquía visual) */
-    --text-header: #f8fafc;   /* Blanco puro para títulos */
-    --text-body: #cbd5e1;     /* Gris claro para párrafos */
-    --text-muted: #94a3b8;    /* Gris tenue para detalles */
+    /* Jerarquía de Texto */
+    --text-header: #f8fafc;   /* Slate 50: Blanco roto para evitar fatiga visual */
+    --text-body: #cbd5e1;     /* Slate 300: Gris claro para párrafos */
+    --text-muted: #94a3b8;    /* Slate 400: Metadatos */
     
-    /* Colores de marca */
-    --primary: #818cf8;       /* Indigo 400 */
-    --accent: #fb923c;
-    --border: #1e293b;
+    /* Marca y Acentos */
+    --primary: #818cf8;       /* Indigo 400: Más vibrante sobre negro */
+    --primary-soft: rgba(129, 140, 248, 0.1);
+    --border: #1e293b;        /* Borde sutil que no distrae */
+    --glow: rgba(129, 140, 248, 0.2);
   }
 
   body {
     background-color: var(--bg);
-    color: var(--text-body); /* El cuerpo usa el color de párrafo */
-    @apply antialiased transition-colors duration-300;
+    color: var(--text-body);
+    @apply antialiased transition-colors duration-500 selection:bg-indigo-500/30;
   }
 
-  /* FORZAMOS LA JERARQUÍA PARA EVITAR EL GRIS PLANO */
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tighter font-black;
-    color: var(--text-header) !important; /* Títulos siempre fuertes */
+  /* REGLAS DE CONTRASTE MAESTRAS */
+  h1, h2, h3, h4 {
+    color: var(--text-header) !important;
+    @apply font-black tracking-tighter;
   }
 
-  p {
-    color: var(--text-body); /* Párrafos legibles */
-    @apply leading-relaxed;
+  /* Tarjetas con efecto de cristalización */
+  .card-premium {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply rounded-[2rem] transition-all duration-300;
   }
 
-  span, label, .muted {
-    color: var(--text-muted); /* Solo los detalles van en gris */
-  }
-
-  /* Mejora de selección de texto */
-  ::selection {
-    @apply bg-indigo-500/30 text-indigo-900 dark:text-indigo-200;
+  .dark .card-premium {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(3, 7, 18, 0.9) 100%);
+    backdrop-filter: blur(10px);
   }
 }
 
+/* Efectos de Scroll y Animación */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.25s ease-out;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
