@@ -7,6 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/', // Aquí bloqueas carpetas que no quieras que se vean
     },
-    sitemap: 'https://veritusstudio.vercel.app',
+    // En src/app/robots.ts
+      sitemap: 'https://veritusstudio.vercel.app/sitemap.xml',
   }
 }

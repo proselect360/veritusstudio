@@ -27,8 +27,8 @@ export const metadata = {
     follow: true,
   },
   // CORRECCIÓN: El código de verificación debe ser solo el ID, sin el ".html" ni "google-site-verification"
-  verification: {
-    google: 'googlea193934f1ca9a133', 
+ verification: {
+    google: '3D_qF1gwvk1wVRc0ESIrHM2H-RUr7e-LIOuPwpHhk6w', 
   },
 }; // <-- Aquí faltaba cerrar la llave del objeto metadata
 
