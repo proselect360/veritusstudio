@@ -8,9 +8,9 @@ export default function LocalBusinessSchema() {
           "@type": "ProfessionalService",
           "name": "Veritus Studio",
           "alternateName": "Veritus Diseño Web Colombia",
-          "url": "https://veritusstudio.vercel.app", // URL coherente con tu sitemap y despliegue actual
-          "logo": "https://veritus-studio.vercel.app/logo.png",
-          "image": "https://veritus-studio.vercel.app/og-image.jpg",
+          "url": "https://veritusstudio.vercel.app",
+          "logo": "https://veritusstudio.vercel.app/logo.png",
+          "image": "https://veritusstudio.vercel.app/og-image.jpg",
           "description": "Agencia boutique de diseño web premium en Colombia. Especialistas en Next.js 15, SEO regional para Cundinamarca y desarrollo de activos digitales de alto impacto.",
           "priceRange": "$$",
           "telephone": "+573125858242",
@@ -50,13 +50,6 @@ export default function LocalBusinessSchema() {
                   "@type": "Service",
                   "name": "SEO Local y Regional para Sabana Occidente"
                 }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Infraestructura Digital para el Sector Logístico"
-                }
               }
             ]
           },
@@ -68,5 +61,5 @@ export default function LocalBusinessSchema() {
         }),
       }}
     />
-  )
+  );
 }
