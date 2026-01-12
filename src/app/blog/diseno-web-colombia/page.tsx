@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/sections/Footer'
-import Contact from '@/sections/Contact'
+import Contact from '@/sections/Contacto'
 import { CheckCircle2, Zap, ShieldCheck, MessageCircle, ArrowRight, BarChart3 } from 'lucide-react'
 
 export default function DisenoWebColombia() {

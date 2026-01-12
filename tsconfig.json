@@ -1,7 +1,6 @@
 {
-
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ESNext", // Elimina el JS heredado detectado por PageSpeed
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,11 +17,11 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": ".", // Punto de referencia para los alias
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ] // Mapeo exacto hacia la carpeta src
     },
     "plugins": [
       {
@@ -41,7 +40,4 @@
   "exclude": [
     "node_modules"
   ]
-
-
-
 }

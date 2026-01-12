@@ -1,0 +1,175 @@
+# Query: contact
+# ContextLines: 1
+
+48 resultados - Archivos de 16
+
+src\app\HomeClient.tsx:
+   9  import Warranty from '@/sections/Warranty'
+  10: import Contact from '@/sections/Contact'
+  11  // Eliminado: FAQSection
+
+  48  
+  49:           <section id="contact" className="scroll-mt-10"><Contact /></section>
+  50            
+
+src\app\schema-local.tsx:
+  20            "telephone": "+573125858242",
+  21:           "email": "contacto@veritusstudio.com.co",
+  22            "areaServed": [
+
+src\app\schema.tsx:
+  33                ],
+  34:               "contactPoint": {
+  35:                 "@type": "ContactPoint",
+  36                  "telephone": "+573125858242",
+  37:                 "contactType": "sales",
+  38                  "areaServed": "CO",
+
+src\app\sitemap.ts:
+  6    // 1. Núcleo
+  7:   const routes = ['', '/blog', '/contacto'].map((route) => ({
+  8      url: `${baseUrl}${route}`,
+
+src\app\blog\cuanto-cuesta-pagina-web-colombia\page.tsx:
+    4  import Footer from '@/sections/Footer'
+    5: import Contact from '@/sections/Contacto'
+    6  import { CheckCircle2, AlertTriangle, ArrowRight, TrendingUp, Zap, Search } from 'lucide-react'
+
+  142                  <Link 
+  143:                   href="#contact" 
+  144                    className="inline-flex items-center gap-4 bg-slate-950 text-white px-12 py-6 rounded-2xl font-black hover:bg-indigo-600 transition-all shadow-2xl shadow-indigo-200 active:scale-95"
+
+  152        </main>
+  153:       <Contact />
+  154        <Footer />
+
+src\app\blog\diseno-web-bogota\page.tsx:
+    1  import Header from '@/components/Header'
+    2: import Contact from '@/sections/Contacto'
+    3  import Footer from '@/sections/Footer'
+
+  100        </main>
+  101:       <Contact />
+  102        <Footer />
+
+src\app\blog\diseno-web-colombia\page.tsx:
+    7  import Footer from '@/sections/Footer'
+    8: import Contact from '@/sections/Contact'
+    9  import { CheckCircle2, Zap, ShieldCheck, MessageCircle, ArrowRight, BarChart3 } from 'lucide-react'
+
+   35              <div className="flex flex-col sm:flex-row justify-center gap-4">
+   36:               <a href="#contact" className="px-10 py-5 bg-indigo-600 text-white font-black rounded-2xl shadow-2xl shadow-indigo-600/30 hover:bg-indigo-700 transition-all hover:scale-105">
+   37                  Quiero mi cotización gratis
+
+   99                { city: 'Medellín', href: '/blog/diseno-web-medellin', slug: 'Innovación Digital' },
+  100:               { city: 'Cali & Resto de Col', href: '#contact', slug: 'Expansión Nacional' }
+  101              ].map((item, i) => (
+
+  112  
+  113:         <Contact />
+  114        </main>
+
+src\app\blog\diseno-web-cundinamarca\page.tsx:
+    4  import Portfolio from '@/sections/Portfolio';
+    5: import Contact from '@/sections/Contact';
+    6  import { CheckCircle2, Zap, Globe, MapPin } from 'lucide-react';
+
+  102      
+  103:       <Contact />
+  104      </div>
+
+src\app\blog\diseno-web-medellin\page.tsx:
+    1  import Header from '@/components/Header'
+    2: import Contact from '@/sections/Contact'
+    3  import Footer from '@/sections/Footer'
+
+   99        </main>
+  100:       <Contact />
+  101        <Footer />
+
+src\app\landing-page\page.tsx:
+  94                  {[
+  95:                   { t: "Lead Gen", desc: "Captura de contactos cualificados para servicios profesionales." },
+  96                    { t: "Lanzamientos", desc: "Páginas de preventa para productos digitales o físicos." },
+
+src\app\privacidad\page.tsx:
+  69                  Limitamos la recolección al mínimo necesario para establecer una relación comercial de alto valor: 
+  70:                 <span className="block mt-2 text-slate-900 dark:text-slate-200 font-bold">Nombre, identificación corporativa, canales de contacto y requerimientos técnicos del proyecto.</span>
+  71                </p>
+
+  90                <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 inline-block">
+  91:                 <code className="text-indigo-600 dark:text-indigo-400 font-bold">contacto@veritus.co</code>
+  92                </div>
+
+src\components\Header.tsx:
+  37      { href: '/blog/cuanto-cuesta-pagina-web-colombia', label: '¿Cuánto cuesta?', highlight: true },
+  38:     { href: '/#contact', label: 'Contacto' },
+  39      {href: '/faq', label: 'FAQ' }
+
+  95              <Link
+  96:               href="/#contact"
+  97                className="ml-4 px-6 py-2.5 bg-white text-slate-950 font-black text-[11px] uppercase tracking-widest rounded-full hover:shadow-indigo-500/20 hover:shadow-xl active:scale-95 transition-all"
+
+src\components\PageSpeedCTA.tsx:
+  146                        <Link 
+  147:                         href="#contact"
+  148                          className="inline-flex items-center gap-2 text-indigo-400 font-black text-[10px] uppercase tracking-widest hover:text-white transition-colors"
+
+src\sections\Contact.tsx:
+    6  
+    7: export default function ContactSection() {
+    8    const [isSubmitting, setIsSubmitting] = useState(false)
+
+   44    return (
+   45:     <section id="contact" className="relative py-20 md:py-32 lg:py-56 overflow-hidden scroll-mt-20 isolate">
+   46        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
+
+   76              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 md:gap-4 max-w-sm lg:max-w-none">
+   77:               <ContactCard 
+   78                  icon={<Mail className="w-5 h-5" />} 
+
+   82                />
+   83:               <ContactCard 
+   84                  icon={<MessageCircle className="w-5 h-5" />} 
+
+   95                  <motion.form 
+   96:                   key="contact-form"
+   97                    initial={{ opacity: 0, scale: 0.95 }}
+
+  177  
+  178: function ContactCard({ icon, label, value, href }: any) {
+  179    return (
+
+src\sections\Services.tsx:
+  102          aria-label={`Solicitar información sobre ${service.name}`}
+  103:         onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+  104          className="relative w-full py-4 bg-transparent border-2 border-indigo-500/30 text-indigo-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95"
+
+  176              aria-label="Solicitar consultoría técnica personalizada"
+  177:             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+  178              className="w-full lg:w-auto px-10 py-5 bg-white text-indigo-600 font-black rounded-xl hover:scale-105 transition-transform active:scale-95 uppercase tracking-widest text-sm shadow-xl"
+
+C:\Users\juanm\OneDrive\Documentos\VeritusStudio\veritus-studio\src\sections\Contact.tsx:
+    6  
+    7: export default function ContactSection() {
+    8    const [isSubmitting, setIsSubmitting] = useState(false)
+
+   42    return (
+   43:     <section id="contact" className="relative py-20 md:py-32 lg:py-56 overflow-hidden scroll-mt-20 isolate">
+   44        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
+
+   74              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 md:gap-4 max-w-sm lg:max-w-none">
+   75:               <ContactCard 
+   76                  icon={<Mail className="w-5 h-5" />} 
+
+   80                />
+   81:               <ContactCard 
+   82                  icon={<MessageCircle className="w-5 h-5" />} 
+
+   93                  <motion.form 
+   94:                   key="contact-form"
+   95                    method="POST"
+
+  166  
+  167: function ContactCard({ icon, label, value, href }: any) {
+  168    return (

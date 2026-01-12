@@ -2,24 +2,47 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, MessageCircle, Mail, CheckCircle2, Loader2, Sparkles, ArrowRight } from 'lucide-react'
+import { Send, MessageCircle, Mail, CheckCircle2, Loader2, Sparkles, ArrowRight, AlertCircle } from 'lucide-react'
 
 export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null) // Añadido el estado de error que faltaba
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    setIsSubmitting(false)
-    setSubmitted(true)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData.entries())
+
+    try {
+      const response = await fetch('https://formspree.io/f/xdakqdpw', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        e.currentTarget.reset()
+      } else {
+        const result = await response.json()
+        setError(result.error || 'Hubo un problema al enviar el mensaje.')
+      }
+    } catch (err) {
+      setError('Error de conexión. Inténtalo de nuevo.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <section id="contact" className="relative py-20 md:py-32 lg:py-56 overflow-hidden scroll-mt-20 isolate">
-      
-      {/* Luces de fondo optimizadas para no ensuciar el móvil */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
         <div className="absolute top-1/4 -left-[20%] w-[80vw] h-[80vw] bg-indigo-500/10 rounded-full blur-[100px] opacity-50" />
         <div className="absolute bottom-0 -right-[20%] w-[60vw] h-[60vw] bg-emerald-500/10 rounded-full blur-[100px] opacity-30" />
@@ -28,7 +51,6 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           
-          {/* Info de Contacto: Más compacta en móvil */}
           <motion.div 
             className="relative z-20 lg:sticky lg:top-32"
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +73,6 @@ export default function ContactSection() {
               Transformamos visiones en <span className="text-white">activos digitales</span> de alto impacto.
             </p>
 
-            {/* Contact Cards: Layout Horizontal en móviles pequeños para evitar el apilamiento excesivo */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 md:gap-4 max-w-sm lg:max-w-none">
               <ContactCard 
                 icon={<Mail className="w-5 h-5" />} 
@@ -68,7 +89,6 @@ export default function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Formulario: Rediseño para evitar el look "apilado" */}
           <div className="relative mt-8 lg:mt-0">
             <AnimatePresence mode="wait">
               {!submitted ? (
@@ -81,25 +101,34 @@ export default function ContactSection() {
                   className="relative bg-slate-900/40 backdrop-blur-3xl border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 shadow-2xl"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                    <FormInput id="name" label="Nombre" placeholder="Tu nombre" />
-                    <FormInput id="whatsapp" label="WhatsApp" placeholder="+57..." />
+                    <FormInput id="name" name="name" label="Nombre" placeholder="Tu nombre" />
+                    <FormInput id="whatsapp" name="whatsapp" label="WhatsApp" placeholder="+57..." />
                   </div>
 
                   <div className="mb-5">
-                    <FormInput id="email" label="Correo Corporativo" placeholder="email@ejemplo.com" type="email" />
+                    <FormInput id="email" name="email" label="Correo Corporativo" placeholder="email@ejemplo.com" type="email" />
                   </div>
 
                   <div className="space-y-2 mb-8 md:mb-10">
                     <label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1">Tu idea o proyecto</label>
                     <textarea 
+                      name="message" // Agregado name
                       required rows={3}
                       className="w-full bg-white/5 border border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-[1.5rem] px-5 py-4 transition-all font-medium text-white placeholder:text-slate-500 outline-none resize-none text-sm md:text-base"
                       placeholder="¿Qué tienes en mente?"
                     />
                   </div>
 
+                  {error && (
+                    <div className="mb-5 p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl flex items-center gap-3 text-xs">
+                      <AlertCircle className="w-4 h-4" />
+                      {error}
+                    </div>
+                  )}
+
                   <button 
                     disabled={isSubmitting}
+                    type="submit"
                     className="group w-full py-5 md:py-6 bg-indigo-600 hover:bg-indigo-500 text-white rounded-[1.5rem] md:rounded-[2rem] font-black text-sm md:text-lg flex items-center justify-center gap-4 transition-all shadow-xl shadow-indigo-500/20 active:scale-95 disabled:opacity-50"
                   >
                     {isSubmitting ? (
@@ -163,12 +192,16 @@ function ContactCard({ icon, label, value, href }: any) {
   )
 }
 
-function FormInput({ id, label, placeholder, type = "text" }: any) {
+function FormInput({ id, name, label, placeholder, type = "text" }: any) { // Agregado name
   return (
     <div className="space-y-2">
       <label htmlFor={id} className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1">{label}</label>
       <input 
-        id={id} required type={type} placeholder={placeholder} 
+        id={id} 
+        name={name} // Agregado atributo name OBLIGATORIO
+        required 
+        type={type} 
+        placeholder={placeholder} 
         className="w-full bg-white/5 border border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl md:rounded-[1.25rem] px-5 py-4 transition-all font-bold text-white outline-none placeholder:text-slate-500 text-sm" 
       />
     </div>

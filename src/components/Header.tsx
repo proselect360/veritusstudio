@@ -10,10 +10,8 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  // Pilar Rendimiento: Hook de Framer Motion para el progreso de lectura
   const { scrollYProgress } = useScroll()
   
-  // Suavizamos el movimiento de la barra para que se sienta "líquida"
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -31,12 +29,14 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  // --- RUTAS ACTUALIZADAS ---
   const navLinks = [
-    { href: '/#services', label: 'Servicios' },
+    { href: '/servicios', label: 'Servicios' },
     { href: '/#projects', label: 'Proyectos' },
-    { href: '/#process', label: 'Proceso' },
+    { href: '/metodologia', label: 'Proceso' }, // Ahora apunta a la nueva página
     { href: '/blog/cuanto-cuesta-pagina-web-colombia', label: '¿Cuánto cuesta?', highlight: true },
     { href: '/#contact', label: 'Contacto' },
+    {href: '/faq', label: 'FAQ' }
   ]
 
   if (!mounted) return <div className="h-[88px] w-full bg-transparent" aria-hidden="true" />
@@ -47,7 +47,6 @@ export default function Header() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        style={{ willChange: 'transform, opacity' }}
         className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
           scrolled 
             ? 'py-3 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-sm' 
@@ -57,11 +56,11 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
           
           {/* LOGO */}
-          <Link href="/" className="group flex items-center gap-3 outline-none min-w-[140px]" aria-label="Veritus Studio - Inicio">
+          <Link href="/" className="group flex items-center gap-3 outline-none min-w-[140px]">
             <div className="relative w-10 h-10 flex items-center justify-center">
               <div className="absolute inset-0 bg-indigo-600 rounded-[12px] blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
               <div className="relative h-full w-full bg-indigo-600 rounded-[12px] flex items-center justify-center shadow-lg">
-                <span className="text-xl font-black text-white" aria-hidden="true">V</span>
+                <span className="text-xl font-black text-white">V</span>
               </div>
             </div>
             <span className="hidden sm:block font-black text-xl tracking-tighter text-white uppercase">
@@ -70,7 +69,7 @@ export default function Header() {
           </Link>
 
           {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Menú principal">
+          <nav className="hidden lg:flex items-center gap-1">
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -91,7 +90,7 @@ export default function Header() {
               ))}
             </ul>
 
-            <div className="h-4 w-px bg-white/10 mx-4" aria-hidden="true" />
+            <div className="h-4 w-px bg-white/10 mx-4" />
 
             <Link
               href="/#contact"
@@ -104,9 +103,6 @@ export default function Header() {
           {/* MOBILE TOGGLE */}
           <div className="flex items-center lg:hidden">
             <button
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-menu-container"
-              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-3 rounded-2xl bg-indigo-600 text-white shadow-lg active:scale-90 transition-transform"
             >
@@ -115,7 +111,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* BARRA DE LECTURA PREMIUM */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-blue-400 origin-left"
           style={{ scaleX }}
@@ -134,7 +129,6 @@ export default function Header() {
               className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[110] lg:hidden"
             />
             <motion.nav 
-              id="mobile-menu-container"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
@@ -154,7 +148,7 @@ export default function Header() {
                       onClick={() => setMobileOpen(false)}
                       className={`block py-4 px-6 text-lg font-bold rounded-2xl ${
                         link.highlight 
-                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' 
+                        ? 'bg-indigo-600 text-white shadow-lg' 
                         : 'text-slate-200 active:bg-white/5'
                       }`}
                     >

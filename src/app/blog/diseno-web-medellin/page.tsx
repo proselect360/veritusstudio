@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import Contact from '@/sections/Contact'
+import Contact from '@/sections/Contacto'
 import Footer from '@/sections/Footer'
 import Link from 'next/link'
 import { Layout, Zap, Search, MapPin, BarChart, Rocket, ArrowRight } from 'lucide-react'
