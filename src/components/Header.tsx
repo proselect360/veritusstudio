@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { Sun, Moon, Menu, X } from 'lucide-react'
@@ -12,44 +12,49 @@ export default function Header() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
+  // PILAR RENDIMIENTO: Optimización de scroll con useCallback
+  const handleScroll = useCallback(() => {
+    const isScrolled = window.scrollY > 20
+    if (isScrolled !== scrolled) setScrolled(isScrolled)
+  }, [scrolled])
+
   useEffect(() => {
     setMounted(true)
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true }) // Passive para mejor rendimiento en móvil
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [handleScroll])
 
   const navLinks = [
     { href: '/#services', label: 'Servicios' },
-    { href: '/#projects', label: 'Proyectos' }, // Enlace estratégico añadido
+    { href: '/#projects', label: 'Proyectos' },
     { href: '/#process', label: 'Proceso' },
     { href: '/blog/cuanto-cuesta-pagina-web-colombia', label: '¿Cuánto cuesta?', highlight: true },
     { href: '/#contact', label: 'Contacto' },
   ]
 
-  // Previene el Layout Shift (CLS) devolviendo un contenedor con la misma altura que el header final
-  if (!mounted) return <div className="h-[76px] lg:h-[88px] w-full" />
+  // PILAR RENDIMIENTO (CLS): Evita el salto visual reservando el espacio exacto
+  if (!mounted) return <div className="h-[88px] w-full bg-transparent" aria-hidden="true" />
 
   return (
     <>
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
           scrolled 
-            ? 'py-3 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-white/10 shadow-sm' 
+            ? 'py-3 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200/50 dark:border-white/10 shadow-sm' 
             : 'py-6 bg-transparent border-b border-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
           
-          {/* LOGO - Dimensiones fijas para evitar CLS */}
-          <Link href="/" className="group flex items-center gap-3 outline-none min-w-[140px]" aria-label="Veritus Studio Home">
+          {/* LOGO - Pilar SEO: Nombre de marca claro */}
+          <Link href="/" className="group flex items-center gap-3 outline-none min-w-[140px]" aria-label="Veritus Studio - Inicio">
             <div className="relative w-10 h-10 flex items-center justify-center">
               <div className="absolute inset-0 bg-indigo-600 rounded-[12px] blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
               <div className="relative h-full w-full bg-indigo-600 rounded-[12px] flex items-center justify-center shadow-lg">
-                <span className="text-xl font-black text-white">V</span>
+                <span className="text-xl font-black text-white" aria-hidden="true">V</span>
               </div>
             </div>
             <span className="hidden sm:block font-black text-xl tracking-tighter text-slate-900 dark:text-white uppercase">
@@ -57,8 +62,8 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* DESKTOP NAV - Pilar Accesibilidad: Roles de navegación */}
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -76,38 +81,40 @@ export default function Header() {
               </Link>
             ))}
 
-            <div className="h-4 w-px bg-slate-200 dark:bg-white/10 mx-4" />
+            <div className="h-4 w-px bg-slate-200 dark:bg-white/10 mx-4" aria-hidden="true" />
 
-            {/* THEME TOGGLE - Corregido para Accesibilidad */}
+            {/* THEME TOGGLE - Pilar Accesibilidad: Contraste y labels */}
             <button
-              aria-label="Cambiar modo de color"
+              aria-label={theme === 'dark' ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+              className="p-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus:ring-2 focus:ring-indigo-500 outline-none"
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
             <Link
               href="/#contact"
-              className="ml-4 px-6 py-2.5 bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-black text-[11px] uppercase tracking-widest rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg"
+              className="ml-4 px-6 py-2.5 bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-black text-[11px] uppercase tracking-widest rounded-full hover:shadow-indigo-500/20 hover:shadow-xl active:scale-95 transition-all"
             >
               Empezar
             </Link>
           </nav>
 
-          {/* MOBILE TOGGLE - Aria Labels para Lighthouse */}
+          {/* MOBILE TOGGLE */}
           <div className="flex items-center gap-2 lg:hidden">
             <button
-              aria-label="Toggle Theme"
+              aria-label="Cambiar tema"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="p-3 text-slate-700 dark:text-slate-300"
             >
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
               aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-3 rounded-2xl bg-indigo-600 text-white shadow-lg"
+              className="p-3 rounded-2xl bg-indigo-600 text-white shadow-lg active:scale-90 transition-transform"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -115,7 +122,7 @@ export default function Header() {
         </div>
       </motion.header>
 
-      {/* MOBILE MENU - Optimización de rendimiento de salida */}
+      {/* MOBILE MENU - Pilar Rendimiento: Framer Motion optimizado */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -126,19 +133,20 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
               className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[110] lg:hidden"
             />
-            <motion.div 
+            <motion.nav 
+              id="mobile-menu"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed inset-x-0 bottom-0 z-[120] bg-white dark:bg-slate-950 rounded-t-[2.5rem] shadow-2xl p-8 lg:hidden border-t border-slate-200 dark:border-white/10"
             >
               <div className="flex flex-col gap-2">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                   >
                     <Link
@@ -146,7 +154,7 @@ export default function Header() {
                       onClick={() => setMobileOpen(false)}
                       className={`block py-4 px-6 text-lg font-bold rounded-2xl ${
                         link.highlight 
-                        ? 'bg-indigo-600 text-white' 
+                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' 
                         : 'text-slate-800 dark:text-slate-200 active:bg-slate-100 dark:active:bg-white/5'
                       }`}
                     >
@@ -155,7 +163,7 @@ export default function Header() {
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
+            </motion.nav>
           </>
         )}
       </AnimatePresence>

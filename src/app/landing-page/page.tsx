@@ -1,16 +1,17 @@
 import Link from 'next/link';
-import { Target, MousePointer2, Zap, ShieldCheck, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { Target, MousePointer2, Zap, ArrowUpRight, MessageCircle } from 'lucide-react';
 
+// Pilar SEO: Metadatos específicos para capturar tráfico de pauta
 export const metadata = {
-  title: "Landing Page de Alta Conversión | Veritus Studio",
-  description: "Diseñamos terminales de venta digital optimizados para capturar leads de calidad. Desde $1.800.000 COP.",
+  title: "Landing Pages de Alta Conversión | Veritus Studio",
+  description: "Diseñamos terminales de venta digital optimizados con Next.js 15. Velocidad extrema y arquitectura para maximizar leads. Desde $1.800.000 COP.",
+  alternates: { canonical: '/servicios/landing-pages' },
 }
 
-// Componente para resaltar beneficios con un look más técnico
 const Advantage = ({ text }: { text: string }) => (
-  <div className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-indigo-200 transition-colors">
+  <div className="flex items-center gap-3 p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-colors">
     <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
-    <span className="text-slate-700 font-semibold text-sm tracking-tight">{text}</span>
+    <span className="text-slate-700 dark:text-slate-300 font-semibold text-sm tracking-tight">{text}</span>
   </div>
 );
 
@@ -25,9 +26,12 @@ export default function LandingPageService() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#fafafa] selection:bg-indigo-900 selection:text-white">
+    <main className="min-h-screen bg-[#fafafa] dark:bg-slate-950 selection:bg-indigo-900 selection:text-white">
       {/* Hero: Minimalismo y Autoridad */}
-      <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-20">
+      <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-20 overflow-hidden">
+        {/* Pilar Diseño: Decoración sutil de fondo */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/5 via-transparent to-transparent -z-10" />
+        
         <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
           <div className="flex justify-center mb-8">
             <span className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 text-slate-100 text-xs font-bold tracking-widest uppercase">
@@ -36,12 +40,12 @@ export default function LandingPageService() {
             </span>
           </div>
           
-          <h1 className="text-balance text-6xl md:text-8xl font-black text-slate-900 tracking-tighter mb-8 italic">
+          <h1 className="text-balance text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter mb-8 italic">
             Menos ruido, <br />
             <span className="text-indigo-600 not-italic">más clientes.</span>
           </h1>
           
-          <p className="text-lg md:text-2xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+          <p className="text-lg md:text-2xl text-slate-500 dark:text-slate-400 max-w-3xl mx-auto font-medium leading-relaxed">
             Creamos landing pages de alto impacto que transforman el tráfico en ingresos. Diseño único, velocidad extrema y arquitectura pensada para vender.
           </p>
         </div>
@@ -52,13 +56,13 @@ export default function LandingPageService() {
           
           {/* Panel de Oferta (Izquierda) */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="bg-white rounded-[2.5rem] p-8 lg:p-12 border border-slate-200 relative overflow-hidden group shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 lg:p-12 border border-slate-200 dark:border-slate-800 relative overflow-hidden group shadow-sm">
               <div className="absolute top-0 right-0 p-8">
-                <MousePointer2 className="w-12 h-12 text-slate-100 group-hover:text-indigo-50 transition-colors duration-500 -rotate-12" />
+                <MousePointer2 className="w-12 h-12 text-slate-100 dark:text-slate-800 group-hover:text-indigo-50 dark:group-hover:text-slate-700 transition-colors duration-500 -rotate-12" />
               </div>
               
-              <p className="text-indigo-600 font-bold uppercase tracking-widest text-xs mb-4">Investment</p>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tighter">
+              <p className="text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-widest text-xs mb-4">Investment</p>
+              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tighter">
                 $1.8M <span className="text-xl text-slate-400 font-normal tracking-normal">COP</span>
               </h2>
               
@@ -68,15 +72,15 @@ export default function LandingPageService() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-indigo-50 p-6 rounded-[2rem] border border-indigo-100">
+              <div className="bg-indigo-50 dark:bg-indigo-500/5 p-6 rounded-[2rem] border border-indigo-100 dark:border-indigo-500/20">
                 <p className="text-xs font-bold text-indigo-400 uppercase mb-2 italic">Timeline</p>
-                <p className="text-2xl font-black text-indigo-900 italic">10 Días</p>
+                <p className="text-2xl font-black text-indigo-900 dark:text-indigo-100 italic">10 Días</p>
               </div>
-              <div className="bg-emerald-50 p-6 rounded-[2rem] border border-emerald-100">
+              <div className="bg-emerald-50 dark:bg-emerald-500/5 p-6 rounded-[2rem] border border-emerald-100 dark:border-emerald-500/20">
                 <p className="text-xs font-bold text-emerald-400 uppercase mb-2 italic">Performance</p>
                 <div className="flex items-center gap-2">
                   <Zap className="w-5 h-5 text-emerald-500" />
-                  <p className="text-2xl font-black text-emerald-900 tracking-tighter">99/100</p>
+                  <p className="text-2xl font-black text-emerald-900 dark:text-emerald-100 tracking-tighter">99/100</p>
                 </div>
               </div>
             </div>
@@ -119,7 +123,7 @@ export default function LandingPageService() {
               href="https://wa.me/573125858242?text=Hola!%20Quiero%20cotizar%20una%20Landing%20Page%20Estratégica"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-10 py-5 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 flex items-center justify-center gap-3 group"
+              className="px-10 py-5 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-indigo-200 dark:shadow-none flex items-center justify-center gap-3 group"
             >
               Iniciar mi proyecto
               <MessageCircle className="w-5 h-5 group-hover:animate-bounce" />
@@ -127,12 +131,12 @@ export default function LandingPageService() {
             
             <Link
               href="/servicios"
-              className="px-10 py-5 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:bg-slate-50 transition-all flex items-center justify-center"
+              className="px-10 py-5 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 font-bold rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center"
             >
               Explorar otros planes
             </Link>
           </div>
-          <p className="mt-8 text-slate-400 text-[10px] font-bold uppercase tracking-[0.4em]">
+          <p className="mt-8 text-slate-400 text-[10px] font-bold uppercase tracking-[0.4em] animate-pulse">
             Limited development slots available
           </p>
         </div>

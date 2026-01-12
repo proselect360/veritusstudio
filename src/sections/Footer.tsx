@@ -3,14 +3,13 @@
 import { useEffect, useState, memo } from 'react'
 import Link from 'next/link'
 
-// Memoizamos los links sociales para evitar re-renders
 const SocialLink = memo(({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
   <a 
     href={href} 
     target="_blank" 
     rel="noopener noreferrer" 
     aria-label={`Visitar nuestro perfil de ${label}`}
-    className="w-11 h-11 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-slate-900/60 text-slate-500 hover:text-white hover:bg-indigo-600 transition-all duration-300 border border-slate-200 dark:border-slate-800 shadow-sm"
+    className="w-11 h-11 flex items-center justify-center rounded-2xl bg-slate-100/50 dark:bg-slate-900/40 text-slate-500 hover:text-indigo-600 dark:hover:text-white hover:bg-white dark:hover:bg-indigo-600 transition-all duration-300 border border-slate-200/50 dark:border-white/5 backdrop-blur-sm shadow-sm"
   >
     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">{icon}</svg>
   </a>
@@ -25,9 +24,8 @@ export default function Footer() {
     setMounted(true)
   }, [])
 
-  // Skeleton con altura fija para evitar Layout Shift (CLS)
   if (!mounted) {
-    return <footer className="min-h-[400px] border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950" />
+    return <footer className="min-h-[400px] bg-transparent" />
   }
 
   const navGroups = [
@@ -42,7 +40,6 @@ export default function Footer() {
     {
       title: "Recursos",
       links: [
-        { href: '/blog/cuanto-cuesta-pagina-web-colombia', label: 'Guía de Precios 2026' },
         { href: '/#process', label: 'Metodología' },
         { href: '/#faq', label: 'Preguntas Frecuentes' },
       ]
@@ -58,14 +55,14 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative border-t border-slate-200 dark:border-slate-800/50 bg-white dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
-      {/* Glow sutil para coherencia visual sin afectar el rendimiento de GPU */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+    <footer className="relative border-t border-slate-200 dark:border-white/5 bg-transparent transition-colors duration-300 overflow-hidden isolate">
+      
+      {/* 1. Capa de legibilidad mejorada: mayor desenfoque para que el texto resalte sobre GlobalFloatingShape */}
+      <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/80 backdrop-blur-2xl -z-10" />
       
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           
-          {/* Branding */}
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="group inline-flex items-center gap-4 outline-none">
               <div className="relative w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg group-hover:scale-105 transition-transform">
@@ -94,7 +91,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navegación */}
           {navGroups.map((group) => (
             <div key={group.title}>
               <p className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6">
@@ -115,7 +111,6 @@ export default function Footer() {
             </div>
           ))}
 
-          {/* Contacto */}
           <div>
             <p className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6">Hablemos</p>
             <div className="space-y-3">
@@ -127,13 +122,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-20 pt-8 border-t border-slate-200 dark:border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-6">
+        {/* 2. Barra inferior con Glassmorphism mejorado */}
+        <div className="mt-20 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest text-center md:text-left">
             © {currentYear} Veritus Studio — Medellín & Bogotá, Colombia.
           </p>
           
-          <div className="flex items-center gap-3 px-5 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/20">
+          <div className="flex items-center gap-3 px-5 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/10 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[10px] font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">
               Cupos limitados para Enero
