@@ -92,10 +92,10 @@ export default function HeroSection() {
             Construimos activos digitales de <strong className="text-white font-bold">alto rendimiento</strong> que transforman clics en facturación real.
           </p>
 
-          {/* CTAs */}
+                {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-24 min-h-[68px]">
             <Link
-              href="https://wa.me/573125858242"
+              href="#contacto" // Apunta al ID de la sección de contacto
               className="w-full sm:w-auto px-10 py-5 bg-blue-600 text-white text-lg font-black rounded-2xl shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-3 active:scale-95"
             >
               Empezar Proyecto
@@ -103,10 +103,10 @@ export default function HeroSection() {
             </Link>
 
             <Link
-              href="/#portfolio"
+              href="#dinamico" // Cambia esto por el ID real de tu sección de proyectos (ej: #proyectos)
               className="w-full sm:w-auto px-10 py-5 bg-slate-900 border border-white/10 text-white text-lg font-bold rounded-2xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
             >
-              Ver Portfolio
+              Ver Portafolio
               <MousePointer2 className="w-4 h-4 text-blue-500" aria-hidden="true" />
             </Link>
           </div>

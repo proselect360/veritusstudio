@@ -76,12 +76,15 @@ export default defineType({
         }
       ],
     }),
-    defineField({
+   
+   /*defineField({
       name: 'autor',
       title: 'Autor',
       type: 'reference', // Sugerencia: Cambiar a referencia si planeas tener múltiples autores
       to: [{ type: 'autor' }], 
     }),
+    */
+   
     defineField({
       name: 'fechaPublicacion',
       title: 'Fecha de publicación',

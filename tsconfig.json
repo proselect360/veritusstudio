@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ESNext", // Elimina el JS heredado detectado por PageSpeed
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+    "target": "ESNext", // O "ES2022" para asegurar funciones modernas
+    "lib": ["dom", "dom.iterable", "esnext"
+
     ],
     "allowJs": true,
     "skipLibCheck": true,

@@ -33,9 +33,8 @@ export default function Header() {
   const navLinks = [
     { href: '/servicios', label: 'Servicios' },
     { href: '/#projects', label: 'Proyectos' },
-    { href: '/metodologia', label: 'Proceso' }, // Ahora apunta a la nueva página
-    { href: '/blog/cuanto-cuesta-pagina-web-colombia', label: '¿Cuánto cuesta?', highlight: true },
-    { href: '/#contact', label: 'Contacto' },
+    { href: '/metodologia', label: 'Proceso' }, // Ahora apunta a la nueva página 
+    { href: '/#PageSpeedCTA', label: 'Test de tu pagina', highlight: true },
     {href: '/faq', label: 'FAQ' }
   ]
 
