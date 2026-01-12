@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import Contact from '@/sections/Contacto'
+import Contact from '@/sections/Contact'
 import Footer from '@/sections/Footer'
 import Link from 'next/link'
 import { Search, TrendingUp, Globe, Target, BarChart3, Rocket, ArrowRight } from 'lucide-react'
