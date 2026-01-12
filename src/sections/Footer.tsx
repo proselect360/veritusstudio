@@ -11,14 +11,14 @@ const SocialLink = memo(({ href, icon, label }: { href: string, icon: React.Reac
     aria-label={`Visitar nuestro perfil de ${label}`}
     className="w-11 h-11 flex items-center justify-center rounded-2xl bg-slate-100/50 dark:bg-slate-900/40 text-slate-500 hover:text-indigo-600 dark:hover:text-white hover:bg-white dark:hover:bg-indigo-600 transition-all duration-300 border border-slate-200/50 dark:border-white/5 backdrop-blur-sm shadow-sm"
   >
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">{icon}</svg>
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">{icon}</svg>
   </a>
 ))
 SocialLink.displayName = 'SocialLink'
 
 export default function Footer() {
   const [mounted, setMounted] = useState(false)
-  const currentYear = new Date().getFullYear()
+  const currentYear = 2026 // Año actual según sistema
 
   useEffect(() => {
     setMounted(true)
@@ -34,13 +34,15 @@ export default function Footer() {
       links: [
         { href: '/#services', label: 'Landing Pages' },
         { href: '/#services', label: 'Sitios Corporativos' },
-        { href: '/#services', label: 'Tiendas E-commerce' },
+        { href: '/#services', label: 'E-commerce' },
+        { href: '/#pricing', label: 'Guía de Precios' },
       ]
     },
     {
       title: "Recursos",
       links: [
         { href: '/#process', label: 'Metodología' },
+        { href: '/blog', label: 'Blog & Insights' },
         { href: '/#faq', label: 'Preguntas Frecuentes' },
       ]
     },
@@ -55,16 +57,17 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative border-t border-slate-200 dark:border-white/5 bg-transparent transition-colors duration-300 overflow-hidden isolate">
+    <footer className="relative border-t border-slate-200 dark:border-white/5 bg-transparent transition-colors duration-300 overflow-hidden isolate" aria-labelledby="footer-heading">
+      <h2 id="footer-heading" className="sr-only">Footer</h2>
       
-      {/* 1. Capa de legibilidad mejorada: mayor desenfoque para que el texto resalte sobre GlobalFloatingShape */}
+      {/* Capa de legibilidad mejorada */}
       <div className="absolute inset-0 bg-white/60 dark:bg-slate-950/80 backdrop-blur-2xl -z-10" />
       
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           
           <div className="lg:col-span-2 space-y-6">
-            <Link href="/" className="group inline-flex items-center gap-4 outline-none">
+            <Link href="/" aria-label="Veritus Studio Home" className="group inline-flex items-center gap-4 outline-none">
               <div className="relative w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg group-hover:scale-105 transition-transform">
                 V
               </div>
@@ -93,15 +96,15 @@ export default function Footer() {
 
           {navGroups.map((group) => (
             <div key={group.title}>
-              <p className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6">
+              <h2 className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6">
                 {group.title}
-              </p>
+              </h2>
               <ul className="space-y-3">
                 {group.links.map((link) => (
                   <li key={link.label}>
                     <Link 
                       href={link.href} 
-                      className="text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 text-sm font-semibold transition-colors block"
+                      className="text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 text-sm font-semibold transition-colors block"
                     >
                       {link.label}
                     </Link>
@@ -112,7 +115,7 @@ export default function Footer() {
           ))}
 
           <div>
-            <p className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6">Hablemos</p>
+            <h2 className="text-[11px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6">Hablemos</h2>
             <div className="space-y-3">
               <a href="mailto:veritusstudioweb@gmail.com" className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-indigo-600 transition-colors block break-all">
                 veritusstudioweb@gmail.com
@@ -122,17 +125,16 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 2. Barra inferior con Glassmorphism mejorado */}
         <div className="mt-20 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest text-center md:text-left">
+          <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-center md:text-left">
             © {currentYear} Veritus Studio — Medellín & Bogotá, Colombia.
           </p>
           
           <div className="flex items-center gap-3 px-5 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/10 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">
+            <p className="text-[10px] font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">
               Cupos limitados para Enero
-            </span>
+            </p>
           </div>
         </div>
       </div>

@@ -2,49 +2,32 @@
 
 @layer base {
   :root {
-    /* MODO CLARO: Minimalismo Editorial */
-    --bg: #ffffff;
-    --bg-card: #f8fafc;
+    /* MODO OSCURO ÚNICO: Deep Space / OLED */
+    --bg: #030712;             /* Slate 950 */
+    --bg-card: #0f172a;        /* Slate 900 */
     
     /* Jerarquía de Texto */
-    --text-header: #020617;   /* Slate 950 */
-    --text-body: #334155;     /* Slate 700 */
-    --text-muted: #64748b;    /* Slate 500 */
+    --text-header: #f8fafc;    /* Slate 50 */
+    --text-body: #cbd5e1;      /* Slate 300 */
+    --text-muted: #94a3b8;     /* Slate 400 */
     
     /* Marca y Acentos */
-    --primary: #4f46e5;       /* Indigo 600 */
-    --primary-soft: #eef2ff;
-    --border: #e2e8f0;
-    --glow: rgba(79, 70, 229, 0.05);
-    
-    /* Tokens de Elevación */
-    --shadow-premium: 0 10px 30px -10px rgba(2, 6, 23, 0.05);
-  }
-
-  .dark {
-    /* MODO OSCURO: Deep Space / OLED */
-    --bg: #030712;            /* Slate 950 */
-    --bg-card: #0f172a;       /* Slate 900 */
-    
-    /* Jerarquía de Texto */
-    --text-header: #f8fafc;   /* Slate 50 */
-    --text-body: #cbd5e1;     /* Slate 300 */
-    --text-muted: #94a3b8;    /* Slate 400 */
-    
-    /* Marca y Acentos */
-    --primary: #818cf8;       /* Indigo 400 */
+    --primary: #818cf8;        /* Indigo 400 */
     --primary-soft: rgba(129, 140, 248, 0.08);
-    --border: #1e293b;        /* Slate 800 */
+    --border: #1e293b;         /* Slate 800 */
     --glow: rgba(129, 140, 248, 0.15);
     
     --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+
+    /* Optimización de Renderizado */
+    color-scheme: dark;
   }
 
   body {
     background-color: var(--bg);
     color: var(--text-body);
-    /* Pilar de Rendimiento: Fuentes optimizadas */
-    @apply antialiased transition-colors duration-500 selection:bg-indigo-500/30 selection:text-indigo-900 dark:selection:text-indigo-100;
+    /* Pilar de Rendimiento: Eliminamos transition-colors innecesaria ya que el tema es estático */
+    @apply antialiased selection:bg-indigo-500/30 selection:text-indigo-100;
   }
 
   h1, h2, h3, h4 {
@@ -54,15 +37,10 @@
 
   /* Utilidad Maestra para Tarjetas Premium */
   .card-premium {
-    background-color: var(--bg-card);
+    background: linear-gradient(165deg, var(--bg-card) 0%, #030712 100%);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-premium);
-    @apply rounded-[2.5rem] transition-all duration-500 overflow-hidden;
-  }
-
-  .dark .card-premium {
-    background: linear-gradient(165deg, var(--bg-card) 0%, #030712 100%);
-    @apply backdrop-blur-md;
+    @apply rounded-[2.5rem] transition-all duration-500 overflow-hidden backdrop-blur-md;
   }
 
   /* Efecto de borde iluminado al hacer hover */
@@ -80,7 +58,8 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-violet-400;
+    /* Gradiente optimizado para fondo oscuro */
+    @apply bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent;
   }
 }
 
@@ -89,7 +68,7 @@
   50% { transform: translateY(-15px); }
 }
 
-/* Scrollbar personalizada para coherencia visual */
+/* Scrollbar personalizada Dark */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -107,17 +86,19 @@
   background: var(--text-muted);
 }
 
-/* Esto asegura que las formas 3D respiren a través de las secciones */
+/* Transparencia para formas 3D */
 section {
   background-color: transparent !important;
   position: relative;
 }
 
-/* Solo añade fondo si es estrictamente necesario para legibilidad */
+/* Capa de lectura optimizada para oscuridad */
 .bg-reader {
-  @apply bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl;
+  @apply bg-slate-950/70 backdrop-blur-xl;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Evita el "bounce" de scroll en iOS que muestra fondo blanco */
+  background-color: var(--bg);
 }

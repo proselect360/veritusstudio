@@ -1,24 +1,39 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Globe, ShoppingCart, Settings, Send, User } from 'lucide-react'
+import { MessageCircle, X, Globe, ShoppingCart, Send, User } from 'lucide-react'
 
 export default function WhatsAppFloat() {
+  const [shouldRender, setShouldRender] = useState(false) // Control de carga diferida
   const [isVisible, setIsVisible] = useState(false)
   const [openBot, setOpenBot] = useState(false)
   const [showTyping, setShowTyping] = useState(false)
   const pathname = usePathname()
 
-  // No mostrar en el dashboard o estudio para evitar distracciones en el flujo de trabajo
   const isStudio = pathname?.startsWith('/studio')
 
+  // Pilar Rendimiento: Intersection Observer para carga bajo demanda
   useEffect(() => {
     if (isStudio) return
-    // Pilar Rendimiento: Retrasar la aparición ayuda a que el LCP ocurra sin interferencias
-    const timer = setTimeout(() => setIsVisible(true), 3000)
-    return () => clearTimeout(timer)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldRender(true)
+          // Una vez que decidimos renderizar, esperamos un poco para mostrar el botón
+          setTimeout(() => setIsVisible(true), 1500)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '100px' } // Se activa 100px antes de que el usuario haga scroll o interactúe
+    )
+
+    // Observamos un elemento invisible o simplemente el scroll inicial
+    observer.observe(document.body)
+
+    return () => observer.disconnect()
   }, [isStudio])
 
   useEffect(() => {
@@ -29,14 +44,13 @@ export default function WhatsAppFloat() {
     }
   }, [openBot])
 
-  // Pilar Rendimiento: Memorizar la función de redirección
   const redirect = useCallback((text: string) => {
     const msg = encodeURIComponent(`Hola Veritus Studio 👋, ${text}`)
     window.open(`https://wa.me/573125858242?text=${msg}`, '_blank', 'noopener,noreferrer')
     setOpenBot(false)
   }, [])
 
-  if (isStudio) return null
+  if (isStudio || !shouldRender) return null
 
   return (
     <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-4">
@@ -49,7 +63,7 @@ export default function WhatsAppFloat() {
             initial={{ opacity: 0, scale: 0.9, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 40 }}
-            className="w-[320px] md:w-[340px] overflow-hidden rounded-[2.5rem] bg-white dark:bg-slate-900 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-slate-800"
+            className="w-[320px] md:w-[340px] overflow-hidden rounded-[2.5rem] bg-slate-900 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] border border-slate-800"
           >
             {/* Header */}
             <div className="bg-[#25D366] p-6 pb-10 text-white relative">
@@ -71,16 +85,16 @@ export default function WhatsAppFloat() {
 
             {/* Contenido */}
             <div className="px-5 pb-6 -mt-6 relative z-10">
-              <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 shadow-sm border border-slate-100 dark:border-slate-800">
+              <div className="bg-slate-900 rounded-[2rem] p-5 shadow-sm border border-slate-800">
                 {showTyping ? (
                   <div className="flex gap-1 py-2" aria-label="Escribiendo...">
-                    <div className="w-1.5 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full animate-bounce" />
-                    <div className="w-1.5 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full animate-bounce [animation-delay:0.2s]" />
-                    <div className="w-1.5 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full animate-bounce [animation-delay:0.4s]" />
+                    <div className="w-1.5 h-1.5 bg-slate-600 rounded-full animate-bounce" />
+                    <div className="w-1.5 h-1.5 bg-slate-600 rounded-full animate-bounce [animation-delay:0.2s]" />
+                    <div className="w-1.5 h-1.5 bg-slate-600 rounded-full animate-bounce [animation-delay:0.4s]" />
                   </div>
                 ) : (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-                    <p className="text-sm font-bold text-slate-800 dark:text-slate-100 leading-relaxed">
+                    <p className="text-sm font-bold text-slate-100 leading-relaxed">
                       ¡Hola! 👋 Soy el asistente de Veritus. ¿Cómo podemos transformar tu negocio hoy?
                     </p>
                     <div className="space-y-2">
@@ -100,7 +114,7 @@ export default function WhatsAppFloat() {
               </div>
               <button
                 onClick={() => setOpenBot(false)}
-                className="w-full mt-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-indigo-500 transition-colors"
+                className="w-full mt-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-indigo-400 transition-colors"
               >
                 Cerrar Asistente
               </button>
@@ -111,14 +125,14 @@ export default function WhatsAppFloat() {
 
       {/* BOTÓN FLOTANTE */}
       <motion.button
-        initial={false}
+        initial={{ scale: 0, opacity: 0 }}
         animate={isVisible ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setOpenBot(!openBot)}
         aria-label={openBot ? "Cerrar chat" : "Abrir chat de WhatsApp"}
-        className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-2xl transition-colors duration-500 ${
-          openBot ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900' : 'bg-[#25D366] text-white'
+        className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-2xl transition-colors duration-300 ${
+          openBot ? 'bg-white text-slate-900' : 'bg-[#25D366] text-white'
         }`}
       >
         {openBot ? <X size={32} /> : (
@@ -135,13 +149,13 @@ function BotOption({ icon, text, onClick }: { icon: any, text: string, onClick: 
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 hover:border-[#25D366] hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-all group"
+      className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-slate-800/40 border border-slate-700/50 hover:border-[#25D366] hover:bg-emerald-500/10 transition-all group"
     >
       <div className="flex items-center gap-3">
         <div className="text-slate-400 group-hover:text-[#25D366] transition-transform group-hover:scale-110">
           {icon}
         </div>
-        <span className="text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white">
+        <span className="text-xs font-bold text-slate-200 group-hover:text-white">
           {text}
         </span>
       </div>
