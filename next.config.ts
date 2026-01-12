@@ -2,7 +2,7 @@
 const nextConfig = {
   // 1. Optimización de Imágenes
   images: {
-    formats: ['image/avif', 'image/webp'], // Soporte para formatos de última generación
+    formats: ['image/avif', 'image/webp'], 
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     remotePatterns: [
       {
@@ -15,23 +15,22 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'veritusstudio.vercel.app', // Asegura el dominio propio para Next/Image
+        hostname: 'veritusstudio.vercel.app',
       },
     ],
   },
 
-  // 2. Reducción de JS Heredado (Soluciona los 14 KiB desperdiciados)
-  // Forzamos a Next.js a usar el compilador moderno SWC sin polyfills excesivos
+  // 2. Compilador y JS Moderno
   swcMinify: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production', // Limpia la consola en producción
+    removeConsole: process.env.NODE_ENV === 'production',
+    // Pilar Rendimiento: Soporte nativo para styled-components en el compilador SWC
+    styledComponents: true, 
   },
 
   // 3. Mejoras de Red y Seguridad
-  poweredByHeader: false, // Seguridad por oscuridad
+  poweredByHeader: false, 
   reactStrictMode: true,
-
-  // 4. Optimización de Compresión (Soluciona rendimiento de red)
   compress: true,
 };
 
