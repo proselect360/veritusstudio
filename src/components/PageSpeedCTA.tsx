@@ -23,7 +23,7 @@ export default function PageSpeedCTA() {
     "Sincronizando con Google PageSpeed Engine..."
   ]
 
-  const veritusProjectUrl = "https://veritusstudio.vercel.app/"
+  const veritusProjectUrl = "https://veritus-studio.vercel.app/"
 
   // Lógica para iniciar el test del usuario
   const handleTest = (e: React.FormEvent) => {
