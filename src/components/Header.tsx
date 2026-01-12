@@ -102,12 +102,18 @@ export default function Header() {
 
           {/* MOBILE TOGGLE */}
           <div className="flex items-center lg:hidden">
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-3 rounded-2xl bg-indigo-600 text-white shadow-lg active:scale-90 transition-transform"
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* MOBILE TOGGLE */}
+            <div className="flex items-center lg:hidden">
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                // AÑADIMOS ESTO PARA ACCESIBILIDAD:
+                aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+                aria-expanded={mobileOpen}
+                className="p-3 rounded-2xl bg-indigo-600 text-white shadow-lg active:scale-90 transition-transform"
+              >
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
 
