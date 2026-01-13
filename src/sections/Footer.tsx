@@ -127,7 +127,7 @@ export default function Footer() {
 
         <div className="mt-20 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-center md:text-left">
-            © {currentYear} Veritus Studio — Medellín & Bogotá, Colombia.
+            © {currentYear} Veritus Studio — Bogotá, Colombia.
           </p>
           
           <div className="flex items-center gap-3 px-5 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/10 backdrop-blur-md">
