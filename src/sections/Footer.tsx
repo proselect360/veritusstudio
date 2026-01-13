@@ -29,24 +29,7 @@ export default function Footer() {
   }
 
   const navGroups = [
-    {
-      title: "Soluciones",
-      links: [
-        { href: '/#services', label: 'Landing Pages' },
-        { href: '/#services', label: 'Sitios Corporativos' },
-        { href: '/#services', label: 'E-commerce' },
-        { href: '/#pricing', label: 'Guía de Precios' },
-      ]
-    },
-    {
-      title: "Recursos",
-      links: [
-        { href: '/#process', label: 'Metodología' },
-        { href: '/blog', label: 'Blog & Insights' },
-        { href: '/#faq', label: 'Preguntas Frecuentes' },
-      ]
-    },
-    {
+   {
       title: "Legal",
       links: [
         { href: '/#warranty', label: 'Garantía Veritus' },
