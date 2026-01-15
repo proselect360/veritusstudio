@@ -2,26 +2,24 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 interface StudioLogoProps {
   className?: string;
   onClick?: () => void;
 }
 
-export const StudioLogo = ({ className, onClick }: StudioLogoProps) => {
+export const StudioLogo = ({ className = "", onClick }: StudioLogoProps) => {
   return (
     <Link 
       href="/" 
       onClick={onClick}
-      className={cn("group flex items-center gap-4 outline-none z-[120]", className)}
+      // Reemplazamos cn() por un template literal estándar de JS
+      className={`group flex items-center gap-4 outline-none z-[120] ${className}`}
     >
       {/* CONTENEDOR DEL ICONO */}
       <div className="relative h-12 w-12 flex items-center justify-center">
-        {/* Efecto de Profundidad Reactivo (Anillo de fondo) */}
         <div className="absolute inset-0 bg-blue-500/10 rounded-xl rotate-45 transition-all duration-700 group-hover:rotate-90 group-hover:scale-110 group-hover:bg-blue-500/20" />
         
-        {/* SVG ANIMADO */}
         <svg 
           width="32" 
           height="32" 
@@ -30,7 +28,6 @@ export const StudioLogo = ({ className, onClick }: StudioLogoProps) => {
           xmlns="http://www.w3.org/2000/svg" 
           className="relative z-10"
         >
-          {/* Llave Izquierda */}
           <motion.path
             d="M12 10L4 20L12 30"
             stroke="currentColor"
@@ -42,7 +39,6 @@ export const StudioLogo = ({ className, onClick }: StudioLogoProps) => {
             animate={{ pathLength: 1 }}
             transition={{ duration: 1, ease: "easeInOut" }}
           />
-          {/* Llave Derecha */}
           <motion.path
             d="M28 10L36 20L28 30"
             stroke="currentColor"
@@ -54,7 +50,6 @@ export const StudioLogo = ({ className, onClick }: StudioLogoProps) => {
             animate={{ pathLength: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
           />
-          {/* El Brote "Veritus" */}
           <motion.path
             d="M20 8C20 8 16 18 20 28M20 16C24 16 28 20 28 20"
             stroke="currentColor"
@@ -65,7 +60,6 @@ export const StudioLogo = ({ className, onClick }: StudioLogoProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           />
-          {/* Punto de enfoque */}
           <circle cx="20" cy="32" r="1.5" className="fill-blue-500 animate-pulse" />
         </svg>
       </div>
@@ -87,3 +81,4 @@ export const StudioLogo = ({ className, onClick }: StudioLogoProps) => {
 };
 
 export default StudioLogo;
+
