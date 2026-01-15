@@ -11,6 +11,8 @@ import Footer from '@/sections/Footer'
 import PageSpeedCTA from '@/components/PageSpeedCTA'
 import { motion } from 'framer-motion'
 
+
+
 export default function HomeClient({ children }: { children: ReactNode }) {
   
   useEffect(() => {
