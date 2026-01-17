@@ -55,6 +55,12 @@ export const metadata = {
   verification: {
     google: '3D_qF1gwvk1wVRc0ESIrHM2H-RUr7e-LIOuPwpHhk6w', 
   },
+  // 👇 Ajuste del favicon
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png', // opcional si quieres soporte para iOS
+  },
 };
 
 export const viewport = {
@@ -98,27 +104,23 @@ export default function RootLayout({
             `}
           </Script>
 
-          {/* ELIMINADO: Meta Pixel (Facebook) por falta de uso publicitario y optimización de rendimiento */}
-
           <ThemeProvider 
             attribute="class" 
             defaultTheme="dark" 
             forcedTheme="dark" 
             enableSystem={false} 
             disableTransitionOnChange
-                >
-          <LocalBusinessSchema />
-          
-          <GlobalFloatingShape />
-          
-          <main className="relative z-10 flex-grow bg-transparent">
-            {children}
-          </main>
-          
-          <WhatsAppFloat />
-          <SanityLive /> 
-          
-        </ThemeProvider>
+          >
+            <LocalBusinessSchema />
+            <GlobalFloatingShape />
+            
+            <main className="relative z-10 flex-grow bg-transparent">
+              {children}
+            </main>
+            
+            <WhatsAppFloat />
+            <SanityLive /> 
+          </ThemeProvider>
       </body>
     </html>
   );

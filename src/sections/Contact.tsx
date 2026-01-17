@@ -62,7 +62,7 @@ export default function ContactSection() {
               <span className="text-[9px] font-black uppercase tracking-[0.3em]">Disponibilidad 2026</span>
             </div>
             
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95] mb-6 md:mb-10 text-white">
+            <h2 className="text-5xl md:text-7xl lg:text-1xl font-black tracking-tight leading-[0.95] mb-6 md:mb-10 text-white">
               Hagamos algo <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-emerald-400 italic">
                 extraordinario.

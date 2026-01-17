@@ -131,7 +131,7 @@ export default function MetodologiaPage() {
         )}
       </AnimatePresence>
 
-      <Footer />
+    
     </div>
   )
 }

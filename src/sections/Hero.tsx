@@ -29,18 +29,17 @@ export default function HeroSection() {
   ]
 
   return (
-    /* Cambiamos min-h-screen por h-screen o una altura fija en px para reservar espacio exacto */
     <section 
       id="inicio" 
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-slate-950 pt-32 pb-16 isolate" 
+      className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-slate-950 pt-32 pb-16 isolate" 
       aria-label="Introducción Veritus Studio"
     >
-      {/* ARTE DE FONDO - Optimizado para LCP */}
+      {/* Fondo optimizado */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-full max-w-[1000px] aspect-square flex items-center justify-center">
           <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" />
           
-          {/* Animación suave para la imagen central */}
+          {/* Imagen central optimizada */}
           <motion.div
             animate={{ y: [0, -20, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -51,23 +50,27 @@ export default function HeroSection() {
               alt="Ingeniería web de alto rendimiento Veritus Studio"
               width={800}
               height={800}
-              priority 
-              fetchPriority="high" 
+              priority
+              fetchPriority="high"
               className="relative z-10 object-contain opacity-70 drop-shadow-2xl"
               sizes="(max-width: 768px) 100vw, 800px"
             />
           </motion.div>
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-30" aria-hidden="true" />
+        <div 
+          className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-30" 
+          aria-hidden="true" 
+        />
       </div>
 
+      {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
         <div className="max-w-5xl mx-auto text-center">
           
-          {/* Badge de Disponibilidad - Forzamos visibilidad inicial */}
-          <div className="flex justify-center mb-8 h-[40px]"> {/* h- fija en lugar de min-h- */}
+          {/* Badge */}
+          <div className="flex justify-center mb-8 h-[40px]">
             <motion.div
-              initial={{ opacity: 1, y: 0 }} // Quitamos la animación de movimiento inicial para el LCP
+              initial={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/10"
             >
               <span className="relative flex h-2 w-2">
@@ -80,7 +83,7 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Headline - Usamos min-height o corregimos el leading para evitar CLS */}
+          {/* Headline */}
           <h1 className="text-[42px] leading-[1.1] sm:text-7xl lg:text-[100px] font-black tracking-tighter text-white mb-8 min-h-[1.2em]">
             Diseño web <span className="text-blue-500 italic font-light lowercase font-serif">premium</span> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-400">
@@ -92,10 +95,10 @@ export default function HeroSection() {
             Construimos activos digitales de <strong className="text-white font-bold">alto rendimiento</strong> que transforman clics en facturación real.
           </p>
 
-                {/* CTAs */}
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-24 min-h-[68px]">
             <Link
-              href="#contacto" // Apunta al ID de la sección de contacto
+              href="#contacto"
               className="w-full sm:w-auto px-10 py-5 bg-blue-600 text-white text-lg font-black rounded-2xl shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-3 active:scale-95"
             >
               Empezar Proyecto
@@ -103,14 +106,14 @@ export default function HeroSection() {
             </Link>
 
             <Link
-              href="#dinamico" // Cambia esto por el ID real de tu sección de proyectos (ej: #proyectos)
+              href="#dinamico"
               className="w-full sm:w-auto px-10 py-5 bg-slate-900 border border-white/10 text-white text-lg font-bold rounded-2xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
             >
               Ver Portafolio
               <MousePointer2 className="w-4 h-4 text-blue-500" aria-hidden="true" />
             </Link>
           </div>
-
+          
           {/* Trust Signals */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {trustSignals.map((item, i) => (
