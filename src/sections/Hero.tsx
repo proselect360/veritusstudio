@@ -1,31 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Zap, Globe, ArrowRight, MousePointer2, Clock } from 'lucide-react'
-import { motion } from 'framer-motion'
 
 export default function HeroSection() {
   const trustSignals = [
-    {
-      title: 'Despliegue Récord',
-      desc: 'Tu activo online listo en 14 días con metodología ágil.',
-      icon: <Clock className="w-6 h-6" aria-hidden="true" />,
-      color: 'text-blue-400',
-    },
-    {
-      title: 'Velocidad Extrema',
-      desc: 'Arquitectura Next.js 15 con carga < 1s garantizada.',
-      icon: <Zap className="w-6 h-6" aria-hidden="true" />,
-      color: 'text-indigo-400',
-    },
-    {
-      title: 'Autoridad Digital',
-      desc: 'SEO técnico de élite para dominar resultados locales.',
-      icon: <Globe className="w-6 h-6" aria-hidden="true" />,
-      color: 'text-emerald-400',
-    },
+    { title: 'Despliegue Récord', desc: 'Tu activo online listo en 14 días con metodología ágil.', icon: <Clock className="w-6 h-6" aria-hidden="true" />, color: 'text-blue-400' },
+    { title: 'Velocidad Extrema', desc: 'Arquitectura Next.js 15 con carga < 1s garantizada.', icon: <Zap className="w-6 h-6" aria-hidden="true" />, color: 'text-indigo-400' },
+    { title: 'Autoridad Digital', desc: 'SEO técnico de élite para dominar resultados locales.', icon: <Globe className="w-6 h-6" aria-hidden="true" />, color: 'text-emerald-400' },
   ]
 
   return (
@@ -34,18 +17,13 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-32 md:pb-20 isolate"
       aria-label="Introducción Veritus Studio"
     >
-      {/* Fondo optimizado — en móvil la forma es más pequeña para no tapar texto */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-full max-w-[280px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[1000px] aspect-square flex items-center justify-center">
-          <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" />
-          <motion.div
-            animate={{ y: [0, -20, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full h-full flex items-center justify-center"
-          >
+          <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" aria-hidden="true" />
+          <div className="relative w-full h-full flex items-center justify-center animate-float">
             <Image
               src="/3d-abstract-shape.webp"
-              alt="Ingeniería web de alto rendimiento Veritus Studio"
+              alt=""
               width={800}
               height={800}
               priority
@@ -53,21 +31,15 @@ export default function HeroSection() {
               className="relative z-10 object-contain opacity-50 sm:opacity-60 md:opacity-70 drop-shadow-2xl"
               sizes="(max-width: 640px) 280px, (max-width: 768px) 500px, (max-width: 1024px) 700px, 800px"
             />
-          </motion.div>
+          </div>
         </div>
-        <div
-          className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-30"
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-30" aria-hidden="true" />
       </div>
 
-      {/* Contenido */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full py-6 sm:py-0">
         <div className="max-w-5xl mx-auto text-center">
-          {/* Badge */}
           <div className="flex justify-center mb-4 sm:mb-6 md:mb-8 min-h-[36px] sm:min-h-[40px]">
-            <motion.div
-              initial={{ opacity: 1, y: 0 }}
+            <div
               className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/10"
             >
               <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
@@ -77,11 +49,10 @@ export default function HeroSection() {
               <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-slate-300">
                 Disponibilidad Enero 2026
               </p>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-[32px] leading-[1.15] sm:text-5xl sm:leading-[1.1] md:text-6xl lg:text-[100px] font-black tracking-tighter text-white mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-[32px] leading-[1.15] sm:text-5xl sm:leading-[1.1] md:text-6xl lg:text-[90px] font-black tracking-tighter text-white mb-4 sm:mb-6 md:mb-8">
             Diseño web <span className="text-blue-500 italic font-light lowercase font-serif">premium</span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-400">
@@ -111,18 +82,13 @@ export default function HeroSection() {
             </Link>
           </div>
 
-          {/* Trust Signals — en móvil menos padding y gap */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {trustSignals.map((item, i) => (
-              <motion.article
+              <article
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-[2rem] bg-white/5 border border-white/5 text-center transition-all hover:border-blue-500/30"
+                className="group p-5 sm:p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 text-center transition-all hover:border-indigo-500/40 hover:bg-white/[0.07]"
               >
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-6 rounded-lg sm:rounded-xl bg-slate-950 shadow-sm flex items-center justify-center ${item.color}`} aria-hidden="true">
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-6 rounded-xl bg-slate-900/80 flex items-center justify-center ${item.color}`} aria-hidden="true">
                   {item.icon}
                 </div>
                 <h2 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white mb-1.5 sm:mb-3">
@@ -131,7 +97,7 @@ export default function HeroSection() {
                 <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-medium">
                   {item.desc}
                 </p>
-              </motion.article>
+              </article>
             ))}
           </div>
         </div>

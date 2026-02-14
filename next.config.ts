@@ -20,8 +20,7 @@ const nextConfig = {
     ],
   },
 
-  // 2. Compilador y JS Moderno
-  swcMinify: true,
+  // 2. Compilador y JS Moderno (SWC minify es default en Next 15)
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
     // Pilar Rendimiento: Soporte nativo para styled-components en el compilador SWC

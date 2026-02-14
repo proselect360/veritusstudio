@@ -1,84 +1,41 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { motion } from "framer-motion";
+import Link from "next/link"
 
 interface StudioLogoProps {
-  className?: string;
-  onClick?: () => void;
+  className?: string
+  onClick?: () => void
 }
 
-export const StudioLogo = ({ className = "", onClick }: StudioLogoProps) => {
+export function StudioLogo({ className = "", onClick }: StudioLogoProps) {
   return (
-    <Link 
-      href="/" 
+    <Link
+      href="/"
       onClick={onClick}
-      // Reemplazamos cn() por un template literal estándar de JS
-      className={`group flex items-center gap-4 outline-none z-[120] ${className}`}
+      className={`group flex items-center gap-4 outline-none z-[120] select-none ${className}`}
     >
-      {/* CONTENEDOR DEL ICONO */}
-      <div className="relative h-12 w-12 flex items-center justify-center">
-        <div className="absolute inset-0 bg-blue-500/10 rounded-xl rotate-45 transition-all duration-700 group-hover:rotate-90 group-hover:scale-110 group-hover:bg-blue-500/20" />
-        
-        <svg 
-          width="32" 
-          height="32" 
-          viewBox="0 0 40 40" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="relative z-10"
-        >
-          <motion.path
-            d="M12 10L4 20L12 30"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-blue-500"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M28 10L36 20L28 30"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-blue-500"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-          />
-          <motion.path
-            d="M20 8C20 8 16 18 20 28M20 16C24 16 28 20 28 20"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            className="text-blue-400"
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          />
-          <circle cx="20" cy="32" r="1.5" className="fill-blue-500 animate-pulse" />
-        </svg>
+      {/* Isotipo: El "Sello" de Veritus */}
+      <div className="relative flex items-center justify-center">
+        <div className="w-9 h-9 bg-gradient-to-br from-slate-800 to-slate-950 border border-slate-700 rounded-sm flex items-center justify-center shadow-2xl group-hover:border-indigo-500/30 transition-colors">
+          <span className="text-white font-light text-[10px] tracking-[0.2em] ml-1">VS</span>
+        </div>
+        <div className="absolute -right-2 h-6 w-[1px] bg-slate-700" />
       </div>
 
-      {/* TEXTO E IDENTIDAD VISUAL */}
-      <div className="flex flex-col">
-        <span className="text-2xl font-black tracking-tighter leading-none bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-          VERITUS
-        </span>
+      {/* Logotipo: Tipografía de Alta Gama */}
+      <div className="flex flex-col justify-center">
+        <h2 className="text-white text-sm font-black tracking-[0.25em] leading-none mb-1">
+          VERITUS <span className="text-indigo-400 opacity-90">STUDIO</span>
+        </h2>
         <div className="flex items-center gap-2">
-          <span className="h-[1px] w-4 bg-blue-500/50" />
-          <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400/80">
+          <span className="text-[7px] text-slate-500 uppercase tracking-[0.5em] font-bold">
             Digital Studio
           </span>
+          <span className="w-1 h-1 rounded-full bg-indigo-500/50 shadow-[0_0_5px_rgba(99,102,241,0.5)]" />
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
-export default StudioLogo;
-
+export default StudioLogo
