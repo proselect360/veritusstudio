@@ -213,12 +213,12 @@ ServiceCard.displayName = 'ServiceCard'
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative py-32 bg-slate-950 overflow-hidden">
+    <section id="services" className="relative py-24 md:py-28 lg:py-36 bg-slate-950 overflow-hidden">
       {/* Background Orbs */}
       <div className="absolute top-0 left-1/4 w-[30rem] h-[30rem] bg-indigo-600/10 blur-[120px] rounded-full" />
       <div className="absolute bottom-0 right-1/4 w-[30rem] h-[30rem] bg-blue-600/10 blur-[120px] rounded-full" />
 
-      <div className="relative z-10 max-w-[120rem] mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="text-center mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

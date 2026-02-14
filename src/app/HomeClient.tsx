@@ -40,14 +40,10 @@ export default function HomeClient({ children }: { children: ReactNode }) {
         </section>
         
         <div className="flex flex-col gap-0 relative z-10">
-          
           {/* --- SERVICIOS --- */}
           <section id="servicios" className="scroll-mt-24 border-t border-white/[0.02]">
             <Services />
           </section>
-        
-         
-
 
           {/* --- TESTIMONIOS --- */}
           <section id="testimonios" className="scroll-mt-24">
@@ -56,10 +52,10 @@ export default function HomeClient({ children }: { children: ReactNode }) {
 
           {/* --- CONTENIDO DINÁMICO (SANITY/OTROS) --- */}
           {children && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              id="dinamico" 
+              id="dinamico"
               className="py-0 bg-slate-950 transition-colors duration-500"
             >
               {children}
@@ -70,15 +66,14 @@ export default function HomeClient({ children }: { children: ReactNode }) {
           <section id="contacto" className="scroll-mt-24 bg-gradient-to-b from-slate-950 to-black">
             <Contact />
           </section>
-         
+
           {/* --- GARANTÍA --- */}
-          <section id="garantia" className="scroll-mt-24 pb-20">
-            <div className="max-w-7xl mx-auto px-6">
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-20" />
+          <section id="garantia" className="scroll-mt-24">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-16 md:mb-24" />
               <Warranty />
             </div>
           </section>
-          
         </div>
       </main>
 

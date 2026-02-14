@@ -26,7 +26,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
 
   return (
     // CAMBIO: bg-transparent y isolate para permitir ver el fondo 3D
-    <section id="articulos-final" className="relative py-32 bg-transparent overflow-hidden scroll-mt-32 isolate">
+    <section id="articulos-final" className="relative py-24 md:py-28 lg:py-36 bg-transparent overflow-hidden scroll-mt-24 isolate">
       
       {/* Decoración de luz ambiental sutil */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />

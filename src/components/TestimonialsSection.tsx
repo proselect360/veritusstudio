@@ -39,7 +39,7 @@ export default function PhilosophySection() {
   return (
     <section 
       id="philosophy"
-      className="relative py-24 md:py-32 lg:py-56 bg-transparent overflow-hidden isolate" 
+      className="relative py-24 md:py-28 lg:py-40 bg-transparent overflow-hidden isolate" 
       ref={containerRef}
       aria-labelledby="philosophy-heading"
     >

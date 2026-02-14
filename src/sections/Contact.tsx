@@ -42,7 +42,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="relative py-20 md:py-32 lg:py-56 overflow-hidden scroll-mt-20 isolate">
+    <section id="contact" className="relative py-20 md:py-28 lg:py-40 overflow-hidden scroll-mt-24 isolate">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
         <div className="absolute top-1/4 -left-[20%] w-[80vw] h-[80vw] bg-indigo-500/10 rounded-full blur-[100px] opacity-50" />
         <div className="absolute bottom-0 -right-[20%] w-[60vw] h-[60vw] bg-emerald-500/10 rounded-full blur-[100px] opacity-30" />
@@ -62,7 +62,7 @@ export default function ContactSection() {
               <span className="text-[9px] font-black uppercase tracking-[0.3em]">Disponibilidad 2026</span>
             </div>
             
-            <h2 className="text-5xl md:text-7xl lg:text-1xl font-black tracking-tight leading-[0.95] mb-6 md:mb-10 text-white">
+            <h2 className="text-5xl md:text-7xl lg:text-7xl font-black tracking-tight leading-[0.95] mb-6 md:mb-10 text-white">
               Hagamos algo <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-emerald-400 italic">
                 extraordinario.

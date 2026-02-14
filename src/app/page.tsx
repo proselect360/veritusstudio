@@ -40,7 +40,7 @@ export default function Page() {
         para mejorar el ranking por palabras clave dinámicas.
       */}
       <section id="articulos" className="scroll-mt-24 bg-slate-50 dark:bg-slate-900/30">
-        <div className="py-12 lg:py-20">
+        <div className="py-0">
           <Blog />
         </div>
       </section>

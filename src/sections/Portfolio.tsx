@@ -21,7 +21,7 @@ export default function Portfolio({ proyectos }: { proyectos: ProyectoSanity[] }
   return (
     <section 
       id="projects" 
-      className="relative py-24 lg:py-40 bg-transparent overflow-hidden isolate transition-colors duration-500 scroll-mt-20"
+      className="relative py-24 md:py-28 lg:py-36 bg-transparent overflow-hidden isolate transition-colors duration-500 scroll-mt-24"
     >
       {/* Glow ambiental sutil */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 dark:bg-indigo-600/5 rounded-full blur-[120px] -z-10 animate-pulse" />

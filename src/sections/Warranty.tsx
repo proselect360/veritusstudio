@@ -30,12 +30,11 @@ export default function WarrantySection() {
   ]
 
   return (
-    <section id="warranty" className="relative py-16 md:py-32 bg-transparent overflow-hidden scroll-mt-24">
-      
+    <section id="warranty" className="relative py-16 md:py-24 lg:py-32 bg-transparent overflow-hidden scroll-mt-24">
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-[1000px] h-[600px] bg-indigo-600/5 rounded-full blur-[80px] md:blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-[100rem] mx-auto px-4 md:px-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="relative bg-slate-900/40 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] md:rounded-[4rem] p-6 sm:p-10 md:p-24 overflow-hidden shadow-2xl">
           
           {/* Luces cinemáticas internas */}
