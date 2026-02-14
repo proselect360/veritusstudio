@@ -55,11 +55,14 @@ export const metadata = {
   verification: {
     google: '3D_qF1gwvk1wVRc0ESIrHM2H-RUr7e-LIOuPwpHhk6w', 
   },
-  // 👇 Ajuste del favicon
+  // Favicon circular (SVG) para Google y navegadores; .ico como respaldo
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
     shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png', // opcional si quieres soporte para iOS
+    apple: '/apple-touch-icon.png',
   },
 };
 
