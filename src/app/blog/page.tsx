@@ -20,7 +20,7 @@ const ALL_POSTS_QUERY = `*[_type == "blog"] | order(fechaPublicacion desc) {
 }`
 
 export default async function BlogPage() {
-  const posts = await sanityServerClient.fetch(ALL_POSTS_QUERY)
+  const posts = await sanityServerClient.fetch(ALL_POSTS_QUERY, undefined, { next: { revalidate: 60 } })
 
   return (
     <>

@@ -52,7 +52,7 @@ export default function PrivacidadPage() {
             <span className="text-slate-400 dark:text-slate-500 italic font-serif font-normal">Privacidad</span>
           </h1>
           <p className="text-slate-500 dark:text-slate-400 font-medium">
-            Última actualización: Enero, {currentYear} • Colombia
+            Última actualización: {currentYear} • Colombia
           </p>
         </header>
 

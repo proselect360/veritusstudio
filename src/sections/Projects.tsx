@@ -2,19 +2,11 @@ import { client } from '@/sanity/lib/client' // Cambiado de { getClient } a { cl
 import { PROJECTS_QUERY } from '@/sanity/lib/queries'
 import Image from 'next/image'
 
-interface Proyecto {
-  _id: string
-  nombre: string
-  imageUrl: string
-  url?: string | null
-  categoria?: {
-    titulo: string
-  }
-}
+import type { Proyecto as SanityProyecto } from '@/sanity/types'
 
 export default async function Projects() {
   // CORRECCIÓN: Usamos client.fetch directamente sin llamar a una función
-  const proyectos: Proyecto[] = await client.fetch(PROJECTS_QUERY)
+  const proyectos: SanityProyecto[] = await client.fetch(PROJECTS_QUERY, undefined, { next: { revalidate: 60 } })
 
   if (!proyectos || proyectos.length === 0) return null
 
@@ -29,7 +21,7 @@ export default async function Projects() {
           {proyectos.map((proy) => (
             <div
               key={proy._id}
-              className="group overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-[#25D366]/50 transition-all"
+              className="group overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-[#25D366]/50 transition-all duration-300"
             >
               {/* Imagen */}
               <div className="relative h-64 w-full">
@@ -37,7 +29,7 @@ export default async function Projects() {
                   src={proy.imageUrl || '/placeholder.webp'}
                   alt={proy.nombre || "Proyecto Veritus"} // Siempre añade un alt por seguridad
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 

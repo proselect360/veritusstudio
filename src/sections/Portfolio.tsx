@@ -5,17 +5,9 @@ import Link from 'next/link'
 import { ExternalLink, ArrowUpRight, Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-interface ProyectoSanity {
-  _id: string
-  nombre: string
-  url: string
-  imageUrl: string
-  categoria?: {
-    titulo: string
-  }
-}
+import type { Proyecto as SanityProyecto } from '@/sanity/types'
 
-export default function Portfolio({ proyectos }: { proyectos: ProyectoSanity[] }) {
+export default function Portfolio({ proyectos }: { proyectos: SanityProyecto[] }) {
   if (!proyectos || proyectos.length === 0) return null;
 
   return (

@@ -111,7 +111,7 @@ export default function Footer() {
           <div className="flex items-center gap-3 px-5 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/10 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <p className="text-[10px] font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">
-              Cupos limitados para Enero
+              Cupos limitados
             </p>
           </div>
         </div>

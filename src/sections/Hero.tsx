@@ -1,15 +1,16 @@
-'use client'
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { Zap, Globe, ArrowRight, MousePointer2, Clock } from 'lucide-react'
 
+type TrustSignal = { title: string; desc: string; icon: React.ReactNode; color: string }
+
+const TRUST_SIGNALS: TrustSignal[] = [
+  { title: 'Despliegue Récord', desc: 'Activo online en 14 días con metodología ágil.', icon: <Clock className="w-6 h-6" aria-hidden="true" />, color: 'text-blue-400' },
+  { title: 'Velocidad Extrema', desc: 'Arquitectura Next.js 15 — LCP optimizado.', icon: <Zap className="w-6 h-6" aria-hidden="true" />, color: 'text-indigo-400' },
+  { title: 'Autoridad Digital', desc: 'SEO técnico de élite para resultados locales.', icon: <Globe className="w-6 h-6" aria-hidden="true" />, color: 'text-emerald-400' },
+]
+
 export default function HeroSection() {
-  const trustSignals = [
-    { title: 'Despliegue Récord', desc: 'Tu activo online listo en 14 días con metodología ágil.', icon: <Clock className="w-6 h-6" aria-hidden="true" />, color: 'text-blue-400' },
-    { title: 'Velocidad Extrema', desc: 'Arquitectura Next.js 15 con carga < 1s garantizada.', icon: <Zap className="w-6 h-6" aria-hidden="true" />, color: 'text-indigo-400' },
-    { title: 'Autoridad Digital', desc: 'SEO técnico de élite para dominar resultados locales.', icon: <Globe className="w-6 h-6" aria-hidden="true" />, color: 'text-emerald-400' },
-  ]
 
   return (
     <section
@@ -17,10 +18,10 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-32 md:pb-20 isolate"
       aria-label="Introducción Veritus Studio"
     >
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" style={{ contentVisibility: 'auto' }} aria-hidden="true">
         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-full max-w-[280px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[1000px] aspect-square flex items-center justify-center">
           <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" aria-hidden="true" />
-          <div className="relative w-full h-full flex items-center justify-center animate-float">
+          <div className="relative w-full h-full flex items-center justify-center animate-float motion-reduce:animate-none">
             <Image
               src="/3d-abstract-shape.webp"
               alt=""
@@ -47,7 +48,7 @@ export default function HeroSection() {
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-blue-500" />
               </span>
               <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-slate-300">
-                Disponibilidad Enero 2026
+                Disponibilidad 2026
               </p>
             </div>
           </div>
@@ -60,40 +61,41 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-2xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium mb-6 sm:mb-8 md:mb-12 px-1">
-            Construimos activos digitales de <strong className="text-white font-bold">alto rendimiento</strong> que transforman clics en facturación real.
+          <p id="hero-desc" className="text-base sm:text-lg md:text-2xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium mb-6 sm:mb-8 md:mb-12 px-1">
+            Activos digitales ultrarrápidos, accesibles y diseñados para convertir — ingeniería aplicada a crecimiento real.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-10 sm:mb-16 md:mb-24 max-w-xs sm:max-w-none mx-auto">
             <Link
               href="#contacto"
-              className="sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-blue-600 text-white text-base sm:text-lg font-black rounded-2xl shadow-xl shadow-blue-500/20 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 sm:gap-3 active:scale-95"
+              aria-describedby="hero-desc"
+              className="sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-indigo-600 text-white text-base sm:text-lg font-black rounded-3xl shadow-2xl shadow-indigo-500/20 hover:bg-indigo-500 transition-transform duration-300 transform-gpu hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/30 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             >
               Empezar Proyecto
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 inline-block align-middle" aria-hidden="true" />
             </Link>
             <Link
               href="#dinamico"
-              className="sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-slate-900 border border-white/10 text-white text-base sm:text-lg font-bold rounded-2xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+              className="sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-slate-900 border border-white/10 text-white text-base sm:text-lg font-bold rounded-3xl hover:bg-slate-800 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             >
               Ver Portafolio
-              <MousePointer2 className="w-4 h-4 text-blue-500" aria-hidden="true" />
+              <MousePointer2 className="w-4 h-4 text-blue-400 ml-2 inline-block align-middle" aria-hidden="true" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            {trustSignals.map((item, i) => (
+            {TRUST_SIGNALS.map((item, i) => (
               <article
                 key={i}
-                className="group p-5 sm:p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 text-center transition-all hover:border-indigo-500/40 hover:bg-white/[0.07]"
+                className="group p-5 sm:p-6 md:p-8 rounded-2xl bg-white/5 border border-white/8 text-center transition-colors duration-200 hover:border-indigo-500/30 hover:bg-white/[0.03]"
               >
                 <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-6 rounded-xl bg-slate-900/80 flex items-center justify-center ${item.color}`} aria-hidden="true">
                   {item.icon}
                 </div>
-                <h2 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white mb-1.5 sm:mb-3">
+                <h3 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white mb-1.5 sm:mb-3">
                   {item.title}
-                </h2>
+                </h3>
                 <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-medium">
                   {item.desc}
                 </p>

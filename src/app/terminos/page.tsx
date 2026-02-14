@@ -55,7 +55,7 @@ export default function TerminosPage() {
             Nuestros términos garantizan una relación de trabajo transparente, protegiendo la propiedad intelectual y los plazos de entrega de tu ecosistema digital.
           </p>
           <p className="mt-4 text-sm text-slate-400 dark:text-slate-500 font-bold uppercase tracking-[0.2em]">
-            Última revisión: Enero, {currentYear} • Colombia
+            Última revisión: {currentYear} • Colombia
           </p>
         </header>
 

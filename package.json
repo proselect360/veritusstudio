@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "sanity:typegen": "sanity codegen types --output ./src/sanity/sanity-types.ts"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.2",
@@ -45,5 +46,8 @@
     "last 2 Safari versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "engines": {
+    "node": ">=20.18.0"
+  }
 }

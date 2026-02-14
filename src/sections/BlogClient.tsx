@@ -5,23 +5,9 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Clock, ArrowRight, Sparkles } from 'lucide-react'
 
-interface Post {
-  _id: string;
-  titulo: string;
-  slug: string;
-  tiempoLectura: number;
-  categoria: {
-    titulo: string;
-  };
-  fechaPublicacion: string;
-  imagenUrl: string;
-  autor: {
-    nombre: string;
-    avatarUrl: string;
-  };
-}
+import type { BlogPost } from '@/sanity/types'
 
-export default function BlogClient({ posts }: { posts: Post[] }) {
+export default function BlogClient({ posts }: { posts: BlogPost[] | any[] }) {
   if (!posts || posts.length === 0) return null;
 
   return (
@@ -56,7 +42,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
               // CAMBIO: bg-white/40 (claro) y bg-slate-900/40 (oscuro) con backdrop-blur
-              className="group relative flex flex-col bg-white/40 dark:bg-slate-950/40 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/20 dark:border-white/5 hover:border-indigo-500/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10"
+              className="group relative flex flex-col bg-white/40 dark:bg-slate-950/40 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/20 dark:border-white/5 hover:border-indigo-500/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10"
             >
               {/* Imagen de Portada con Overlay Gradiente */}
               <div className="relative h-64 w-full overflow-hidden">

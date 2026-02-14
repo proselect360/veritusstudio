@@ -32,7 +32,7 @@ export default async function ProyectosPage() {
           {proyectos.map((proyecto: any) => (
             <article 
               key={proyecto._id} 
-              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-200 dark:border-white/5 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-500"
+              className="group flex flex-col bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-200 dark:border-white/5 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
             >
               {/* Contenedor de Imagen con Overlay */}
               <div className="aspect-[16/10] relative overflow-hidden bg-slate-200 dark:bg-slate-800">

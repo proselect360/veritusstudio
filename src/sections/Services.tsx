@@ -110,7 +110,7 @@ const ServiceCard = memo(({ service }: { service: Service }) => {
       onMouseMove={onMouseMove}
       whileHover={{ y: -8 }}
       className={`
-        relative group h-full p-8 rounded-[2.5rem] flex flex-col overflow-hidden transition-all duration-500
+        relative group h-full p-8 rounded-[2.5rem] flex flex-col overflow-hidden transition-all duration-300
         ${service.recommended
           ? 'bg-slate-900/90 border-2 border-indigo-500/50 shadow-[0_0_40px_-15px_rgba(99,102,241,0.5)]'
           : 'bg-white/[0.02] border border-white/10 backdrop-blur-xl hover:bg-white/[0.05]'}

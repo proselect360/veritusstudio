@@ -2,25 +2,39 @@ import Image from 'next/image'
 import { urlFor } from './lib/image'
 
 interface Props {
-  asset: any;
-  alt: string;
+  asset: any; // Sanity image object (asset -> metadata.dimensions)
+  alt?: string;
   className?: string;
   priority?: boolean;
 }
 
-export default function SanityImage({ asset, alt, className, priority = false }: Props) {
+export default function SanityImage({ asset, alt = 'Imagen de Veritus Studio', className = '', priority = false }: Props) {
+  // Extraemos dimensiones si están disponibles para reservar el espacio y evitar CLS
+  const meta = asset?.asset?.metadata?.dimensions
+  const imgW = meta?.width ?? 16
+  const imgH = meta?.height ?? 9
+  const aspect = `${imgW} / ${imgH}`
+
+  // Pedimos al builder un formato automático (WebP/AVIF cuando esté disponible)
+  const src = urlFor(asset).width(Math.min(1600, Math.round((imgW / imgH) * 1200))).auto('format').quality(80).url()
+  const tiny = urlFor(asset).width(32).blur(15).auto('format').url()
+
   return (
-    <Image
-      src={urlFor(asset).width(1200).url()} // Limitamos el ancho máximo para ahorrar ancho de banda
-      alt={alt || "Imagen de Veritus Studio"}
-      width={1200}
-      height={675}
-      priority={priority} // Pilar Rendimiento: 'true' para imágenes de cabecera (Above the fold)
-      className={className}
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      // Pilar UX: Carga un placeholder borroso mientras descarga la original
-      placeholder="blur"
-      blurDataURL={urlFor(asset).width(24).blur(10).url()} 
-    />
+    <div
+      className={`relative w-full overflow-hidden ${className}`}
+      style={{ aspectRatio: aspect }}
+      aria-hidden={false}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+        priority={priority}
+        placeholder="blur"
+        blurDataURL={tiny}
+      />
+    </div>
   )
 }
