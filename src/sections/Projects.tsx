@@ -1,5 +1,6 @@
 import { client } from '@/sanity/lib/client' // Cambiado de { getClient } a { client }
 import { PROJECTS_QUERY } from '@/sanity/lib/queries'
+import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 
 import type { Proyecto as SanityProyecto } from '@/sanity/types'
@@ -26,7 +27,7 @@ export default async function Projects() {
               {/* Imagen */}
               <div className="relative h-64 w-full">
                 <Image
-                  src={proy.imageUrl || '/placeholder.webp'}
+                  src={proy.imagen ? urlFor(proy.imagen).width(1400).height(900).url() : '/placeholder.webp'}
                   alt={proy.nombre || "Proyecto Veritus"} // Siempre añade un alt por seguridad
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
