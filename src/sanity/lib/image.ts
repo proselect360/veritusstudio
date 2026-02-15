@@ -1,5 +1,5 @@
 import createImageUrlBuilder from '@sanity/image-url'
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/asset-utils";
 import { dataset, projectId } from '../env'
 
 // Configuración del generador de URLs de Sanity

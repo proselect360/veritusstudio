@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ExternalLink, ArrowUpRight, Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { urlFor } from '@/sanity/lib/image'
 
 import type { Proyecto as SanityProyecto } from '@/sanity/types'
 
@@ -67,7 +68,7 @@ export default function Portfolio({ proyectos }: { proyectos: SanityProyecto[] }
               {/* Contenedor de Imagen con Bordes Suavizados */}
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 transition-all duration-700 group-hover:border-indigo-500/50 group-hover:shadow-2xl">
                 <Image
-                  src={project.imageUrl || "/placeholder.webp"}
+                  src={project.imagen ? urlFor(project.imagen).url() : "/placeholder.webp"}
                   alt={project.nombre}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
