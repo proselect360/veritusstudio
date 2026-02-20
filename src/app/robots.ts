@@ -16,6 +16,6 @@ export default function robots(): MetadataRoute.Robots {
       ],
     },
     // Es vital que esta URL coincida exactamente con tu sitemap.ts
-    sitemap: 'https://veritusstudio.com.co/sitemap.xml',
+    sitemap: 'https://veritusstudio.co/sitemap.xml',
   }
 }

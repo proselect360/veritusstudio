@@ -2,9 +2,9 @@
 
 import { memo } from 'react'
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
-import { 
-  Rocket, Building2, ShoppingCart, CheckCircle2, 
-  UserCircle 
+import {
+  Rocket, Building2, ShoppingCart, CheckCircle2,
+  UserCircle
 } from 'lucide-react'
 
 // --- Tipado Profesional ---
@@ -113,7 +113,7 @@ const ServiceCard = memo(({ service }: { service: Service }) => {
         relative group h-full p-8 rounded-[2.5rem] flex flex-col overflow-hidden transition-all duration-300
         ${service.recommended
           ? 'bg-slate-900/90 border-2 border-indigo-500/50 shadow-[0_0_40px_-15px_rgba(99,102,241,0.5)]'
-          : 'bg-white/[0.02] border border-white/10 backdrop-blur-xl hover:bg-white/[0.05]'}
+          : 'bg-white/2 border border-white/10 backdrop-blur-xl hover:bg-white/5'}
       `}
     >
       {/* Spotlight Effect */}
@@ -132,7 +132,7 @@ const ServiceCard = memo(({ service }: { service: Service }) => {
 
       {service.recommended && (
         <div className="absolute top-6 right-8">
-          <motion.span 
+          <motion.span
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ repeat: Infinity, duration: 2 }}
             className="bg-indigo-500 text-white text-[9px] font-black px-4 py-1 rounded-full uppercase tracking-widest"
@@ -142,7 +142,7 @@ const ServiceCard = memo(({ service }: { service: Service }) => {
         </div>
       )}
 
-      <div className={`w-14 h-14 mb-8 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+      <div className={`w-14 h-14 mb-8 rounded-2xl bg-linear-to-br ${service.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-500`}>
         {service.icon}
       </div>
 
@@ -191,15 +191,15 @@ const ServiceCard = memo(({ service }: { service: Service }) => {
         onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
         className={`
           relative overflow-hidden w-full py-4 text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all duration-300
-          ${service.recommended 
-            ? 'bg-indigo-600 text-white hover:bg-indigo-500 shadow-xl shadow-indigo-500/20' 
+          ${service.recommended
+            ? 'bg-indigo-600 text-white hover:bg-indigo-500 shadow-xl shadow-indigo-500/20'
             : 'border-2 border-indigo-500/30 text-indigo-400 hover:border-indigo-500 hover:text-white'}
         `}
       >
         <span className="relative z-10">Cotizar ahora</span>
         {service.recommended && (
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+          <motion.div
+            className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent"
             animate={{ x: ['-100%', '100%'] }}
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
           />
@@ -215,8 +215,8 @@ export default function ServicesSection() {
   return (
     <section id="services" className="relative py-24 md:py-28 lg:py-36 bg-slate-950 overflow-hidden">
       {/* Background Orbs */}
-      <div className="absolute top-0 left-1/4 w-[30rem] h-[30rem] bg-indigo-600/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-0 right-1/4 w-[30rem] h-[30rem] bg-blue-600/10 blur-[120px] rounded-full" />
+      <div className="absolute top-0 left-1/4 w-120 h-120 bg-indigo-600/10 blur-[120px] rounded-full" />
+      <div className="absolute bottom-0 right-1/4 w-120 h-120 bg-blue-600/10 blur-[120px] rounded-full" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="text-center mb-24">
@@ -226,7 +226,7 @@ export default function ServicesSection() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl md:text-7xl font-black text-white uppercase mb-6 tracking-tighter">
-              Nuestros <span className="text-indigo-500">Servicios</span>
+              Agencia de <span className="text-indigo-500">Desarrollo Web</span>
             </h2>
             <div className="h-1.5 w-24 bg-indigo-500 mx-auto mb-8 rounded-full" />
             <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
@@ -242,10 +242,10 @@ export default function ServicesSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.7, 
+              transition={{
+                duration: 0.7,
                 delay: i * 0.1,
-                ease: [0.21, 1.11, 0.81, 0.99] 
+                ease: [0.21, 1.11, 0.81, 0.99]
               }}
             >
               <ServiceCard service={service} />

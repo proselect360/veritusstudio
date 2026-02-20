@@ -10,7 +10,7 @@ import Blog from '@/sections/BlogServer'
 
 export const dynamic = 'force-dynamic'
 export const metadata = {
-  metadataBase: new URL('https://veritusstudio.com.co'),
+  metadataBase: new URL('https://veritusstudio.co'),
   title: 'Veritus Studio | Ingeniería Web de Alto Rendimiento',
   description: 'Desarrollamos ecosistemas digitales con Next.js 15 y Sanity CMS. Sitios web premium listos en 14 días con SEO garantizado.',
   openGraph: {

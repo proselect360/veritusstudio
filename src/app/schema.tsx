@@ -3,7 +3,7 @@
  * Vincula la marca (Organización) con su fundador (Persona) para mejorar el E-E-A-T.
  */
 export default function SchemaJsonLd() {
-  const domain = "https://veritusstudio.com.co"; // Centralizado para evitar errores de ID
+  const domain = "https://veritusstudio.co"; // Centralizado para evitar errores de ID
 
   return (
     <script

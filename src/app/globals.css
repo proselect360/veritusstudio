@@ -1,62 +1,126 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --bg: #030712;
-    --bg-card: #0f172a;
-    --text-header: #f8fafc;
-    --text-body: #cbd5e1;
-    --text-muted: #94a3b8;
-    --primary: #6366f1;
-    --primary-soft: rgba(99, 102, 241, 0.08);
-    --border: #1e293b;
-    --glow: rgba(99, 102, 241, 0.2);
-    --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-    --space-section: clamp(4rem, 8vw, 6rem);
-    --space-block: clamp(1.5rem, 3vw, 2.5rem);
-    color-scheme: dark;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   Plugins de Tailwind v4 (reemplazan los require() del viejo config)
+   ═══════════════════════════════════════════════════════════════ */
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/aspect-ratio";
 
-  body {
-    background-color: var(--bg);
-    color: var(--text-body);
-    @apply antialiased selection:bg-indigo-500/30 selection:text-indigo-100;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   Sistema de diseño – migrado desde tailwind.config.ts a @theme
+   ═══════════════════════════════════════════════════════════════ */
+@theme {
+  /* --- Colores Corporativos --- */
+  --color-veritus: var(--primary);
+  --color-veritus-soft: var(--primary-soft);
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-text-header: var(--text-header);
+  --color-text-body: var(--text-body);
+  --color-muted: var(--text-muted);
 
-  h1, h2, h3, h4 {
-    color: var(--text-header);
-    @apply font-black tracking-tighter leading-[1.1];
-  }
+  /* --- Gradientes de Glassmorphism --- */
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-glass-light: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+  --background-image-glass-dark: linear-gradient(to bottom right, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.95));
 
-  .card-premium {
-    background: linear-gradient(165deg, var(--bg-card) 0%, #030712 100%);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-premium);
-    @apply rounded-[2.5rem] transition-all duration-500 overflow-hidden backdrop-blur-md;
-  }
-
-  .card-premium:hover {
-    border-color: var(--primary);
-    box-shadow: 0 0 30px var(--glow);
-    @apply -translate-y-1;
-  }
+  /* --- Tipografía --- */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-widest: 0.25em;
 }
 
-@layer utilities {
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  .text-gradient {
-    @apply bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   Variables CSS del Design System
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --bg: #030712;
+  --bg-card: #0f172a;
+  --text-header: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+  --primary: #6366f1;
+  --primary-soft: rgba(99, 102, 241, 0.08);
+  --border: #1e293b;
+  --glow: rgba(99, 102, 241, 0.2);
+  --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  --space-section: clamp(4rem, 8vw, 6rem);
+  --space-block: clamp(1.5rem, 3vw, 2.5rem);
+  color-scheme: dark;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Estilos base globales
+   ═══════════════════════════════════════════════════════════════ */
+body {
+  background-color: var(--bg);
+  color: var(--text-body);
+  @apply antialiased;
+}
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: #e0e7ff;
+}
+
+h1, h2, h3, h4 {
+  color: var(--text-header);
+  @apply font-black tracking-tighter leading-[1.1];
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Componentes premium
+   ═══════════════════════════════════════════════════════════════ */
+.card-premium {
+  background: linear-gradient(165deg, var(--bg-card) 0%, #030712 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-premium);
+  @apply rounded-[2.5rem] transition-all duration-500 overflow-hidden backdrop-blur-md;
+}
+
+.card-premium:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 30px var(--glow);
+  @apply -translate-y-1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Utilidades personalizadas
+   ═══════════════════════════════════════════════════════════════ */
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(to right, #818cf8, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-reader {
+  background-color: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Animaciones
+   ═══════════════════════════════════════════════════════════════ */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
 
-/* Scrollbar personalizada Dark */
+/* ═══════════════════════════════════════════════════════════════
+   Scrollbar personalizada (modo oscuro)
+   ═══════════════════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -74,19 +138,10 @@
   background: var(--text-muted);
 }
 
-/* Transparencia para formas 3D */
+/* ═══════════════════════════════════════════════════════════════
+   Transparencia para formas 3D
+   ═══════════════════════════════════════════════════════════════ */
 section {
   background-color: transparent !important;
   position: relative;
-}
-
-/* Capa de lectura optimizada para oscuridad */
-.bg-reader {
-  @apply bg-slate-950/70 backdrop-blur-xl;
-}
-
-html {
-  scroll-behavior: smooth;
-  /* Evita el "bounce" de scroll en iOS que muestra fondo blanco */
-  background-color: var(--bg);
 }

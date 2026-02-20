@@ -24,7 +24,7 @@ export default function HeroSection() {
           <div className="relative w-full h-full flex items-center justify-center animate-float motion-reduce:animate-none">
             <Image
               src="/3d-abstract-shape.webp"
-              alt=""
+              alt="Estructura digital 3D representando ingeniería web de alto rendimiento"
               width={800}
               height={800}
               priority
@@ -54,10 +54,10 @@ export default function HeroSection() {
           </div>
 
           <h1 className="text-[32px] leading-[1.15] sm:text-5xl sm:leading-[1.1] md:text-6xl lg:text-[90px] font-black tracking-tighter text-white mb-4 sm:mb-6 md:mb-8">
-            Diseño web <span className="text-blue-500 italic font-light lowercase font-serif">premium</span>
+            Desarrollo web <span className="text-blue-500 italic font-light lowercase font-serif">premium</span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-400">
-              que escala tu éxito
+              con Next.js 15 y SEO técnico
             </span>
           </h1>
 

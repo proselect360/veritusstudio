@@ -17,6 +17,7 @@ export type Proyecto = {
   url?: string
   descripcion?: string
   imagen?: any
+
   imageUrl?: string
   categoria?: Categoria
   tecnologias?: string[]

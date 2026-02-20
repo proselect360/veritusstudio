@@ -4,13 +4,13 @@ export default function LocalBusinessSchema() {
     "@type": "ProfessionalService", // Más preciso para una agencia de desarrollo
     "name": "Veritus Studio",
     "alternateName": "Veritus Diseño Web Colombia",
-    "url": "https://veritusstudio.vercel.app",
-    "logo": "https://veritusstudio.vercel.app/logo.png",
-    "image": "https://veritusstudio.vercel.app/og-image.jpg",
-    "description": "Agencia boutique de diseño web premium en Colombia. Especialistas en Next.js 15, SEO regional para Cundinamarca y desarrollo de activos digitales de alto impacto.",
+    "url": "https://veritusstudio.co",
+    "logo": "https://veritusstudio.co/logo.png",
+    "image": "https://veritusstudio.co/og-image.jpg",
+    "description": "Agencia boutique de ingeniería y diseño web premium en Colombia. Especialistas en Next.js 15, SEO de alto rendimiento y desarrollo de activos digitales escalables.",
     "priceRange": "$$",
     "telephone": "+573125858242",
-    "email": "tu-correo@ejemplo.com", // Añadirlo mejora la confianza del pilar SEO
+    "email": "contacto@veritusstudio.co", // Email profesional
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Bogotá",
@@ -19,7 +19,7 @@ export default function LocalBusinessSchema() {
     },
     "geo": { // Las coordenadas ayudan al posicionamiento en Google Maps
       "@type": "GeoCoordinates",
-      "latitude": 4.7110, 
+      "latitude": 4.7110,
       "longitude": -74.0721
     },
     "areaServed": [

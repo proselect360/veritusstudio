@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://veritusstudio.com.co'
+  const baseUrl = 'https://veritusstudio.co'
 
   // 1. Núcleo
   const routes = ['', '/blog', '/contacto'].map((route) => ({

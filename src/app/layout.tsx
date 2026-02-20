@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://veritusstudio.com.co'),
+  metadataBase: new URL('https://veritusstudio.co'),
   title: {
     default: 'Veritus Studio | Ingeniería Web de Alto Rendimiento',
     template: '%s | Veritus Studio'
@@ -23,16 +23,17 @@ export const metadata = {
   description: 'Desarrollo con Next.js 15 para marcas que lideran. Tu ecosistema digital optimizado para Google en 14 días. Bogotá y Colombia.',
   keywords: [
     'Diseño web Colombia', 
-    'Next.js 15', 
+    'Desarrollo Web Next.js 15', 
     'Agencia SEO Bogotá',
-    'Desarrollo Web Cundinamarca',
+    'Ingeniería de Software Cundinamarca',
+    'Agencia de Desarrollo Web Premium',
     'Sanity CMS Professional'
   ],
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Veritus Studio | Ingeniería Web en Colombia',
-    description: 'Ingeniería web de alto rendimiento con Next.js 15. Ecosistemas digitales escalables.',
-    url: 'https://veritusstudio.com.co',
+    title: 'Veritus Studio | Ingeniería Web Premium en Colombia',
+    description: 'Ecosistemas digitales de alto rendimiento con Next.js 15. Ingeniería web escalable para marcas que lideran.',
+    url: 'https://veritusstudio.co',
     siteName: 'Veritus Studio',
     locale: 'es_CO',
     type: 'website',
