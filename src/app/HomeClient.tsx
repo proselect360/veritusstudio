@@ -14,20 +14,20 @@ import { motion } from 'framer-motion'
 
 
 export default function HomeClient({ children }: { children: ReactNode }) {
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       document.body.classList.add('loaded')
-    }, 100) 
+    }, 100)
     return () => clearTimeout(timer)
   }, [])
 
   return (
     <>
       <Header />
-      
+
       <main className="relative overflow-x-hidden bg-slate-950 min-h-screen flex flex-col selection:bg-indigo-500/30">
-        
+
         {/* --- CAPA DE ILUMINACIÓN PREMIUM (Background Glows) --- */}
         <div className="fixed inset-0 pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-500/10 rounded-full blur-[120px] animate-pulse" />
@@ -38,10 +38,10 @@ export default function HomeClient({ children }: { children: ReactNode }) {
         <section id="inicio" className="scroll-mt-20 flex-1 relative z-10">
           <Hero />
         </section>
-        
+
         <div className="flex flex-col gap-0 relative z-10">
           {/* --- SERVICIOS --- */}
-          <section id="servicios" className="scroll-mt-24 border-t border-white/[0.02]">
+          <section id="servicios" className="scroll-mt-24 border-t border-white/2">
             <Services />
           </section>
 
@@ -63,14 +63,14 @@ export default function HomeClient({ children }: { children: ReactNode }) {
           )}
 
           {/* --- CONTACTO --- */}
-          <section id="contacto" className="scroll-mt-24 bg-gradient-to-b from-slate-950 to-black">
+          <section id="contacto" className="scroll-mt-24 bg-linear-to-b from-slate-950 to-black">
             <Contact />
           </section>
 
           {/* --- GARANTÍA --- */}
           <section id="garantia" className="scroll-mt-24">
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-16 md:mb-24" />
+              <div className="h-px w-full bg-linear-to-r from-transparent via-white/10 to-transparent mb-16 md:mb-24" />
               <Warranty />
             </div>
           </section>
