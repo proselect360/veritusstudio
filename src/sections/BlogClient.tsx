@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Clock, ArrowRight, Sparkles } from 'lucide-react'
+import { urlFor } from '@/sanity/lib/image'
 
 import type { BlogPost } from '@/sanity/types'
 
@@ -13,7 +14,7 @@ export default function BlogClient({ posts }: { posts: BlogPost[] | any[] }) {
   return (
     // CAMBIO: bg-transparent y isolate para permitir ver el fondo 3D
     <section id="articulos-final" className="relative py-24 md:py-28 lg:py-36 bg-transparent overflow-hidden scroll-mt-24 isolate">
-      
+
       {/* Decoración de luz ambiental sutil */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
 
@@ -47,13 +48,13 @@ export default function BlogClient({ posts }: { posts: BlogPost[] | any[] }) {
               {/* Imagen de Portada con Overlay Gradiente */}
               <div className="relative h-64 w-full overflow-hidden">
                 <Image
-                  src={post.imagenUrl || '/placeholder.webp'}
+                  src={post.imagenPrincipal ? urlFor(post.imagenPrincipal).url() : '/placeholder.webp'}
                   alt={post.titulo}
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-60" />
-                
+
                 <div className="absolute top-6 left-6">
                   <span className="px-4 py-1.5 rounded-xl bg-slate-950/80 backdrop-blur-md text-[10px] font-black text-white uppercase tracking-[0.2em] border border-white/10">
                     {post.categoria?.titulo}
@@ -80,8 +81,8 @@ export default function BlogClient({ posts }: { posts: BlogPost[] | any[] }) {
                   {/* Autor con estilo refinado */}
                   <div className="flex items-center gap-3">
                     <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-white dark:border-slate-800 shadow-sm">
-                      <Image 
-                        src={post.autor?.avatarUrl ?? 'https://ui-avatars.com/api/?name=Veritus+Studio&background=6366f1&color=fff'} 
+                      <Image
+                        src={post.autor?.avatar ? urlFor(post.autor.avatar).url() : 'https://ui-avatars.com/api/?name=Veritus+Studio&background=6366f1&color=fff'}
                         alt={post.autor?.nombre ?? 'Autor Veritus'}
                         fill
                         className="object-cover"
@@ -92,7 +93,7 @@ export default function BlogClient({ posts }: { posts: BlogPost[] | any[] }) {
                     </span>
                   </div>
 
-                  <Link 
+                  <Link
                     href={`/blog/${post.slug}`}
                     className="w-10 h-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-lg"
                   >

@@ -6,7 +6,7 @@ const PROJECTS_QUERY = `*[_type == "proyecto"] | order(_createdAt desc) {
   _id,
   nombre,
   url,
-  "imageUrl": imagen.asset->url,
+  imagen,
   categoria->{
     titulo
   }

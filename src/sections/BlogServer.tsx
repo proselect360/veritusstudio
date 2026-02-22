@@ -9,10 +9,10 @@ const BLOG_QUERY = `*[_type == "blog"] | order(fechaPublicacion desc) {
   tiempoLectura,
   categoria,
   fechaPublicacion,
-  "imagenUrl": imagenPrincipal.asset->url,
+  imagenPrincipal,
   "autor": {
     "nombre": autor.nombre,
-    "avatarUrl": autor.avatar.asset->url
+    "avatar": autor.avatar
   }
 }`
 
